@@ -8,4 +8,7 @@ date: 2012-03-01
 location: "San Francisco, CA, USA"
 ---
 
-This is a description of your project.
+This is a description of your project.$$\braket{\psi}$$
+\begin{equation}
+e^{i\theta}=1
+\end{equation}
