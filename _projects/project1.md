@@ -1,5 +1,5 @@
 ---
-title: "Talk 1 on Relevant Topic in Your Field"
+title: "Project 1"
 collection: projects
 type: "Projects"
 permalink: /talks/2012-03-01-talk-1
@@ -8,4 +8,4 @@ date: 2012-03-01
 location: "San Francisco, CA, USA"
 ---
 
-This is a description of your talk, which is a markdown file that can be all markdown-ified like any other post. Yay markdown!
+This is a description of your project.
