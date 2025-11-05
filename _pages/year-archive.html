@@ -7,13 +7,22 @@ redirect_from:
   - /wordpress/blog-posts/
 ---
 
-{% include base_path %}
-{% capture written_year %}'None'{% endcapture %}
 {% for post in site.posts %}
   {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
   {% if year != written_year %}
     <h2 id="{{ year | slugify }}" class="archive__subtitle">{{ year }}</h2>
     {% capture written_year %}{{ year }}{% endcapture %}
   {% endif %}
-  {% include archive-single.html %}
+
+  <article class="post-summary">
+    <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+    {% if post.categories %}
+      <p class="archive-categories">
+        {% for category in post.categories %}
+          <a href="/categories/{{ category | slugify }}/">{{ category }}</a>{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+      </p>
+    {% endif %}
+    <p>{{ post.excerpt }}</p>
+  </article>
 {% endfor %}
