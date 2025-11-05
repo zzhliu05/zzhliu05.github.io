@@ -8,36 +8,12 @@ redirect_from:
 ---
 
 {% include base_path %}
-
 {% capture written_year %}'None'{% endcapture %}
-
 {% for post in site.posts %}
   {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
-
   {% if year != written_year %}
-    {%- comment -%} 收集该年份所有 category {%- endcomment -%}
-    {% assign year_posts = site.posts | where_exp: "p", "p.date | date: '%Y' == year" %}
-    {% assign year_categories = "" | split: "" %}
-    {% for yp in year_posts %}
-      {% for c in yp.categories %}
-        {% unless year_categories contains c %}
-          {% assign year_categories = year_categories | push: c %}
-        {% endunless %}
-      {% endfor %}
-    {% endfor %}
-
-    <h2 id="{{ year | slugify }}" class="archive__subtitle">
-      {{ year }} 
-      {% if year_categories.size > 0 %}
-        - Categories: 
-        {% for c in year_categories %}
-          <a href="/categories/{{ c | slugify }}/">{{ c }}</a>{% if forloop.last == false %}, {% endif %}
-        {% endfor %}
-      {% endif %}
-    </h2>
-
+    <h2 id="{{ year | slugify }}" class="archive__subtitle">{{ year }}</h2>
     {% capture written_year %}{{ year }}{% endcapture %}
   {% endif %}
-
   {% include archive-single.html %}
 {% endfor %}
