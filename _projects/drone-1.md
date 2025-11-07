@@ -6,4 +6,4 @@ permalink: /projects/drone
 date: 2025-09
 ---
 
-I am currently working a project that builds a very simple quadrotor using esp32. 
+test

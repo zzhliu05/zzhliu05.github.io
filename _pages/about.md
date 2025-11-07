@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Zizhuang’s Acedamic page"
+title: "Zizhuang’s Acedamic Page"
 author_profile: true
 redirect_from: 
   - /about/
