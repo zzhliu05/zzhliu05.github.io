@@ -2,8 +2,8 @@
 title: "Project 1"
 collection: projects
 type: "projects"
-permalink: /projects/drone
-date: 2025-09
+permalink: /projects/project1
+date: 2025-09-01
 ---
 
-I am currently working a project that builds a very simple quadrotor using esp32. 
+test1
