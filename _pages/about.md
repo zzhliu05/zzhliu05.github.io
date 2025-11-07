@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Zizhuang Liu"
+title: "Zizhuang’s Acedamic page"
 author_profile: true
 redirect_from: 
   - /about/
