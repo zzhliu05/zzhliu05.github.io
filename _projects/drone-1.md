@@ -1,9 +1,9 @@
 ---
-title: "Project 1"
+title: "Project 2"
 collection: projects
 type: "projects"
-permalink: /projects/drone
-date: 2025-09
+permalink: /projects/project2
+date: 2025-09-02
 ---
 
-test
+test1
