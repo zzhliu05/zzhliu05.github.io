@@ -5,8 +5,9 @@ permalink: /projects/
 author_profile: true
 ---
 
-
 {% include base_path %}
+
+<h1 class="archive__subtitle">Projects by Category</h1>
 
 {% comment %}
   Step 1. 收集所有 collection 标签
@@ -20,18 +21,27 @@ author_profile: true
     {% endunless %}
   {% endif %}
 {% endfor %}
-
 {% assign sorted_collections = all_collections | sort %}
 
 {% comment %}
-  Step 2. 按 collection 分组输出
+  Step 2. 输出每个分类标题与项目
 {% endcomment %}
 {% for cat in sorted_collections %}
-  <h2 id="{{ cat | slugify }}">{{ cat }}</h2>
-  <div class="project-category-group">
+  <h2 class="archive__subtitle" style="margin-top: 2em; border-bottom: 1px solid #ccc;">
+    {{ cat }}
+  </h2>
+
+  <ul class="archive__items">
     {% assign projects_in_cat = site.projects | where: "collection", cat %}
     {% for post in projects_in_cat reversed %}
-      {% include archive-single.html %}
+      <li style="margin: 0.5em 0;">
+        <a href="{{ post.url | relative_url }}" style="font-weight:500;">
+          {{ post.title }}
+        </a>
+        {% if post.date %}
+          <span style="color:#666; font-size:0.9em;"> ({{ post.date | date: "%Y-%m-%d" }})</span>
+        {% endif %}
+      </li>
     {% endfor %}
-  </div>
+  </ul>
 {% endfor %}
