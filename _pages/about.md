@@ -12,7 +12,7 @@ I am **Zizhuang Liu(刘子壮)**,an undergraduate student at the Shanghaitech un
  - 2023-now: B.Sc. in physics,SPST,Shanghaitech
  - 2020-2023: The Affiliated High School of Peking University
 
- # Miscellaneous
+# Miscellaneous
 See [course file](https://github.com/zzhliu05/Course-File) for various course materials.
 
 
