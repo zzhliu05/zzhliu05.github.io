@@ -21,9 +21,7 @@
     height: 100vh;
     overflow-y: auto;
     position: fixed;
-    left: max(1rem, calc((100vw - #{$large}) / 2 + 1rem));
     padding-top: $masthead-height;
-    width: span(2 of 12);
   }
 
   @include breakpoint($large) {
@@ -38,7 +36,6 @@
   }
 
   @include breakpoint($x-large) {
-    left: calc((100vw - #{$large}) / 2 + 1rem);
     max-width: $sidebar-link-max-width;
     padding-right: 0;
   }
