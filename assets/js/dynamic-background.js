@@ -121,15 +121,15 @@
 
   function drawField() {
     const gradient = context.createLinearGradient(0, 0, 0, height);
-    gradient.addColorStop(0, "#eaf3ff");
-    gradient.addColorStop(0.45, "#f7fbff");
-    gradient.addColorStop(1, "#eef3f8");
+    gradient.addColorStop(0, "#05070d");
+    gradient.addColorStop(0.45, "#091121");
+    gradient.addColorStop(1, "#04060c");
     context.fillStyle = gradient;
     context.fillRect(0, 0, width, height);
 
     for (const attractor of attractors) {
       const glow = context.createRadialGradient(attractor.x, attractor.y, 0, attractor.x, attractor.y, 150);
-      glow.addColorStop(0, "rgba(107, 166, 255, 0.12)");
+      glow.addColorStop(0, "rgba(86, 133, 255, 0.16)");
       glow.addColorStop(1, "rgba(107, 166, 255, 0)");
       context.fillStyle = glow;
       context.beginPath();
@@ -149,7 +149,7 @@
         if (distance > config.linkDistance) continue;
 
         const alpha = 0.16 * (1 - distance / config.linkDistance);
-        context.strokeStyle = `rgba(96, 145, 214, ${alpha})`;
+        context.strokeStyle = `rgba(92, 136, 255, ${alpha})`;
         context.lineWidth = 1;
         context.beginPath();
         context.moveTo(a.x, a.y);
@@ -165,16 +165,16 @@
       const tailX = particle.x - particle.vx * 12;
       const tailY = particle.y - particle.vy * 12;
 
-      context.strokeStyle = `hsla(${particle.hue}, 72%, 66%, 0.22)`;
+      context.strokeStyle = `hsla(${particle.hue}, 80%, 70%, 0.26)`;
       context.lineWidth = 1;
       context.beginPath();
       context.moveTo(tailX, tailY);
       context.lineTo(particle.x, particle.y);
       context.stroke();
 
-      context.fillStyle = `hsla(${particle.hue}, 76%, ${68 + speed * 8}%, 0.95)`;
-      context.shadowBlur = 10;
-      context.shadowColor = "rgba(111, 169, 255, 0.32)";
+      context.fillStyle = `hsla(${particle.hue}, 90%, ${70 + speed * 7}%, 0.98)`;
+      context.shadowBlur = 12;
+      context.shadowColor = "rgba(102, 144, 255, 0.42)";
       context.beginPath();
       context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
       context.fill();
