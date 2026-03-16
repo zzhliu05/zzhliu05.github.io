@@ -81,13 +81,43 @@
     };
   }
 
+  function assignStablePairs() {
+    const families = [[], [], []];
+
+    for (let i = 0; i < particles.length; i += 1) {
+      const particle = particles[i];
+      particle.pairIndex = -1;
+      families[particle.entanglement].push(i);
+    }
+
+    for (let family = 0; family < families.length; family += 1) {
+      const source = families[family];
+      const target = families[(family + 1) % families.length];
+
+      for (let k = 0; k < source.length; k += 1) {
+        const sourceIndex = source[k];
+        const targetIndex = target[k % target.length];
+        particles[sourceIndex].pairIndex = targetIndex;
+      }
+    }
+  }
+
   function updatePairings() {
     for (const particle of particles) {
-      particle.pairIndex = -1;
+      if (particle.pairIndex < 0) continue;
     }
 
     for (let i = 0; i < particles.length; i += 1) {
       const particle = particles[i];
+      const currentPartner = particle.pairIndex;
+      if (currentPartner < 0) continue;
+
+      const partner = particles[currentPartner];
+      const currentDx = wrapDelta(partner.x - particle.x, width);
+      const currentDy = wrapDelta(partner.y - particle.y, height);
+      const currentDistance = Math.hypot(currentDx, currentDy);
+      if (currentDistance < config.couplingDistance * 1.35) continue;
+
       let bestIndex = -1;
       let bestDistance = Infinity;
 
@@ -106,7 +136,9 @@
         }
       }
 
-      particle.pairIndex = bestIndex;
+      if (bestIndex >= 0) {
+        particle.pairIndex = bestIndex;
+      }
     }
   }
 
@@ -115,7 +147,7 @@
     for (let i = 0; i < config.particleCount; i += 1) {
       particles.push(createParticle(i));
     }
-    updatePairings();
+    assignStablePairs();
   }
 
   function resize() {
@@ -280,7 +312,7 @@
 
     if (!reducedMotionQuery.matches) {
       updateParticles(delta);
-      if (Math.floor(timestamp / 1000) !== Math.floor((timestamp - delta) / 1000)) {
+      if (Math.floor(timestamp / 4000) !== Math.floor((timestamp - delta) / 4000)) {
         updatePairings();
       }
     }
