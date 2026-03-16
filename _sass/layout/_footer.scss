@@ -4,38 +4,36 @@
 
 .page__footer {
   @include clearfix;
-  background-color: transparent;
+  background-color: var(--global-footer-bg-color);
   color: var(--global-text-color-light);
-  margin-left: auto;
-  margin-right: auto;
+
+  float: left;
+  margin-left: 0;
+  margin-right: 0;
   width: 100%;
   clear: both;
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 25;
-  margin-top: 0;
-  padding: 0 0.75rem 0;
+
+  /* sticky footer fix start */
+  position: absolute;
+  bottom: 0em;
+  height: auto;
+  /* sticky footer fix end */
+
+  margin-top: 3em;
 
   -webkit-animation: intro 0.3s both;
           animation: intro 0.3s both;
   -webkit-animation-delay: 0.45s;
           animation-delay: 0.45s;
-  border-top: 0;
+  border-top: 1px solid var(--global-dark-border-color);
 
   footer {
     @include clearfix;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 0;
-    max-width: $x-large;
-    padding: 0.7rem 1rem 0.85rem;
-    background: rgba(6, 10, 18, 0.92);
-    border: 0;
-    border-radius: 18px 18px 0 0;
-    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.22);
-    backdrop-filter: blur(14px);
+    margin-top: 1em;
+    max-width: 100%;
+    padding: 0 1em 1em;
 
     @include breakpoint($x-large) {
       max-width: $x-large;
