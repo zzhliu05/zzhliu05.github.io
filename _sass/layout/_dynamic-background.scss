@@ -68,6 +68,15 @@ body {
   z-index: 2;
 }
 
+#main,
+.page,
+.page__inner-wrap,
+.page__content,
+.sidebar,
+.sidebar * {
+  pointer-events: auto !important;
+}
+
 body,
 #main,
 .page,
@@ -89,6 +98,16 @@ a,
 div,
 article,
 section {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+
+.page__content,
+.page__content *,
+.author__content,
+.author__content *,
+.sidebar,
+.sidebar * {
   -webkit-user-select: text !important;
   user-select: text !important;
 }

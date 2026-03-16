@@ -1,5 +1,15 @@
 (function () {
   const canvas = document.getElementById("dynamic-background-canvas");
+  const selectableNodes = document.querySelectorAll(
+    "#main, .page, .page__inner-wrap, .page__content, .sidebar, .sidebar *, .author__content, .author__content *"
+  );
+
+  for (const node of selectableNodes) {
+    node.style.userSelect = "text";
+    node.style.webkitUserSelect = "text";
+    node.style.pointerEvents = "auto";
+  }
+
   if (!canvas) return;
 
   const context = canvas.getContext("2d");
@@ -10,10 +20,10 @@
   const config = {
     particleCount: 78,
     trailLength: 24,
-    maxSpeed: 1.35,
-    velocityBlend: 0.06,
-    linkDistance: 145,
-    couplingDistance: 185,
+    maxSpeed: 2.35,
+    velocityBlend: 0.11,
+    linkDistance: 175,
+    couplingDistance: 220,
   };
 
   let width = 0;
@@ -45,8 +55,8 @@
     return {
       x: randomBetween(0, width),
       y: randomBetween(0, height),
-      vx: randomBetween(-0.18, 0.18),
-      vy: randomBetween(-0.18, 0.18),
+      vx: randomBetween(-0.42, 0.42),
+      vy: randomBetween(-0.42, 0.42),
       radius: randomBetween(1.1, 2.5),
       hue: 206 + family * 18 + randomBetween(-4, 4),
       phase: randomBetween(0, Math.PI * 2),
@@ -62,18 +72,18 @@
     const ny = y / height;
 
     const u =
-      Math.sin((ny + time * 0.032) * Math.PI * 3.1) +
-      0.8 * Math.cos((nx * 1.7 - time * 0.025) * Math.PI * 2.4) +
-      0.55 * Math.sin((nx * 1.3 + ny * 1.8 + time * 0.018) * Math.PI * 2.2);
+      1.25 * Math.sin((ny + time * 0.05) * Math.PI * 3.3) +
+      1.05 * Math.cos((nx * 1.55 - time * 0.04) * Math.PI * 2.6) +
+      0.8 * Math.sin((nx * 1.15 + ny * 1.7 + time * 0.028) * Math.PI * 2.35);
 
     const v =
-      Math.cos((nx - time * 0.028) * Math.PI * 2.7) -
-      0.75 * Math.sin((ny * 1.8 + time * 0.024) * Math.PI * 2.9) +
-      0.5 * Math.cos((nx * 1.4 - ny * 1.6 - time * 0.015) * Math.PI * 2.0);
+      1.18 * Math.cos((nx - time * 0.044) * Math.PI * 2.9) -
+      0.95 * Math.sin((ny * 1.7 + time * 0.038) * Math.PI * 3.0) +
+      0.72 * Math.cos((nx * 1.35 - ny * 1.5 - time * 0.024) * Math.PI * 2.15);
 
     const swirl =
-      0.42 *
-      Math.sin((nx + ny + time * 0.02) * Math.PI * 3.0);
+      0.62 *
+      Math.sin((nx + ny + time * 0.032) * Math.PI * 3.15);
 
     return {
       x: u - v * swirl,
@@ -98,46 +108,6 @@
         const sourceIndex = source[k];
         const targetIndex = target[k % target.length];
         particles[sourceIndex].pairIndex = targetIndex;
-      }
-    }
-  }
-
-  function updatePairings() {
-    for (const particle of particles) {
-      if (particle.pairIndex < 0) continue;
-    }
-
-    for (let i = 0; i < particles.length; i += 1) {
-      const particle = particles[i];
-      const currentPartner = particle.pairIndex;
-      if (currentPartner < 0) continue;
-
-      const partner = particles[currentPartner];
-      const currentDx = wrapDelta(partner.x - particle.x, width);
-      const currentDy = wrapDelta(partner.y - particle.y, height);
-      const currentDistance = Math.hypot(currentDx, currentDy);
-      if (currentDistance < config.couplingDistance * 1.35) continue;
-
-      let bestIndex = -1;
-      let bestDistance = Infinity;
-
-      for (let j = 0; j < particles.length; j += 1) {
-        if (i === j) continue;
-        const other = particles[j];
-        if (particle.entanglement === other.entanglement) continue;
-
-        const dx = wrapDelta(other.x - particle.x, width);
-        const dy = wrapDelta(other.y - particle.y, height);
-        const distance = Math.hypot(dx, dy);
-
-        if (distance < bestDistance && distance < config.couplingDistance) {
-          bestDistance = distance;
-          bestIndex = j;
-        }
-      }
-
-      if (bestIndex >= 0) {
-        particle.pairIndex = bestIndex;
       }
     }
   }
@@ -169,9 +139,9 @@
     const dx = wrapDelta(partner.x - particle.x, width);
     const dy = wrapDelta(partner.y - particle.y, height);
     const distance = Math.max(Math.hypot(dx, dy), 1);
-    const targetDistance = 58 + Math.sin(particle.phase + partner.phase) * 16;
-    const spring = (distance - targetDistance) * 0.00048;
-    const braid = 0.018 * Math.sin((particle.phase - partner.phase) * 1.6);
+    const targetDistance = 72 + Math.sin(particle.phase + partner.phase) * 24;
+    const spring = (distance - targetDistance) * 0.00062;
+    const braid = 0.028 * Math.sin((particle.phase - partner.phase) * 1.6);
 
     return {
       x: dx * spring - (dy / distance) * braid * step,
@@ -312,9 +282,6 @@
 
     if (!reducedMotionQuery.matches) {
       updateParticles(delta);
-      if (Math.floor(timestamp / 4000) !== Math.floor((timestamp - delta) / 4000)) {
-        updatePairings();
-      }
     }
 
     drawTrails();

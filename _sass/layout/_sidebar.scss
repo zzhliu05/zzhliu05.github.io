@@ -7,8 +7,8 @@
    ========================================================================== */
 
 .sidebar {
-  -webkit-transform: translate3d(0, 0 , 0);
-          transform: translate3d(0, 0 , 0);
+  -webkit-transform: none;
+          transform: none;
 
   @include clearfix();
   margin-bottom: 1em;
@@ -167,7 +167,7 @@
   font-family: $sans-serif;
   z-index: 10;
   position: relative;
-  cursor: pointer;
+  cursor: default;
 
   li:last-child {
     a {
@@ -180,6 +180,7 @@
   }
 
   button {
+    cursor: pointer;
     margin-bottom: 0;
 
     @include breakpoint($large) {
