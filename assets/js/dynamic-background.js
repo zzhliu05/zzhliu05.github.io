@@ -7,16 +7,13 @@
 
   const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   const particles = [];
-  const attractors = [];
   const config = {
-    particleCount: 72,
-    attractorCount: 3,
-    softening: 3000,
-    drag: 0.988,
-    maxSpeed: 1.5,
-    trailLength: 18,
-    linkDistance: 150,
-    couplingDistance: 190,
+    particleCount: 78,
+    trailLength: 24,
+    maxSpeed: 1.35,
+    velocityBlend: 0.06,
+    linkDistance: 145,
+    couplingDistance: 185,
   };
 
   let width = 0;
@@ -24,6 +21,7 @@
   let ratio = 1;
   let animationFrameId = 0;
   let lastTime = 0;
+  let fieldTime = 0;
 
   function randomBetween(min, max) {
     return min + Math.random() * (max - min);
@@ -35,37 +33,51 @@
     return delta;
   }
 
+  function wrapPosition(particle) {
+    if (particle.x < 0) particle.x += width;
+    if (particle.x > width) particle.x -= width;
+    if (particle.y < 0) particle.y += height;
+    if (particle.y > height) particle.y -= height;
+  }
+
   function createParticle(index) {
-    const family = index % config.attractorCount;
+    const family = index % 3;
     return {
       x: randomBetween(0, width),
       y: randomBetween(0, height),
-      vx: randomBetween(-0.12, 0.12),
-      vy: randomBetween(-0.12, 0.12),
-      radius: randomBetween(1.1, 2.4),
-      hue: 205 + family * 16 + randomBetween(-4, 4),
+      vx: randomBetween(-0.18, 0.18),
+      vy: randomBetween(-0.18, 0.18),
+      radius: randomBetween(1.1, 2.5),
+      hue: 206 + family * 18 + randomBetween(-4, 4),
       phase: randomBetween(0, Math.PI * 2),
-      phaseVelocity: randomBetween(0.009, 0.02),
+      phaseVelocity: randomBetween(0.008, 0.018),
       entanglement: family,
-      history: [],
       pairIndex: -1,
+      history: [],
     };
   }
 
-  function createAttractor(index) {
-    const angle = (Math.PI * 2 * index) / config.attractorCount;
+  function sampleFlow(x, y, time) {
+    const nx = x / width;
+    const ny = y / height;
+
+    const u =
+      Math.sin((ny + time * 0.032) * Math.PI * 3.1) +
+      0.8 * Math.cos((nx * 1.7 - time * 0.025) * Math.PI * 2.4) +
+      0.55 * Math.sin((nx * 1.3 + ny * 1.8 + time * 0.018) * Math.PI * 2.2);
+
+    const v =
+      Math.cos((nx - time * 0.028) * Math.PI * 2.7) -
+      0.75 * Math.sin((ny * 1.8 + time * 0.024) * Math.PI * 2.9) +
+      0.5 * Math.cos((nx * 1.4 - ny * 1.6 - time * 0.015) * Math.PI * 2.0);
+
+    const swirl =
+      0.42 *
+      Math.sin((nx + ny + time * 0.02) * Math.PI * 3.0);
+
     return {
-      orbitAngle: angle,
-      orbitSpeed: randomBetween(0.00008, 0.00016) * (index % 2 === 0 ? 1 : -1),
-      radialPhase: randomBetween(0, Math.PI * 2),
-      radialSpeed: randomBetween(0.0002, 0.0004),
-      centerX: width * 0.5,
-      centerY: height * 0.5,
-      baseRadiusX: width * randomBetween(0.14, 0.24),
-      baseRadiusY: height * randomBetween(0.12, 0.2),
-      strength: randomBetween(1600, 2400),
-      x: width * 0.5,
-      y: height * 0.5,
+      x: u - v * swirl,
+      y: v + u * swirl,
     };
   }
 
@@ -87,6 +99,7 @@
         const dx = wrapDelta(other.x - particle.x, width);
         const dy = wrapDelta(other.y - particle.y, height);
         const distance = Math.hypot(dx, dy);
+
         if (distance < bestDistance && distance < config.couplingDistance) {
           bestDistance = distance;
           bestIndex = j;
@@ -99,16 +112,9 @@
 
   function resetScene() {
     particles.length = 0;
-    attractors.length = 0;
-
-    for (let i = 0; i < config.attractorCount; i += 1) {
-      attractors.push(createAttractor(i));
-    }
-
     for (let i = 0; i < config.particleCount; i += 1) {
       particles.push(createParticle(i));
     }
-
     updatePairings();
   }
 
@@ -122,65 +128,40 @@
     resetScene();
   }
 
-  function updateAttractors(delta) {
-    for (let i = 0; i < attractors.length; i += 1) {
-      const attractor = attractors[i];
-      attractor.orbitAngle += attractor.orbitSpeed * delta;
-      attractor.radialPhase += attractor.radialSpeed * delta;
-
-      const radialPulse = 0.82 + Math.sin(attractor.radialPhase) * 0.18;
-      const orbitX = attractor.baseRadiusX * radialPulse;
-      const orbitY = attractor.baseRadiusY * (1 + Math.cos(attractor.radialPhase * 0.7) * 0.15);
-
-      attractor.x = attractor.centerX + Math.cos(attractor.orbitAngle) * orbitX;
-      attractor.y = attractor.centerY + Math.sin(attractor.orbitAngle * 1.15) * orbitY;
+  function applyEntanglement(particle, step) {
+    if (particle.pairIndex < 0) {
+      return { x: 0, y: 0 };
     }
-  }
-
-  function applyEntanglementForces(particle, step) {
-    if (particle.pairIndex < 0) return { ax: 0, ay: 0 };
 
     const partner = particles[particle.pairIndex];
     const dx = wrapDelta(partner.x - particle.x, width);
     const dy = wrapDelta(partner.y - particle.y, height);
     const distance = Math.max(Math.hypot(dx, dy), 1);
-    const targetDistance = 62 + Math.sin(particle.phase + partner.phase) * 18;
-    const spring = (distance - targetDistance) * 0.00042;
-    const swirl = 0.00085 * Math.sin((particle.phase - partner.phase) * 1.7);
+    const targetDistance = 58 + Math.sin(particle.phase + partner.phase) * 16;
+    const spring = (distance - targetDistance) * 0.00048;
+    const braid = 0.018 * Math.sin((particle.phase - partner.phase) * 1.6);
 
     return {
-      ax: dx * spring - (dy / distance) * swirl * 90 * step,
-      ay: dy * spring + (dx / distance) * swirl * 90 * step,
+      x: dx * spring - (dy / distance) * braid * step,
+      y: dy * spring + (dx / distance) * braid * step,
     };
   }
 
   function updateParticles(delta) {
     const step = Math.min(delta / 16.666, 2);
+    fieldTime += delta;
 
     for (const particle of particles) {
-      let ax = 0;
-      let ay = 0;
+      const flow = sampleFlow(particle.x, particle.y, fieldTime);
+      const flowMagnitude = Math.max(Math.hypot(flow.x, flow.y), 0.001);
+      const entanglement = applyEntanglement(particle, step);
 
-      for (const attractor of attractors) {
-        const dx = wrapDelta(attractor.x - particle.x, width);
-        const dy = wrapDelta(attractor.y - particle.y, height);
-        const distanceSq = dx * dx + dy * dy + config.softening;
-        const force = attractor.strength / distanceSq;
-        ax += dx * force;
-        ay += dy * force;
-      }
-
-      const pairForce = applyEntanglementForces(particle, step);
-      ax += pairForce.ax;
-      ay += pairForce.ay;
-
-      const streamAngle = Math.atan2(particle.y - height * 0.5, particle.x - width * 0.5);
-      ax += Math.cos(streamAngle + Math.PI / 2) * 0.008;
-      ay += Math.sin(streamAngle + Math.PI / 2) * 0.008;
+      const targetVx = (flow.x / flowMagnitude) * config.maxSpeed + entanglement.x;
+      const targetVy = (flow.y / flowMagnitude) * config.maxSpeed + entanglement.y;
 
       particle.phase += particle.phaseVelocity * step;
-      particle.vx = (particle.vx + ax * step) * config.drag;
-      particle.vy = (particle.vy + ay * step) * config.drag;
+      particle.vx += (targetVx - particle.vx) * config.velocityBlend * step;
+      particle.vy += (targetVy - particle.vy) * config.velocityBlend * step;
 
       const speed = Math.hypot(particle.vx, particle.vy);
       if (speed > config.maxSpeed) {
@@ -190,11 +171,7 @@
 
       particle.x += particle.vx * step;
       particle.y += particle.vy * step;
-
-      if (particle.x < 0) particle.x += width;
-      if (particle.x > width) particle.x -= width;
-      if (particle.y < 0) particle.y += height;
-      if (particle.y > height) particle.y -= height;
+      wrapPosition(particle);
 
       particle.history.push({ x: particle.x, y: particle.y });
       if (particle.history.length > config.trailLength) {
@@ -206,21 +183,16 @@
   function drawField() {
     const gradient = context.createLinearGradient(0, 0, 0, height);
     gradient.addColorStop(0, "#04060b");
-    gradient.addColorStop(0.45, "#07101d");
+    gradient.addColorStop(0.4, "#07101d");
     gradient.addColorStop(1, "#03050a");
     context.fillStyle = gradient;
     context.fillRect(0, 0, width, height);
 
-    for (let i = 0; i < attractors.length; i += 1) {
-      const attractor = attractors[i];
-      const glow = context.createRadialGradient(attractor.x, attractor.y, 0, attractor.x, attractor.y, 180);
-      glow.addColorStop(0, `rgba(${80 + i * 15}, ${120 + i * 8}, 255, 0.13)`);
-      glow.addColorStop(1, "rgba(80, 130, 255, 0)");
-      context.fillStyle = glow;
-      context.beginPath();
-      context.arc(attractor.x, attractor.y, 180, 0, Math.PI * 2);
-      context.fill();
-    }
+    const veil = context.createRadialGradient(width * 0.5, height * 0.45, 0, width * 0.5, height * 0.45, Math.max(width, height) * 0.7);
+    veil.addColorStop(0, "rgba(70, 105, 255, 0.08)");
+    veil.addColorStop(1, "rgba(70, 105, 255, 0)");
+    context.fillStyle = veil;
+    context.fillRect(0, 0, width, height);
   }
 
   function drawTrails() {
@@ -240,8 +212,8 @@
 
       const tail = particle.history[particle.history.length - 1];
       context.lineTo(tail.x, tail.y);
-      context.strokeStyle = `hsla(${particle.hue}, 88%, 68%, 0.17)`;
-      context.lineWidth = 1.1;
+      context.strokeStyle = `hsla(${particle.hue}, 92%, 70%, 0.18)`;
+      context.lineWidth = 1.15;
       context.stroke();
     }
   }
@@ -268,36 +240,32 @@
       const midY = particle.y + dy * 0.5;
       const normalX = -dy / Math.max(distance, 1);
       const normalY = dx / Math.max(distance, 1);
-      const braid = 16 * Math.sin((particle.phase + partner.phase) * 0.9);
-      const control1X = midX + normalX * braid;
-      const control1Y = midY + normalY * braid;
-      const control2X = midX - normalX * braid;
-      const control2Y = midY - normalY * braid;
-      const alpha = 0.2 * (1 - distance / config.linkDistance);
+      const bend = 14 * Math.sin((particle.phase + partner.phase) * 0.85);
+      const alpha = 0.18 * (1 - distance / config.linkDistance);
 
-      context.strokeStyle = `rgba(120, 170, 255, ${alpha})`;
+      context.strokeStyle = `rgba(112, 163, 255, ${alpha})`;
       context.lineWidth = 1;
       context.beginPath();
       context.moveTo(particle.x, particle.y);
-      context.quadraticCurveTo(control1X, control1Y, partner.x, partner.y);
+      context.quadraticCurveTo(midX + normalX * bend, midY + normalY * bend, partner.x, partner.y);
       context.stroke();
 
-      context.strokeStyle = `rgba(179, 122, 255, ${alpha * 0.8})`;
+      context.strokeStyle = `rgba(182, 120, 255, ${alpha * 0.78})`;
       context.beginPath();
       context.moveTo(particle.x, particle.y);
-      context.quadraticCurveTo(control2X, control2Y, partner.x, partner.y);
+      context.quadraticCurveTo(midX - normalX * bend, midY - normalY * bend, partner.x, partner.y);
       context.stroke();
     }
   }
 
   function drawParticles() {
     for (const particle of particles) {
-      const glow = 0.7 + Math.sin(particle.phase) * 0.3;
+      const glow = 0.72 + Math.sin(particle.phase) * 0.28;
       context.fillStyle = `hsla(${particle.hue}, 95%, ${72 + glow * 8}%, 0.98)`;
-      context.shadowBlur = 14;
-      context.shadowColor = "rgba(110, 152, 255, 0.45)";
+      context.shadowBlur = 12;
+      context.shadowColor = "rgba(110, 152, 255, 0.42)";
       context.beginPath();
-      context.arc(particle.x, particle.y, particle.radius + glow * 0.4, 0, Math.PI * 2);
+      context.arc(particle.x, particle.y, particle.radius + glow * 0.35, 0, Math.PI * 2);
       context.fill();
     }
 
@@ -309,11 +277,10 @@
     lastTime = timestamp;
 
     drawField();
-    updateAttractors(delta);
 
     if (!reducedMotionQuery.matches) {
       updateParticles(delta);
-      if (Math.floor(timestamp / 900) !== Math.floor((timestamp - delta) / 900)) {
+      if (Math.floor(timestamp / 1000) !== Math.floor((timestamp - delta) / 1000)) {
         updatePairings();
       }
     }
@@ -334,11 +301,11 @@
   function restart() {
     window.cancelAnimationFrame(animationFrameId);
     lastTime = 0;
+    fieldTime = 0;
     resize();
 
     if (reducedMotionQuery.matches) {
-      for (let i = 0; i < 8; i += 1) {
-        updateAttractors(16.666);
+      for (let i = 0; i < 10; i += 1) {
         updateParticles(16.666);
       }
       renderStatic();
@@ -350,8 +317,7 @@
 
   resize();
   if (reducedMotionQuery.matches) {
-    for (let i = 0; i < 8; i += 1) {
-      updateAttractors(16.666);
+    for (let i = 0; i < 10; i += 1) {
       updateParticles(16.666);
     }
     renderStatic();
