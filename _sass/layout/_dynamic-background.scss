@@ -159,6 +159,12 @@ section {
 }
 
 .page__inner-wrap,
+.archive {
+  border-width: 2px;
+  border-color: rgba(120, 166, 235, 0.34);
+}
+
+.page__inner-wrap,
 .archive,
 .cv-layout .container {
   border-radius: 22px;
