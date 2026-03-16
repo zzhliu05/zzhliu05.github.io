@@ -22,6 +22,8 @@ html {
   --global-code-background-color: rgba(16, 24, 42, 0.92);
   --global-code-text-color: #dce7ff;
   --global-thead-color: rgba(19, 30, 54, 0.95);
+  --global-selection-bg: #2f6fff;
+  --global-selection-text: #f7fbff;
 }
 
 body {
@@ -30,6 +32,24 @@ body {
   background:
     radial-gradient(circle at top, rgba(74, 129, 255, 0.18), transparent 30%),
     linear-gradient(180deg, #06090f 0%, #0b1020 42%, #05070d 100%) !important;
+}
+
+body ::selection,
+.sidebar ::selection,
+.page__content ::selection,
+.page__inner-wrap ::selection {
+  color: var(--global-selection-text);
+  background: var(--global-selection-bg);
+  text-shadow: none;
+}
+
+body ::-moz-selection,
+.sidebar ::-moz-selection,
+.page__content ::-moz-selection,
+.page__inner-wrap ::-moz-selection {
+  color: var(--global-selection-text);
+  background: var(--global-selection-bg);
+  text-shadow: none;
 }
 
 #dynamic-background {
