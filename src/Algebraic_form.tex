@@ -1,0 +1,53 @@
+% Setting up the document class and essential packages
+\documentclass[a4paper,12pt]{article}
+\usepackage{amsmath, amsthm, amssymb,color,braket}
+\usepackage{geometry}
+\geometry{margin=0.5in} % Set 1.5-inch margins on all sides
+
+\usepackage{parskip}
+\renewcommand{\familydefault}{\sfdefault}
+
+
+\newtheoremstyle{mystyle}%                % Name
+{}%                                     % Space above
+{}%                                     % Space below
+{\itshape}%                             % Body font
+{}%                                     % Indent amount
+{\bfseries}%                            % Theorem head font
+{.}%                                    % Punctuation after theorem head
+{ }%                                    % Space after theorem head, ' ', or \newline
+{}%     
+
+
+\theoremstyle{mystyle}
+% Configuring theorem-like environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{mystyle}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{definition}{\color{blue} Definition}[section]
+\newtheorem{remark}{\color{red} Remark}[section]
+\newtheorem{example}{Example}[section]
+
+% Setting up section numbering
+\numberwithin{equation}{section}
+\title{Algebraic Definition of Differential Forms}
+\begin{document}
+	\maketitle
+	Modern definition of differential forms relies on the definition of sheaf.The concept of Sheaf is used to describe how the information of a local structure is integrated to a global structure.
+	\begin{definition}
+		A sheaf on a topological space $(M,\tau)$ is a map $F$ that assign each open set $U$ a abelian group $F(U)$ and for any $U\subseteq V$,the inclusion must give a homeomorphism of the abelian group
+		$$\rho_{UV}:F(V)\to F(U)$$
+		and that
+		\\
+		(1):$\rho$ must be transitive (i.e. $[0]$ for 1-cycles):$\rho_{UV}\circ \rho_{VW}=\rho_{UW}$.
+		\\
+		It is called presheaf if (1) is satisfied.
+		\\
+		(2):The following short sequence is exact
+		$$0\to F(X)\to \prod_{\alpha} F(U_{\alpha})\to \prod_{\alpha,\beta} F(U_{\alpha}\cap U_\beta)\to 0$$
+		The first map is simply the decomposition map $\oplus_{\alpha} \rho_{U_\alpha X}$,and the second map is the 
+	\end{definition}
+\end{document}

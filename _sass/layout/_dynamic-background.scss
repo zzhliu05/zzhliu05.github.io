@@ -188,6 +188,48 @@ section {
 }
 
 @media (max-width: 767px) {
+  html {
+    --global-text-color: #f5f8ff;
+    --global-text-color-light: #c7d4f2;
+    --global-link-color: #c9d9ff;
+    --global-link-color-hover: #eef4ff;
+  }
+
+  .page__title,
+  .archive__item-title,
+  .archive__subtitle,
+  .page__content,
+  .page__content p,
+  .page__content li,
+  .page__content dl,
+  .archive__item-excerpt,
+  .page__meta,
+  .page__meta a,
+  .archive a,
+  .page a {
+    color: #f3f7ff !important;
+  }
+
+  .page__meta,
+  .archive__subtitle,
+  .archive__item-excerpt {
+    opacity: 1;
+  }
+
+  .page__content strong,
+  .page__content b,
+  .archive__item-title a {
+    color: #ffffff !important;
+  }
+
+  .page__inner-wrap,
+  .archive,
+  .cv-layout .container,
+  .sidebar,
+  .page__footer footer {
+    background: rgba(12, 18, 32, 0.82);
+  }
+
   .page__inner-wrap,
   .archive,
   .cv-layout .container,
