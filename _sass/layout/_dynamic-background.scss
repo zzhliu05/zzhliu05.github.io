@@ -27,6 +27,9 @@ html {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   position: relative;
   isolation: isolate;
   background:
@@ -184,31 +187,6 @@ section {
   background: rgba(8, 12, 22, 0.94) !important;
 }
 
-.floating-sitemap {
-  position: fixed;
-  right: 1.25rem;
-  bottom: 1.25rem;
-  z-index: 30;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 7rem;
-  padding: 0.75rem 1rem;
-  color: #f7fbff !important;
-  text-decoration: none !important;
-  background: rgba(8, 12, 22, 0.86);
-  border: 1px solid rgba(120, 166, 235, 0.34);
-  border-radius: 999px;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(12px);
-}
-
-.floating-sitemap:hover {
-  color: #ffffff !important;
-  background: rgba(20, 34, 64, 0.92);
-  text-decoration: none !important;
-}
-
 @media (max-width: 767px) {
   .page__inner-wrap,
   .archive,
@@ -221,13 +199,5 @@ section {
   .archive,
   .cv-layout .container {
     padding: 1rem;
-  }
-
-  .floating-sitemap {
-    right: 0.85rem;
-    bottom: 0.85rem;
-    min-width: auto;
-    padding: 0.68rem 0.9rem;
-    font-size: 0.95rem;
   }
 }
