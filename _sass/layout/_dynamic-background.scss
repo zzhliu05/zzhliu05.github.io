@@ -167,6 +167,11 @@ section {
   border-color: rgba(120, 166, 235, 0.34);
 }
 
+.archive {
+  border: 0;
+  box-shadow: none;
+}
+
 .page__inner-wrap,
 .archive,
 .cv-layout .container {
