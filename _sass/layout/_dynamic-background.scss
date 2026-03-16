@@ -2,11 +2,33 @@
    DYNAMIC BACKGROUND
    ========================================================================== */
 
+html,
+body {
+  background-color: #05070d !important;
+}
+
+html {
+  --global-base-color: #05070d;
+  --global-bg-color: #05070d;
+  --global-footer-bg-color: #070b14;
+  --global-border-color: rgba(96, 136, 201, 0.24);
+  --global-dark-border-color: rgba(52, 78, 126, 0.4);
+  --global-text-color: #e7edf9;
+  --global-text-color-light: #9fb2d9;
+  --global-link-color: #9ec0ff;
+  --global-link-color-hover: #c0d8ff;
+  --global-masthead-link-color: #e7edf9;
+  --global-masthead-link-color-hover: #9ec0ff;
+  --global-code-background-color: rgba(16, 24, 42, 0.92);
+  --global-code-text-color: #dce7ff;
+  --global-thead-color: rgba(19, 30, 54, 0.95);
+}
+
 body {
   position: relative;
   background:
     radial-gradient(circle at top, rgba(74, 129, 255, 0.18), transparent 30%),
-    linear-gradient(180deg, #06090f 0%, #0b1020 42%, #05070d 100%);
+    linear-gradient(180deg, #06090f 0%, #0b1020 42%, #05070d 100%) !important;
 }
 
 #dynamic-background {
@@ -45,6 +67,16 @@ body {
   backdrop-filter: blur(10px);
 }
 
+.page__footer {
+  background: rgba(6, 10, 18, 0.9) !important;
+}
+
+#main,
+.page,
+.archive {
+  background: transparent !important;
+}
+
 .page__inner-wrap,
 .archive,
 .cv-layout .container,
@@ -65,6 +97,14 @@ body {
 .sidebar {
   border-radius: 20px;
   padding: 1rem;
+}
+
+.author__urls,
+.masthead__menu-item,
+.greedy-nav,
+.greedy-nav .visible-links,
+.greedy-nav .hidden-links {
+  background: rgba(8, 12, 22, 0.94) !important;
 }
 
 @media (max-width: 767px) {
