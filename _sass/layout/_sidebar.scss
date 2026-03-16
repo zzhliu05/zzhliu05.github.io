@@ -7,8 +7,8 @@
    ========================================================================== */
 
 .sidebar {
-  -webkit-transform: none;
-          transform: none;
+  -webkit-transform: translate3d(0, 0 , 0);
+          transform: translate3d(0, 0 , 0);
 
   @include clearfix();
   margin-bottom: 1em;
@@ -18,17 +18,14 @@
   }
 
   @media screen and (min-width: $sidebar-screen-min-width) {
-    height: auto;
-    overflow: visible;
-    position: relative;
-    top: auto;
-    max-height: none;
-    padding-top: 0 !important;
+    height: 100vh;
+    overflow-y: auto;
+    position: fixed;
+    padding-top: $masthead-height;
   }
 
   @include breakpoint($large) {
     @include span(2 of 12);
-    min-width: 0;
     opacity: 1;
     -webkit-transition: opacity 0.2s ease-in-out;
             transition: opacity 0.2s ease-in-out;
@@ -39,7 +36,7 @@
   }
 
   @include breakpoint($x-large) {
-    max-width: 260px;
+    max-width: $sidebar-link-max-width;
     padding-right: 0;
   }
 
@@ -119,7 +116,6 @@
     width: 100%;
     padding-left: 0;
     padding-right: 0;
-    margin-top: 0.2rem;
   }
 }
 
@@ -168,7 +164,7 @@
   font-family: $sans-serif;
   z-index: 10;
   position: relative;
-  cursor: default;
+  cursor: pointer;
 
   li:last-child {
     a {
@@ -178,7 +174,6 @@
 
   @include breakpoint($large) {
     display: block;
-    margin-top: 0.5rem;
   }
 
   button {
