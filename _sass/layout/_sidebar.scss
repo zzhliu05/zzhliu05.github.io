@@ -22,13 +22,14 @@
     overflow: visible;
     position: -webkit-sticky;
     position: sticky;
-    top: calc(#{$masthead-height} + 1.5rem);
-    max-height: calc(100vh - #{$masthead-height} - 2rem);
-    padding-top: 0;
+    top: 1.25rem;
+    max-height: calc(100vh - 7.5rem);
+    padding-top: 0 !important;
   }
 
   @include breakpoint($large) {
     @include span(2 of 12);
+    align-self: flex-start;
     opacity: 1;
     -webkit-transition: opacity 0.2s ease-in-out;
             transition: opacity 0.2s ease-in-out;
