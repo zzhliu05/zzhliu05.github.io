@@ -16,11 +16,11 @@
   var lastTime = 0;
   var bodies = [];
 
-  var G = 1000;
+  var G = 2000;
   var softening = 0.03;
   var trailLength = 24;
   var maxDt = 0.014;
-  var timeScale = 1;
+  var timeScale = 1.5;
   var integrationSubsteps = 2;
   var confinementRadius = 0;
   var confinementStrength = 0;
