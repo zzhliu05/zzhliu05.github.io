@@ -8,6 +8,7 @@ html {
 
 body {
   position: relative;
+  isolation: isolate;
   background:
     radial-gradient(circle at 18% 16%, rgba(91, 138, 255, 0.14), transparent 26%),
     radial-gradient(circle at 78% 24%, rgba(97, 185, 255, 0.08), transparent 20%),
@@ -18,7 +19,7 @@ body {
 #dynamic-background {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
   overflow: hidden;
   pointer-events: none;
 }
@@ -40,6 +41,11 @@ body {
   height: 100%;
   opacity: 0.95;
   pointer-events: none;
+}
+
+body > *:not(#dynamic-background) {
+  position: relative;
+  z-index: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -19,16 +19,16 @@
 
   var G = 0.75;
   var softening = 0.018;
-  var tracerCount = 170;
+  var tracerCount = 140;
   var trailLength = 26;
   var maxDt = 0.018;
 
   function resize() {
     width = window.innerWidth;
     height = window.innerHeight;
-    centerX = width * 0.5;
-    centerY = height * 0.5;
-    orbitScale = Math.min(width, height) * 0.18;
+    centerX = width * 0.72;
+    centerY = height * 0.6;
+    orbitScale = Math.min(width, height) * 0.14;
 
     canvas.width = Math.floor(width * dpr);
     canvas.height = Math.floor(height * dpr);
