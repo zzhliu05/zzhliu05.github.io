@@ -44,19 +44,11 @@ body {
   pointer-events: none;
 }
 
-body > *:not(#dynamic-background) {
-  position: relative;
-  z-index: 1;
-}
-
 .page__content-shell,
 #main,
-.page,
-.archive,
-.list__item,
-.sidebar,
 .page__footer {
-  z-index: 0;
+  position: relative;
+  z-index: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
