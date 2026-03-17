@@ -50,7 +50,7 @@ body {
   right: clamp(1rem, 3vw, 2.5rem);
   width: min(24vw, 280px);
   pointer-events: none;
-  z-index: 0;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -79,7 +79,7 @@ body {
   backdrop-filter: none;
   white-space: nowrap;
   position: relative;
-  z-index: -1;
+  z-index: 2;
   text-shadow: 0 0 12px rgba(65, 118, 214, 0.18);
 }
 
@@ -97,7 +97,7 @@ body {
 .sidebar,
 .page__footer {
   position: relative;
-  z-index: 1 !important;
+  z-index: 3 !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
