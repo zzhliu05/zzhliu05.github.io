@@ -17,12 +17,13 @@
   var bodies = [];
   var tracers = [];
 
-  var G = 1.05;
+  var G = 1.22;
   var softening = 0.03;
   var tracerCount = 120;
   var trailLength = 24;
-  var maxDt = 0.016;
-  var maxBodyRadiusFactor = 1.15;
+  var maxDt = 0.014;
+  var confinementRadius = 0;
+  var confinementStrength = 0;
 
   function resize() {
     width = window.innerWidth;
@@ -30,6 +31,8 @@
     centerX = width * 0.72;
     centerY = height * 0.6;
     orbitScale = Math.min(width, height) * 0.14;
+    confinementRadius = orbitScale * 1.42;
+    confinementStrength = 1.85 / Math.max(orbitScale, 1);
 
     canvas.width = Math.floor(width * dpr);
     canvas.height = Math.floor(height * dpr);
@@ -48,7 +51,7 @@
         y: 0.24308753 * bodyScale,
         vx: 0.466203685 * velocityScale,
         vy: 0.43236573 * velocityScale,
-        mass: 1,
+        mass: 1.05,
         radius: 3.1,
         color: "rgba(198, 224, 255, 0.98)",
         trail: []
@@ -68,14 +71,12 @@
         y: 0,
         vx: -0.93240737 * velocityScale,
         vy: -0.86473146 * velocityScale,
-        mass: 1,
+        mass: 0.95,
         radius: 2.9,
         color: "rgba(110, 181, 255, 0.98)",
         trail: []
       }
     ];
-
-    stabilizeBodies();
   }
 
   function initializeTracers() {
@@ -120,53 +121,31 @@
     return { x: ax, y: ay };
   }
 
+  function confinementAcceleration(x, y) {
+    var radius = Math.sqrt(x * x + y * y);
+    if (radius <= confinementRadius) {
+      return { x: 0, y: 0 };
+    }
+
+    var excess = (radius - confinementRadius) / confinementRadius;
+    var smooth = excess * excess * (3 - 2 * Math.min(excess, 1));
+    var strength = confinementStrength * smooth * Math.min(radius / confinementRadius, 1.8);
+    return {
+      x: -(x / radius) * strength * orbitScale,
+      y: -(y / radius) * strength * orbitScale
+    };
+  }
+
+  function addAcceleration(a, b) {
+    return {
+      x: a.x + b.x,
+      y: a.y + b.y
+    };
+  }
+
   function pushPoint(history, point, maxLength) {
     history.push(point);
     if (history.length > maxLength) history.shift();
-  }
-
-  function stabilizeBodies() {
-    var totalMass = 0;
-    var centerMassX = 0;
-    var centerMassY = 0;
-    var centerVelocityX = 0;
-    var centerVelocityY = 0;
-    var i = 0;
-
-    for (i = 0; i < bodies.length; i += 1) {
-      totalMass += bodies[i].mass;
-      centerMassX += bodies[i].x * bodies[i].mass;
-      centerMassY += bodies[i].y * bodies[i].mass;
-      centerVelocityX += bodies[i].vx * bodies[i].mass;
-      centerVelocityY += bodies[i].vy * bodies[i].mass;
-    }
-
-    centerMassX /= totalMass;
-    centerMassY /= totalMass;
-    centerVelocityX /= totalMass;
-    centerVelocityY /= totalMass;
-
-    var maxRadius = 0;
-    for (i = 0; i < bodies.length; i += 1) {
-      bodies[i].x -= centerMassX;
-      bodies[i].y -= centerMassY;
-      bodies[i].vx -= centerVelocityX;
-      bodies[i].vy -= centerVelocityY;
-
-      var radius = Math.sqrt(bodies[i].x * bodies[i].x + bodies[i].y * bodies[i].y);
-      if (radius > maxRadius) maxRadius = radius;
-    }
-
-    var allowedRadius = orbitScale * maxBodyRadiusFactor;
-    if (maxRadius > allowedRadius) {
-      var scale = allowedRadius / maxRadius;
-      for (i = 0; i < bodies.length; i += 1) {
-        bodies[i].x *= scale;
-        bodies[i].y *= scale;
-        bodies[i].vx *= Math.sqrt(scale);
-        bodies[i].vy *= Math.sqrt(scale);
-      }
-    }
   }
 
   function stepBodies(dt) {
@@ -182,7 +161,10 @@
         if (i !== j) others.push(bodies[j]);
       }
 
-      currentAccelerations[i] = accelerationAt(bodies[i].x, bodies[i].y, others);
+      currentAccelerations[i] = addAcceleration(
+        accelerationAt(bodies[i].x, bodies[i].y, others),
+        confinementAcceleration(bodies[i].x, bodies[i].y)
+      );
     }
 
     for (i = 0; i < bodies.length; i += 1) {
@@ -198,26 +180,58 @@
         if (i !== j) futureOthers.push(bodies[j]);
       }
 
-      nextAccelerations[i] = accelerationAt(bodies[i].x, bodies[i].y, futureOthers);
+      nextAccelerations[i] = addAcceleration(
+        accelerationAt(bodies[i].x, bodies[i].y, futureOthers),
+        confinementAcceleration(bodies[i].x, bodies[i].y)
+      );
     }
 
     for (i = 0; i < bodies.length; i += 1) {
       var updatedBody = bodies[i];
       updatedBody.vx += 0.5 * (currentAccelerations[i].x + nextAccelerations[i].x) * dt;
       updatedBody.vy += 0.5 * (currentAccelerations[i].y + nextAccelerations[i].y) * dt;
+
+      pushPoint(updatedBody.trail, { x: updatedBody.x, y: updatedBody.y }, trailLength);
     }
 
     stabilizeBodies();
+  }
 
-    for (i = 0; i < bodies.length; i += 1) {
-      pushPoint(bodies[i].trail, { x: bodies[i].x, y: bodies[i].y }, trailLength);
+  function stabilizeBodies() {
+    var totalMass = 0;
+    var cmx = 0;
+    var cmy = 0;
+    var cvx = 0;
+    var cvy = 0;
+
+    for (var i = 0; i < bodies.length; i += 1) {
+      totalMass += bodies[i].mass;
+      cmx += bodies[i].x * bodies[i].mass;
+      cmy += bodies[i].y * bodies[i].mass;
+      cvx += bodies[i].vx * bodies[i].mass;
+      cvy += bodies[i].vy * bodies[i].mass;
+    }
+
+    cmx /= totalMass;
+    cmy /= totalMass;
+    cvx /= totalMass;
+    cvy /= totalMass;
+
+    for (var j = 0; j < bodies.length; j += 1) {
+      bodies[j].x -= cmx * 0.012;
+      bodies[j].y -= cmy * 0.012;
+      bodies[j].vx -= cvx * 0.018;
+      bodies[j].vy -= cvy * 0.018;
     }
   }
 
   function stepTracers(dt) {
     for (var i = 0; i < tracers.length; i += 1) {
       var tracer = tracers[i];
-      var acceleration = accelerationAt(tracer.x, tracer.y, bodies);
+      var acceleration = addAcceleration(
+        accelerationAt(tracer.x, tracer.y, bodies),
+        confinementAcceleration(tracer.x, tracer.y)
+      );
 
       tracer.vx += acceleration.x * dt * 0.34;
       tracer.vy += acceleration.y * dt * 0.34;
@@ -229,9 +243,9 @@
       pushPoint(tracer.history, { x: tracer.x, y: tracer.y }, trailLength);
 
       var radius = Math.sqrt(tracer.x * tracer.x + tracer.y * tracer.y);
-      if (radius > orbitScale * 2.45) {
+      if (radius > confinementRadius * 1.15) {
         var angle = Math.random() * Math.PI * 2;
-        var spawnRadius = orbitScale * (0.6 + Math.random() * 1.0);
+        var spawnRadius = orbitScale * (0.56 + Math.random() * 0.74);
         tracer.x = Math.cos(angle) * spawnRadius;
         tracer.y = Math.sin(angle) * spawnRadius * 0.72;
         tracer.vx = (Math.random() - 0.5) * orbitScale * 0.025;
