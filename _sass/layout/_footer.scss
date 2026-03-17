@@ -7,7 +7,7 @@
   background-color: rgba(7, 16, 29, 0.96);
   color: var(--global-text-color-light);
   float: none;
-  margin: 0;
+  margin: auto 0 0;
   width: 100%;
   clear: none;
   position: relative;
@@ -19,6 +19,7 @@
   z-index: 20;
   backdrop-filter: blur(8px);
   box-sizing: border-box;
+  flex-shrink: 0;
 
   -webkit-animation: intro 0.3s both;
           animation: intro 0.3s both;
