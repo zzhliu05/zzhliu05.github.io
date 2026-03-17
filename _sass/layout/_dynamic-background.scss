@@ -89,6 +89,14 @@ body {
   top: 2.3rem;
 }
 
+.background-formula--bottom-right {
+  position: fixed;
+  right: clamp(1.25rem, 3vw, 2.8rem);
+  bottom: 1.25rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
 .page__content-shell,
 #main,
 .page,
@@ -127,10 +135,21 @@ body {
     right: calc(100% + 0.8rem);
     top: 1.7rem;
   }
+
+  .background-formula--bottom-right {
+    right: 0.9rem;
+    bottom: 0.9rem;
+    max-width: 42vw;
+    text-align: right;
+  }
 }
 
 @media screen and (max-width: 640px) {
   #topology-overlay {
+    display: none;
+  }
+
+  .background-formula--bottom-right {
     display: none;
   }
 }
