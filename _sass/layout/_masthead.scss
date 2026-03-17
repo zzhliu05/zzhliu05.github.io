@@ -9,14 +9,15 @@
   right: 0 !important;
   bottom: auto !important;
   height: $masthead-height;
-  background: #07101d;
+  background: rgba(7, 16, 29, 0.96);
+  backdrop-filter: blur(8px);
   width: 100%;
 
   -webkit-animation: intro 0.3s both;
           animation: intro 0.3s both;
   -webkit-animation-delay: 0.15s;
           animation-delay: 0.15s;
-  z-index: 5000;
+  z-index: 1000;
   box-sizing: border-box;
 
   &::after {
@@ -37,9 +38,6 @@
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    position: relative;
-    z-index: 5001;
-    background: #07101d;
 
     @include breakpoint($x-large) {
       max-width: $x-large;
@@ -58,16 +56,12 @@
 #site-nav,
 .greedy-nav {
   position: relative;
-  z-index: 5002;
+  z-index: 1001;
   min-height: $masthead-height;
-  background: #07101d;
 }
 
 .masthead__menu {
   width: 100%;
-  position: relative;
-  z-index: 5002;
-  background: #07101d;
 
   ul {
     margin: 0;
@@ -75,13 +69,6 @@
     clear: both;
     list-style-type: none;
   }
-}
-
-.greedy-nav .visible-links,
-.greedy-nav .hidden-links,
-.greedy-nav button {
-  position: relative;
-  z-index: 5003;
 }
 
 .masthead__menu-item {
