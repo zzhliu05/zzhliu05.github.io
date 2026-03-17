@@ -3,11 +3,11 @@
    ========================================================================== */
 
 .masthead {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: auto;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: auto !important;
   min-height: $masthead-height;
   background: rgba(7, 16, 29, 0.96);
   backdrop-filter: blur(8px);
@@ -49,6 +49,12 @@
       text-decoration: none;
     }
   }
+}
+
+#site-nav,
+.greedy-nav {
+  position: relative;
+  z-index: 21;
 }
 
 .masthead__menu {
