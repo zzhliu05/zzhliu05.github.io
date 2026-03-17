@@ -4,7 +4,7 @@
 
 .page__footer {
   @include clearfix;
-  background-color: var(--global-footer-bg-color);
+  background-color: rgba(7, 16, 29, 0.96);
   color: var(--global-text-color-light);
 
   float: left;
@@ -12,14 +12,14 @@
   margin-right: 0;
   width: 100%;
   clear: both;
-
-  /* sticky footer fix start */
-  position: absolute;
-  bottom: 0em;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
   height: auto;
-  /* sticky footer fix end */
-
-  margin-top: 3em;
+  margin-top: 0;
+  z-index: 20;
+  backdrop-filter: blur(8px);
 
   -webkit-animation: intro 0.3s both;
           animation: intro 0.3s both;
@@ -31,9 +31,9 @@
     @include clearfix;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 1em;
+    margin-top: 0.65em;
     max-width: 100%;
-    padding: 0 1em 1em;
+    padding: 0 1em 0.8em;
 
     @include breakpoint($x-large) {
       max-width: $x-large;
