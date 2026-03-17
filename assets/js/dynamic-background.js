@@ -120,7 +120,7 @@
       var dy = list[i].y - y;
       var distSq = dx * dx + dy * dy + orbitScale * orbitScale * softening;
       var invDist = 1 / Math.sqrt(distSq);
-      var factor = G * list[i].mass * invDist * invDist * invDist;
+      var factor = G * list[i].mass * invDist * invDist;
       ax += dx * factor;
       ay += dy * factor;
     }
