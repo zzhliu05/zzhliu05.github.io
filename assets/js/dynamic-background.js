@@ -44,6 +44,7 @@
   function initializeBodies() {
     var bodyScale = orbitScale;
     var velocityScale = orbitScale * 0.22;
+    var spinStrength = orbitScale * 0.06;
 
     bodies = [
       {
@@ -77,6 +78,12 @@
         trail: []
       }
     ];
+
+    for (var i = 0; i < bodies.length; i += 1) {
+      var body = bodies[i];
+      body.vx += -body.y * spinStrength / Math.max(bodyScale, 1);
+      body.vy += body.x * spinStrength / Math.max(bodyScale, 1);
+    }
   }
 
   function initializeTracers() {
