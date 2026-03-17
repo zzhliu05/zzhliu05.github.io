@@ -50,7 +50,7 @@ body {
   right: clamp(1rem, 3vw, 2.5rem);
   width: min(24vw, 280px);
   pointer-events: none;
-  z-index: 6;
+  z-index: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -64,19 +64,23 @@ body {
   aspect-ratio: 1.28 / 1;
 }
 
+.background-formula,
 .topology-formula {
   max-width: 100%;
-  padding: 0.4rem 0.7rem;
+  padding: 0;
   color: rgba(203, 225, 255, 0.92);
   font-family: "Times New Roman", Georgia, serif;
   font-size: 0.95rem;
   letter-spacing: 0.02em;
-  background: linear-gradient(180deg, rgba(9, 18, 34, 0.78), rgba(8, 14, 27, 0.46));
-  border: 1px solid rgba(124, 171, 255, 0.2);
-  border-radius: 999px;
-  box-shadow: 0 0 24px rgba(28, 61, 122, 0.12);
-  backdrop-filter: blur(6px);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
   white-space: nowrap;
+  position: relative;
+  z-index: -1;
+  text-shadow: 0 0 12px rgba(65, 118, 214, 0.18);
 }
 
 .page__content-shell,
