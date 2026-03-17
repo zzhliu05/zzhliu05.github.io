@@ -22,6 +22,7 @@
   var tracerCount = 120;
   var trailLength = 24;
   var maxDt = 0.016;
+  var maxBodyRadiusFactor = 1.15;
 
   function resize() {
     width = window.innerWidth;
@@ -47,7 +48,7 @@
         y: 0.24308753 * bodyScale,
         vx: 0.466203685 * velocityScale,
         vy: 0.43236573 * velocityScale,
-        mass: 1.05,
+        mass: 1,
         radius: 3.1,
         color: "rgba(198, 224, 255, 0.98)",
         trail: []
@@ -67,12 +68,14 @@
         y: 0,
         vx: -0.93240737 * velocityScale,
         vy: -0.86473146 * velocityScale,
-        mass: 0.95,
+        mass: 1,
         radius: 2.9,
         color: "rgba(110, 181, 255, 0.98)",
         trail: []
       }
     ];
+
+    stabilizeBodies();
   }
 
   function initializeTracers() {
@@ -122,6 +125,50 @@
     if (history.length > maxLength) history.shift();
   }
 
+  function stabilizeBodies() {
+    var totalMass = 0;
+    var centerMassX = 0;
+    var centerMassY = 0;
+    var centerVelocityX = 0;
+    var centerVelocityY = 0;
+    var i = 0;
+
+    for (i = 0; i < bodies.length; i += 1) {
+      totalMass += bodies[i].mass;
+      centerMassX += bodies[i].x * bodies[i].mass;
+      centerMassY += bodies[i].y * bodies[i].mass;
+      centerVelocityX += bodies[i].vx * bodies[i].mass;
+      centerVelocityY += bodies[i].vy * bodies[i].mass;
+    }
+
+    centerMassX /= totalMass;
+    centerMassY /= totalMass;
+    centerVelocityX /= totalMass;
+    centerVelocityY /= totalMass;
+
+    var maxRadius = 0;
+    for (i = 0; i < bodies.length; i += 1) {
+      bodies[i].x -= centerMassX;
+      bodies[i].y -= centerMassY;
+      bodies[i].vx -= centerVelocityX;
+      bodies[i].vy -= centerVelocityY;
+
+      var radius = Math.sqrt(bodies[i].x * bodies[i].x + bodies[i].y * bodies[i].y);
+      if (radius > maxRadius) maxRadius = radius;
+    }
+
+    var allowedRadius = orbitScale * maxBodyRadiusFactor;
+    if (maxRadius > allowedRadius) {
+      var scale = allowedRadius / maxRadius;
+      for (i = 0; i < bodies.length; i += 1) {
+        bodies[i].x *= scale;
+        bodies[i].y *= scale;
+        bodies[i].vx *= Math.sqrt(scale);
+        bodies[i].vy *= Math.sqrt(scale);
+      }
+    }
+  }
+
   function stepBodies(dt) {
     var currentAccelerations = [];
     var nextAccelerations = [];
@@ -158,8 +205,12 @@
       var updatedBody = bodies[i];
       updatedBody.vx += 0.5 * (currentAccelerations[i].x + nextAccelerations[i].x) * dt;
       updatedBody.vy += 0.5 * (currentAccelerations[i].y + nextAccelerations[i].y) * dt;
+    }
 
-      pushPoint(updatedBody.trail, { x: updatedBody.x, y: updatedBody.y }, trailLength);
+    stabilizeBodies();
+
+    for (i = 0; i < bodies.length; i += 1) {
+      pushPoint(bodies[i].trail, { x: bodies[i].x, y: bodies[i].y }, trailLength);
     }
   }
 
