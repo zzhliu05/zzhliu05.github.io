@@ -13,8 +13,10 @@ body {
   background-color: var(--global-bg-color);
 
   margin: 0;
-  padding: $masthead-height 0 0;
-  padding-bottom: 7.5rem;
+  padding-top: $masthead-height;
+  padding-right: 0;
+  padding-bottom: 5.75rem;
+  padding-left: 0;
   font-family: $global-font-family;
   line-height: 1.5;
 

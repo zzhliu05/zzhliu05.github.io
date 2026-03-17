@@ -7,6 +7,7 @@
   top: 0;
   left: 0;
   right: 0;
+  bottom: auto;
   min-height: $masthead-height;
   background: rgba(7, 16, 29, 0.96);
   backdrop-filter: blur(8px);
@@ -17,6 +18,7 @@
   -webkit-animation-delay: 0.15s;
           animation-delay: 0.15s;
   z-index: 20;
+  box-sizing: border-box;
 
   &::after {
     content: "";
@@ -33,6 +35,7 @@
     padding: 0.75em 1em;
     font-family: $sans-serif-narrow;
     min-height: $masthead-height;
+    box-sizing: border-box;
 
     @include breakpoint($x-large) {
       max-width: $x-large;
