@@ -243,3 +243,91 @@
     }
   }
 }
+
+.timeline-archive {
+  margin-top: 1.5rem;
+}
+
+.timeline-archive__year-group {
+  margin-bottom: 2.5rem;
+}
+
+.timeline-archive__year {
+  margin: 0 0 1rem;
+  font-size: 1.9rem;
+  letter-spacing: 0.04em;
+}
+
+.timeline-archive__items {
+  position: relative;
+  padding-left: 2.4rem;
+}
+
+.timeline-archive__items::before {
+  content: "";
+  position: absolute;
+  top: 0.35rem;
+  bottom: 0.35rem;
+  left: 0.7rem;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(124, 171, 255, 0.48), rgba(124, 171, 255, 0.08));
+}
+
+.timeline-archive__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4.75rem 1fr;
+  column-gap: 1.25rem;
+  margin-bottom: 1.4rem;
+}
+
+.timeline-archive__item::before {
+  content: "";
+  position: absolute;
+  left: -1.98rem;
+  top: 0.52rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: #a6d2ff;
+  box-shadow: 0 0 0 4px rgba(76, 119, 255, 0.12);
+}
+
+.timeline-archive__date {
+  color: var(--global-text-color-light);
+  font-family: $sans-serif-narrow;
+  font-size: $type-size-6;
+  letter-spacing: 0.06em;
+}
+
+.timeline-archive__title {
+  margin: 0 0 0.22rem;
+  font-family: $sans-serif-narrow;
+  font-size: $type-size-5;
+}
+
+.timeline-archive__meta,
+.timeline-archive__excerpt {
+  margin: 0;
+  font-size: $type-size-6;
+}
+
+.timeline-archive__meta {
+  color: var(--global-text-color-light);
+  margin-bottom: 0.28rem;
+}
+
+@include breakpoint(max-width $small) {
+  .timeline-archive__items {
+    padding-left: 1.5rem;
+  }
+
+  .timeline-archive__item {
+    grid-template-columns: 1fr;
+    row-gap: 0.25rem;
+  }
+
+  .timeline-archive__item::before {
+    left: -1.08rem;
+  }
+}

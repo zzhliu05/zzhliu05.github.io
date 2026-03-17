@@ -7,18 +7,34 @@ redirect_from:
   - /wordpress/blog-posts/
 ---
 
-{% assign sorted_categories = site.categories | sort %}
+{% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
 
-{% for category in sorted_categories %}
-  {% assign cat_name = category[0] %}
-  <h2 id="{{ cat_name | slugify }}" class="archive__subtitle">{{ cat_name }}</h2>
-  
-  <ul>
-  {% for post in category[1] %}
-    <li>
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      <small>({{ post.date | date: "%Y-%m-%d" }})</small>
-    </li>
+<div class="timeline-archive">
+  {% for year in posts_by_year %}
+    <section class="timeline-archive__year-group">
+      <h2 class="timeline-archive__year">{{ year.name }}</h2>
+      <div class="timeline-archive__items">
+        {% for post in year.items %}
+          <article class="timeline-archive__item">
+            <time class="timeline-archive__date" datetime="{{ post.date | date_to_xmlschema }}">
+              {{ post.date | date: "%m-%d" }}
+            </time>
+            <div class="timeline-archive__content">
+              <h3 class="timeline-archive__title">
+                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+              </h3>
+              {% if post.categories and post.categories.size > 0 %}
+                <p class="timeline-archive__meta">{{ post.categories | join: " / " }}</p>
+              {% endif %}
+              {% if post.excerpt %}
+                <p class="timeline-archive__excerpt">
+                  {{ post.excerpt | markdownify | strip_html | strip_newlines }}
+                </p>
+              {% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
   {% endfor %}
-  </ul>
-{% endfor %}
+</div>
