@@ -17,11 +17,11 @@
   var bodies = [];
   var tracers = [];
 
-  var G = 0.75;
-  var softening = 0.018;
-  var tracerCount = 140;
-  var trailLength = 26;
-  var maxDt = 0.018;
+  var G = 1.05;
+  var softening = 0.03;
+  var tracerCount = 120;
+  var trailLength = 24;
+  var maxDt = 0.016;
 
   function resize() {
     width = window.innerWidth;
@@ -39,7 +39,7 @@
 
   function initializeBodies() {
     var bodyScale = orbitScale;
-    var velocityScale = orbitScale * 0.42;
+    var velocityScale = orbitScale * 0.22;
 
     bodies = [
       {
@@ -47,10 +47,9 @@
         y: 0.24308753 * bodyScale,
         vx: 0.466203685 * velocityScale,
         vy: 0.43236573 * velocityScale,
-        mass: 1,
-        radius: 5.2,
-        color: "rgba(126, 162, 255, 0.96)",
-        glow: "rgba(126, 162, 255, 0.18)",
+        mass: 1.05,
+        radius: 3.1,
+        color: "rgba(198, 224, 255, 0.98)",
         trail: []
       },
       {
@@ -59,9 +58,8 @@
         vx: 0.466203685 * velocityScale,
         vy: 0.43236573 * velocityScale,
         mass: 1,
-        radius: 5.2,
-        color: "rgba(91, 214, 255, 0.95)",
-        glow: "rgba(91, 214, 255, 0.16)",
+        radius: 3,
+        color: "rgba(143, 208, 255, 0.98)",
         trail: []
       },
       {
@@ -69,10 +67,9 @@
         y: 0,
         vx: -0.93240737 * velocityScale,
         vy: -0.86473146 * velocityScale,
-        mass: 1,
-        radius: 5.6,
-        color: "rgba(193, 223, 255, 0.95)",
-        glow: "rgba(193, 223, 255, 0.14)",
+        mass: 0.95,
+        radius: 2.9,
+        color: "rgba(110, 181, 255, 0.98)",
         trail: []
       }
     ];
@@ -89,10 +86,10 @@
       tracers.push({
         x: Math.cos(angle) * radius + (Math.random() - 0.5) * jitter,
         y: Math.sin(angle) * radius * 0.72 + (Math.random() - 0.5) * jitter,
-        vx: (Math.random() - 0.5) * orbitScale * 0.08,
-        vy: (Math.random() - 0.5) * orbitScale * 0.08,
-        size: 0.8 + Math.random() * 1.4,
-        alpha: 0.1 + Math.random() * 0.24,
+        vx: (Math.random() - 0.5) * orbitScale * 0.05,
+        vy: (Math.random() - 0.5) * orbitScale * 0.05,
+        size: 0.55 + Math.random() * 0.9,
+        alpha: 0.08 + Math.random() * 0.18,
         history: []
       });
     }
@@ -126,26 +123,43 @@
   }
 
   function stepBodies(dt) {
-    var accelerations = [];
+    var currentAccelerations = [];
+    var nextAccelerations = [];
+    var i = 0;
+    var j = 0;
 
-    for (var i = 0; i < bodies.length; i += 1) {
+    for (i = 0; i < bodies.length; i += 1) {
       var others = [];
 
-      for (var j = 0; j < bodies.length; j += 1) {
+      for (j = 0; j < bodies.length; j += 1) {
         if (i !== j) others.push(bodies[j]);
       }
 
-      accelerations[i] = accelerationAt(bodies[i].x, bodies[i].y, others);
+      currentAccelerations[i] = accelerationAt(bodies[i].x, bodies[i].y, others);
     }
 
-    for (var k = 0; k < bodies.length; k += 1) {
-      var body = bodies[k];
-      body.vx += accelerations[k].x * dt;
-      body.vy += accelerations[k].y * dt;
-      body.x += body.vx * dt;
-      body.y += body.vy * dt;
+    for (i = 0; i < bodies.length; i += 1) {
+      var body = bodies[i];
+      body.x += body.vx * dt + 0.5 * currentAccelerations[i].x * dt * dt;
+      body.y += body.vy * dt + 0.5 * currentAccelerations[i].y * dt * dt;
+    }
 
-      pushPoint(body.trail, { x: body.x, y: body.y }, trailLength);
+    for (i = 0; i < bodies.length; i += 1) {
+      var futureOthers = [];
+
+      for (j = 0; j < bodies.length; j += 1) {
+        if (i !== j) futureOthers.push(bodies[j]);
+      }
+
+      nextAccelerations[i] = accelerationAt(bodies[i].x, bodies[i].y, futureOthers);
+    }
+
+    for (i = 0; i < bodies.length; i += 1) {
+      var updatedBody = bodies[i];
+      updatedBody.vx += 0.5 * (currentAccelerations[i].x + nextAccelerations[i].x) * dt;
+      updatedBody.vy += 0.5 * (currentAccelerations[i].y + nextAccelerations[i].y) * dt;
+
+      pushPoint(updatedBody.trail, { x: updatedBody.x, y: updatedBody.y }, trailLength);
     }
   }
 
@@ -154,23 +168,23 @@
       var tracer = tracers[i];
       var acceleration = accelerationAt(tracer.x, tracer.y, bodies);
 
-      tracer.vx += acceleration.x * dt * 0.52;
-      tracer.vy += acceleration.y * dt * 0.52;
-      tracer.vx *= 0.995;
-      tracer.vy *= 0.995;
+      tracer.vx += acceleration.x * dt * 0.34;
+      tracer.vy += acceleration.y * dt * 0.34;
+      tracer.vx *= 0.997;
+      tracer.vy *= 0.997;
       tracer.x += tracer.vx * dt;
       tracer.y += tracer.vy * dt;
 
       pushPoint(tracer.history, { x: tracer.x, y: tracer.y }, trailLength);
 
       var radius = Math.sqrt(tracer.x * tracer.x + tracer.y * tracer.y);
-      if (radius > orbitScale * 2.8) {
+      if (radius > orbitScale * 2.45) {
         var angle = Math.random() * Math.PI * 2;
-        var spawnRadius = orbitScale * (0.7 + Math.random() * 1.1);
+        var spawnRadius = orbitScale * (0.6 + Math.random() * 1.0);
         tracer.x = Math.cos(angle) * spawnRadius;
         tracer.y = Math.sin(angle) * spawnRadius * 0.72;
-        tracer.vx = (Math.random() - 0.5) * orbitScale * 0.04;
-        tracer.vy = (Math.random() - 0.5) * orbitScale * 0.04;
+        tracer.vx = (Math.random() - 0.5) * orbitScale * 0.025;
+        tracer.vy = (Math.random() - 0.5) * orbitScale * 0.025;
         tracer.history = [];
       }
     }
@@ -202,16 +216,44 @@
     context.stroke();
   }
 
+  function drawEntanglement() {
+    var pairs = [
+      [0, 1],
+      [1, 2],
+      [2, 0]
+    ];
+
+    for (var i = 0; i < pairs.length; i += 1) {
+      var a = bodies[pairs[i][0]];
+      var b = bodies[pairs[i][1]];
+      var midX = (a.x + b.x) * 0.5;
+      var midY = (a.y + b.y) * 0.5;
+      var dx = b.x - a.x;
+      var dy = b.y - a.y;
+      var distance = Math.sqrt(dx * dx + dy * dy) || 1;
+      var offsetScale = Math.min(distance * 0.12, orbitScale * 0.16);
+      var nx = -dy / distance;
+      var ny = dx / distance;
+
+      context.beginPath();
+      context.moveTo(centerX + a.x, centerY + a.y);
+      context.quadraticCurveTo(
+        centerX + midX + nx * offsetScale,
+        centerY + midY + ny * offsetScale,
+        centerX + b.x,
+        centerY + b.y
+      );
+      context.strokeStyle = "rgba(122, 180, 255, 0.28)";
+      context.lineWidth = 0.9;
+      context.stroke();
+    }
+  }
+
   function drawBodies() {
     for (var i = 0; i < bodies.length; i += 1) {
       var body = bodies[i];
 
-      drawPath(body.trail, body.glow, 1.4);
-
-      context.beginPath();
-      context.arc(centerX + body.x, centerY + body.y, body.radius * 4.2, 0, Math.PI * 2);
-      context.fillStyle = body.glow;
-      context.fill();
+      drawPath(body.trail, "rgba(117, 176, 255, 0.16)", 0.8);
 
       context.beginPath();
       context.arc(centerX + body.x, centerY + body.y, body.radius, 0, Math.PI * 2);
@@ -225,7 +267,7 @@
       var tracer = tracers[i];
 
       if (tracer.history.length > 1) {
-        drawPath(tracer.history, "rgba(94, 150, 255, " + tracer.alpha * 0.45 + ")", 0.7);
+        drawPath(tracer.history, "rgba(94, 150, 255, " + tracer.alpha * 0.34 + ")", 0.55);
       }
 
       context.beginPath();
@@ -238,6 +280,7 @@
   function render() {
     drawBackdrop();
     drawTracers();
+    drawEntanglement();
     drawBodies();
   }
 
