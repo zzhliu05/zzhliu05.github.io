@@ -22,7 +22,7 @@
   var tracerCount = 120;
   var trailLength = 24;
   var maxDt = 0.014;
-  var timeScale = 4;
+  var timeScale = 1;
   var integrationSubsteps = 2;
   var confinementRadius = 0;
   var confinementStrength = 0;
