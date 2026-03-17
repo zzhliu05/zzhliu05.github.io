@@ -4,10 +4,12 @@
 
 .masthead {
   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: $masthead-height;
   background: rgba(7, 16, 29, 0.96);
   backdrop-filter: blur(8px);
-  height: fit-content;
-  top: 0;
   width: 100%;
 
   -webkit-animation: intro 0.3s both;
@@ -28,8 +30,9 @@
   &__inner-wrap {
     @include container;
     @include clearfix;
-    padding: 0.5em 1em;
+    padding: 0.75em 1em;
     font-family: $sans-serif-narrow;
+    min-height: $masthead-height;
 
     @include breakpoint($x-large) {
       max-width: $x-large;
