@@ -78,15 +78,15 @@ body {
   box-shadow: none;
   backdrop-filter: none;
   white-space: nowrap;
-  position: fixed;
-  pointer-events: none;
-  z-index: 0;
+  position: relative;
+  z-index: -1;
   text-shadow: 0 0 12px rgba(65, 118, 214, 0.18);
 }
 
-.background-formula--integral {
-  top: calc(#{$masthead-height} + 2.3rem);
-  right: min(28vw, 340px);
+.topology-formula--left {
+  position: absolute;
+  right: calc(100% + 1.2rem);
+  top: 2.3rem;
 }
 
 .page__content-shell,
@@ -123,18 +123,14 @@ body {
     text-align: right;
   }
 
-  .background-formula--integral {
-    right: min(34vw, 255px);
-    font-size: 0.8rem;
+  .topology-formula--left {
+    right: calc(100% + 0.8rem);
+    top: 1.7rem;
   }
 }
 
 @media screen and (max-width: 640px) {
   #topology-overlay {
-    display: none;
-  }
-
-  .background-formula--integral {
     display: none;
   }
 }
