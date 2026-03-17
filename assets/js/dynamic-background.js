@@ -4,6 +4,8 @@
 
   var context = canvas.getContext("2d", { alpha: true });
   if (!context) return;
+  var torusCanvas = document.getElementById("torus-canvas");
+  var torusContext = torusCanvas ? torusCanvas.getContext("2d", { alpha: true }) : null;
 
   var reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -24,6 +26,8 @@
   var integrationSubsteps = 2;
   var confinementRadius = 0;
   var confinementStrength = 0;
+  var torusRotation = 0;
+  var torusTilt = 0.85;
 
   function resize() {
     width = window.innerWidth;
@@ -38,7 +42,19 @@
     canvas.height = Math.floor(height * dpr);
     context.setTransform(dpr, 0, 0, dpr, 0, 0);
 
+    resizeTorus();
+
     initializeScene();
+  }
+
+  function resizeTorus() {
+    if (!torusCanvas || !torusContext) return;
+    var rect = torusCanvas.getBoundingClientRect();
+    var torusWidth = Math.max(Math.floor(rect.width), 1);
+    var torusHeight = Math.max(Math.floor(rect.height), 1);
+    torusCanvas.width = Math.floor(torusWidth * dpr);
+    torusCanvas.height = Math.floor(torusHeight * dpr);
+    torusContext.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
   function initializeBodies() {
@@ -222,6 +238,80 @@
     context.fillRect(0, 0, width, height);
   }
 
+  function projectTorusPoint(u, v, widthPx, heightPx) {
+    var majorRadius = Math.min(widthPx, heightPx) * 0.28;
+    var minorRadius = majorRadius * 0.38;
+    var cu = Math.cos(u + torusRotation);
+    var su = Math.sin(u + torusRotation);
+    var cv = Math.cos(v);
+    var sv = Math.sin(v);
+
+    var x = (majorRadius + minorRadius * cv) * cu;
+    var y = minorRadius * sv;
+    var z = (majorRadius + minorRadius * cv) * su;
+
+    var tiltCos = Math.cos(torusTilt);
+    var tiltSin = Math.sin(torusTilt);
+    var y2 = y * tiltCos - z * tiltSin;
+    var z2 = y * tiltSin + z * tiltCos;
+    var perspective = 1 / (1 + z2 / (majorRadius * 3.4));
+
+    return {
+      x: widthPx * 0.5 + x * perspective,
+      y: heightPx * 0.5 + y2 * perspective,
+      depth: perspective
+    };
+  }
+
+  function drawTorus() {
+    if (!torusCanvas || !torusContext) return;
+
+    var widthPx = torusCanvas.width / dpr;
+    var heightPx = torusCanvas.height / dpr;
+    torusContext.clearRect(0, 0, widthPx, heightPx);
+
+    if (reducedMotionQuery.matches) {
+      torusRotation += 0.0015;
+    } else {
+      torusRotation += 0.006;
+    }
+
+    var uSegments = 28;
+    var vSegments = 16;
+    var uStep = (Math.PI * 2) / uSegments;
+    var vStep = (Math.PI * 2) / vSegments;
+
+    for (var i = 0; i < uSegments; i += 1) {
+      torusContext.beginPath();
+      for (var j = 0; j <= vSegments; j += 1) {
+        var point = projectTorusPoint(i * uStep, j * vStep, widthPx, heightPx);
+        if (j === 0) {
+          torusContext.moveTo(point.x, point.y);
+        } else {
+          torusContext.lineTo(point.x, point.y);
+        }
+      }
+      torusContext.strokeStyle = "rgba(121, 180, 255, 0.30)";
+      torusContext.lineWidth = 0.8;
+      torusContext.stroke();
+    }
+
+    for (var k = 0; k < vSegments; k += 1) {
+      torusContext.beginPath();
+      for (var m = 0; m <= uSegments; m += 1) {
+        var ringPoint = projectTorusPoint(m * uStep, k * vStep, widthPx, heightPx);
+        if (m === 0) {
+          torusContext.moveTo(ringPoint.x, ringPoint.y);
+        } else {
+          torusContext.lineTo(ringPoint.x, ringPoint.y);
+        }
+      }
+      torusContext.strokeStyle = "rgba(188, 221, 255, 0.18)";
+      torusContext.lineWidth = 0.65;
+      torusContext.stroke();
+    }
+  }
+
   function drawPath(points, strokeStyle, lineWidth) {
     if (points.length < 2) return;
 
@@ -287,6 +377,7 @@
     drawBackdrop();
     drawEntanglement();
     drawBodies();
+    drawTorus();
   }
 
   function tick(time) {

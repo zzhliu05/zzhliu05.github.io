@@ -44,6 +44,41 @@ body {
   pointer-events: none;
 }
 
+#topology-overlay {
+  position: fixed;
+  top: calc(#{$masthead-height} + 1rem);
+  right: clamp(1rem, 3vw, 2.5rem);
+  width: min(24vw, 280px);
+  pointer-events: none;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.65rem;
+  opacity: 0.92;
+}
+
+#torus-canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.28 / 1;
+}
+
+.topology-formula {
+  max-width: 100%;
+  padding: 0.4rem 0.7rem;
+  color: rgba(203, 225, 255, 0.92);
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  background: linear-gradient(180deg, rgba(9, 18, 34, 0.78), rgba(8, 14, 27, 0.46));
+  border: 1px solid rgba(124, 171, 255, 0.2);
+  border-radius: 999px;
+  box-shadow: 0 0 24px rgba(28, 61, 122, 0.12);
+  backdrop-filter: blur(6px);
+  white-space: nowrap;
+}
+
 .page__content-shell,
 #main,
 .page,
@@ -58,5 +93,29 @@ body {
 @media (prefers-reduced-motion: reduce) {
   #dynamic-background-canvas {
     opacity: 0.35;
+  }
+
+  #topology-overlay {
+    opacity: 0.7;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  #topology-overlay {
+    width: min(36vw, 220px);
+    top: calc(#{$masthead-height} + 0.85rem);
+    right: 0.85rem;
+  }
+
+  .topology-formula {
+    font-size: 0.8rem;
+    white-space: normal;
+    text-align: right;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  #topology-overlay {
+    display: none;
   }
 }
