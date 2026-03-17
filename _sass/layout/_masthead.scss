@@ -19,6 +19,7 @@
           animation-delay: 0.15s;
   z-index: 1000;
   box-sizing: border-box;
+  pointer-events: auto;
 
   &::after {
     content: "";
@@ -58,6 +59,18 @@
   position: relative;
   z-index: 1001;
   min-height: $masthead-height;
+  pointer-events: auto;
+}
+
+.masthead__menu,
+.masthead__menu-item,
+.masthead a,
+.greedy-nav button,
+.greedy-nav .hidden-links,
+.greedy-nav .visible-links {
+  position: relative;
+  z-index: 1002;
+  pointer-events: auto;
 }
 
 .masthead__menu {
