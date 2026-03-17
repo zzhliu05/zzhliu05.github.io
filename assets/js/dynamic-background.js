@@ -17,7 +17,7 @@
   var bodies = [];
   var tracers = [];
 
-  var G = 1.22;
+  var G = 1.6;
   var softening = 0.03;
   var tracerCount = 120;
   var trailLength = 24;
