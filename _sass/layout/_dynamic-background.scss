@@ -2,40 +2,14 @@
    DYNAMIC BACKGROUND
    ========================================================================== */
 
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-=======
->>>>>>> theirs
-html {
-  background: #07101d;
-}
-
-body {
-  position: relative;
-<<<<<<< ours
-  isolation: isolate;
-=======
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
 html,
 body {
   background-color: #07101d;
 }
 
 body {
-<<<<<<< ours
-<<<<<<< ours
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
+  position: relative;
+  isolation: isolate;
   background:
     radial-gradient(circle at 18% 16%, rgba(91, 138, 255, 0.14), transparent 26%),
     radial-gradient(circle at 78% 24%, rgba(97, 185, 255, 0.08), transparent 20%),
@@ -46,15 +20,7 @@ body {
 #dynamic-background {
   position: fixed;
   inset: 0;
-<<<<<<< ours
-<<<<<<< ours
   z-index: 0;
-=======
-  z-index: -1;
->>>>>>> theirs
-=======
-  z-index: 0;
->>>>>>> theirs
   overflow: hidden;
   pointer-events: none;
 }
@@ -78,35 +44,11 @@ body {
   pointer-events: none;
 }
 
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
 body > *:not(#dynamic-background) {
-=======
-.masthead,
-#main,
-.page__footer {
->>>>>>> theirs
-=======
-.masthead,
-#main,
-.page__footer {
->>>>>>> theirs
-=======
-.masthead,
-#main,
-.page__footer {
->>>>>>> theirs
   position: relative;
   z-index: 1;
 }
 
-<<<<<<< ours
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
 @media (prefers-reduced-motion: reduce) {
   #dynamic-background-canvas {
     opacity: 0.35;
