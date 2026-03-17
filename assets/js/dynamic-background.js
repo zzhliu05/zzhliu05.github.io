@@ -15,11 +15,9 @@
   var animationFrame = null;
   var lastTime = 0;
   var bodies = [];
-  var tracers = [];
 
   var G = 1000;
   var softening = 0.03;
-  var tracerCount = 120;
   var trailLength = 24;
   var maxDt = 0.014;
   var timeScale = 1;
@@ -88,29 +86,8 @@
     }
   }
 
-  function initializeTracers() {
-    tracers = [];
-
-    for (var i = 0; i < tracerCount; i += 1) {
-      var angle = Math.random() * Math.PI * 2;
-      var radius = orbitScale * (0.55 + Math.random() * 1.2);
-      var jitter = orbitScale * 0.12;
-
-      tracers.push({
-        x: Math.cos(angle) * radius + (Math.random() - 0.5) * jitter,
-        y: Math.sin(angle) * radius * 0.72 + (Math.random() - 0.5) * jitter,
-        vx: (Math.random() - 0.5) * orbitScale * 0.05,
-        vy: (Math.random() - 0.5) * orbitScale * 0.05,
-        size: 0.55 + Math.random() * 0.9,
-        alpha: 0.08 + Math.random() * 0.18,
-        history: []
-      });
-    }
-  }
-
   function initializeScene() {
     initializeBodies();
-    initializeTracers();
   }
 
   function accelerationAt(x, y, list) {
@@ -234,36 +211,6 @@
     }
   }
 
-  function stepTracers(dt) {
-    for (var i = 0; i < tracers.length; i += 1) {
-      var tracer = tracers[i];
-      var acceleration = addAcceleration(
-        accelerationAt(tracer.x, tracer.y, bodies),
-        confinementAcceleration(tracer.x, tracer.y)
-      );
-
-      tracer.vx += acceleration.x * dt * 0.34;
-      tracer.vy += acceleration.y * dt * 0.34;
-      tracer.vx *= 0.997;
-      tracer.vy *= 0.997;
-      tracer.x += tracer.vx * dt;
-      tracer.y += tracer.vy * dt;
-
-      pushPoint(tracer.history, { x: tracer.x, y: tracer.y }, trailLength);
-
-      var radius = Math.sqrt(tracer.x * tracer.x + tracer.y * tracer.y);
-      if (radius > confinementRadius * 1.15) {
-        var angle = Math.random() * Math.PI * 2;
-        var spawnRadius = orbitScale * (0.56 + Math.random() * 0.74);
-        tracer.x = Math.cos(angle) * spawnRadius;
-        tracer.y = Math.sin(angle) * spawnRadius * 0.72;
-        tracer.vx = (Math.random() - 0.5) * orbitScale * 0.025;
-        tracer.vy = (Math.random() - 0.5) * orbitScale * 0.025;
-        tracer.history = [];
-      }
-    }
-  }
-
   function drawBackdrop() {
     context.clearRect(0, 0, width, height);
 
@@ -336,24 +283,8 @@
     }
   }
 
-  function drawTracers() {
-    for (var i = 0; i < tracers.length; i += 1) {
-      var tracer = tracers[i];
-
-      if (tracer.history.length > 1) {
-        drawPath(tracer.history, "rgba(94, 150, 255, " + tracer.alpha * 0.34 + ")", 0.55);
-      }
-
-      context.beginPath();
-      context.arc(centerX + tracer.x, centerY + tracer.y, tracer.size, 0, Math.PI * 2);
-      context.fillStyle = "rgba(186, 218, 255, " + tracer.alpha + ")";
-      context.fill();
-    }
-  }
-
   function render() {
     drawBackdrop();
-    drawTracers();
     drawEntanglement();
     drawBodies();
   }
@@ -367,7 +298,6 @@
       var subDt = dt / integrationSubsteps;
       for (var i = 0; i < integrationSubsteps; i += 1) {
         stepBodies(subDt);
-        stepTracers(subDt);
       }
     }
 
