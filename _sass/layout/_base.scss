@@ -15,15 +15,22 @@ body {
   margin: 0;
   padding-top: $masthead-height;
   padding-right: 0;
-  padding-bottom: 5.75rem;
+  padding-bottom: 0;
   padding-left: 0;
   font-family: $global-font-family;
   line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 
   &.overflow--hidden {
     /* when primary navigation is visible, the content in the background won't scroll */
     overflow: hidden;
   }
+}
+
+.page__content-shell {
+  flex: 1 0 auto;
 }
 
 h1, h2, h3, h4, h5, h6 {

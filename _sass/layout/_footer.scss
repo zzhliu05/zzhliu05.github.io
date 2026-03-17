@@ -10,10 +10,10 @@
   margin: 0;
   width: 100%;
   clear: none;
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: relative;
+  left: auto;
+  right: auto;
+  bottom: auto;
   top: auto;
   min-height: 0;
   z-index: 20;
