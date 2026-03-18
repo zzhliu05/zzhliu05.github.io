@@ -1,0 +1,43 @@
+% Setting up the document class and essential packages
+\documentclass[a4paper,12pt]{article}
+\usepackage{amsmath, amsthm, amssymb,color,braket}
+\usepackage{geometry}
+\geometry{margin=0.5in} % Set 1.5-inch margins on all sides
+
+\usepackage{parskip}
+\renewcommand{\familydefault}{\sfdefault}
+
+
+\newtheoremstyle{mystyle}%                % Name
+{}%                                     % Space above
+{}%                                     % Space below
+{\itshape}%                             % Body font
+{}%                                     % Indent amount
+{\bfseries}%                            % Theorem head font
+{.}%                                    % Punctuation after theorem head
+{ }%                                    % Space after theorem head, ' ', or \newline
+{}%     
+
+
+\theoremstyle{mystyle}
+% Configuring theorem-like environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{mystyle}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{definition}{\color{blue} Definition}[section]
+\newtheorem{remark}{\color{red} Remark}[section]
+\newtheorem{example}{Example}[section]
+
+% Setting up section numbering
+\numberwithin{equation}{section}
+\title{Second Quantization}
+\begin{document}
+	\maketitle
+	We consider the second Quantization process of identical particle.Assume the single particle Hilbert space is denoted as $\mathcal{H}$,then for $n$ particles,the Hilbert space is (by basic principles of QM)
+	$$\mathcal{H}_n=\mathcal{H}\otimes \mathcal{H}\otimes  \cdots \otimes \mathcal{H}$$
+	We want a system where the number of particles is not fixed.So we have to collect all Hilbert spaces with different particle number.Define the many-body Hilbert space as
+	$$\mathcal{H}_\infty=\mathcal{H}_0\oplus \mathcal{H}_1\oplus\cdots =\oplus_{n=0}^\infty \mathcal{H}_n$$
+\end{document}
