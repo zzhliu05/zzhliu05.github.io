@@ -67,12 +67,12 @@ body {
 #feynman-overlay {
   position: fixed;
   right: clamp(1.2rem, 3vw, 2.8rem);
-  bottom: 7.2rem;
+  bottom: 8.2rem;
   width: min(23vw, 260px);
-  aspect-ratio: 1.18 / 1;
+  height: min(19vw, 220px);
   z-index: 2;
   pointer-events: none;
-  opacity: 0.9;
+  opacity: 0.98;
 }
 
 #feynman-canvas {
@@ -147,8 +147,9 @@ body {
 
   #feynman-overlay {
     right: 0.9rem;
-    bottom: 6.8rem;
+    bottom: 7.4rem;
     width: min(31vw, 210px);
+    height: min(24vw, 180px);
   }
 }
 
