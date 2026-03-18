@@ -1,7 +1,7 @@
 ---
 title: 'A Short note on path integral'
 date: 2025-11-08
-permalink: /posts/QFT/
+permalink: /posts/2025-09
 categories:
   - Quantum Field Theory
 layout: singlepdf

@@ -64,6 +64,23 @@ body {
   aspect-ratio: 1.28 / 1;
 }
 
+#feynman-overlay {
+  position: fixed;
+  right: clamp(1.2rem, 3vw, 2.8rem);
+  bottom: 7.2rem;
+  width: min(23vw, 260px);
+  aspect-ratio: 1.18 / 1;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+#feynman-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .background-formula,
 .topology-formula {
   max-width: 100%;
@@ -127,10 +144,20 @@ body {
     right: calc(100% + 0.8rem);
     top: 1.7rem;
   }
+
+  #feynman-overlay {
+    right: 0.9rem;
+    bottom: 6.8rem;
+    width: min(31vw, 210px);
+  }
 }
 
 @media screen and (max-width: 640px) {
   #topology-overlay {
+    display: none;
+  }
+
+  #feynman-overlay {
     display: none;
   }
 }

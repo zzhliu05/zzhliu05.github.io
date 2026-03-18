@@ -6,6 +6,8 @@
   if (!context) return;
   var torusCanvas = document.getElementById("torus-canvas");
   var torusContext = torusCanvas ? torusCanvas.getContext("2d", { alpha: true }) : null;
+  var feynmanCanvas = document.getElementById("feynman-canvas");
+  var feynmanContext = feynmanCanvas ? feynmanCanvas.getContext("2d", { alpha: true }) : null;
 
   var reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -43,6 +45,7 @@
     context.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     resizeTorus();
+    resizeFeynman();
 
     initializeScene();
   }
@@ -55,6 +58,16 @@
     torusCanvas.width = Math.floor(torusWidth * dpr);
     torusCanvas.height = Math.floor(torusHeight * dpr);
     torusContext.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function resizeFeynman() {
+    if (!feynmanCanvas || !feynmanContext) return;
+    var rect = feynmanCanvas.getBoundingClientRect();
+    var canvasWidth = Math.max(Math.floor(rect.width), 1);
+    var canvasHeight = Math.max(Math.floor(rect.height), 1);
+    feynmanCanvas.width = Math.floor(canvasWidth * dpr);
+    feynmanCanvas.height = Math.floor(canvasHeight * dpr);
+    feynmanContext.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
   function initializeBodies() {
@@ -327,6 +340,113 @@
     context.stroke();
   }
 
+  function drawWavyLine(ctx, x1, y1, x2, y2, amplitude, segments, color, widthPx) {
+    var dx = x2 - x1;
+    var dy = y2 - y1;
+    var length = Math.sqrt(dx * dx + dy * dy) || 1;
+    var nx = -dy / length;
+    var ny = dx / length;
+
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    for (var i = 1; i <= segments; i += 1) {
+      var t = i / segments;
+      var px = x1 + dx * t;
+      var py = y1 + dy * t;
+      var wave = Math.sin(t * Math.PI * segments) * amplitude;
+      ctx.lineTo(px + nx * wave, py + ny * wave);
+    }
+    ctx.strokeStyle = color;
+    ctx.lineWidth = widthPx;
+    ctx.stroke();
+  }
+
+  function drawArrowedLine(ctx, x1, y1, x2, y2, color, widthPx) {
+    var dx = x2 - x1;
+    var dy = y2 - y1;
+    var length = Math.sqrt(dx * dx + dy * dy) || 1;
+    var ux = dx / length;
+    var uy = dy / length;
+
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = widthPx;
+    ctx.stroke();
+
+    var arrowSize = 7;
+    var ax = x1 + dx * 0.58;
+    var ay = y1 + dy * 0.58;
+    ctx.beginPath();
+    ctx.moveTo(ax, ay);
+    ctx.lineTo(ax - ux * arrowSize - uy * arrowSize * 0.55, ay - uy * arrowSize + ux * arrowSize * 0.55);
+    ctx.moveTo(ax, ay);
+    ctx.lineTo(ax - ux * arrowSize + uy * arrowSize * 0.55, ay - uy * arrowSize - ux * arrowSize * 0.55);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = widthPx * 0.95;
+    ctx.stroke();
+  }
+
+  function drawFeynmanDiagram() {
+    if (!feynmanCanvas || !feynmanContext) return;
+
+    var widthPx = feynmanCanvas.width / dpr;
+    var heightPx = feynmanCanvas.height / dpr;
+    var ctx = feynmanContext;
+    var phase = lastTime ? lastTime * 0.0012 : 0;
+
+    ctx.clearRect(0, 0, widthPx, heightPx);
+
+    var lineColor = "rgba(192, 223, 255, 0.78)";
+    var photonColor = "rgba(117, 176, 255, 0.62)";
+    var glowColor = "rgba(82, 141, 255, 0.08)";
+
+    var leftTop = { x: widthPx * 0.08, y: heightPx * 0.2 };
+    var leftBottom = { x: widthPx * 0.08, y: heightPx * 0.8 };
+    var v1 = { x: widthPx * 0.42, y: heightPx * 0.34 };
+    var v2 = { x: widthPx * 0.42, y: heightPx * 0.66 };
+    var rightTop = { x: widthPx * 0.9, y: heightPx * 0.2 };
+    var rightBottom = { x: widthPx * 0.9, y: heightPx * 0.8 };
+
+    ctx.beginPath();
+    ctx.arc(v1.x, v1.y, 26, 0, Math.PI * 2);
+    ctx.arc(v2.x, v2.y, 26, 0, Math.PI * 2);
+    ctx.fillStyle = glowColor;
+    ctx.fill();
+
+    drawArrowedLine(ctx, leftTop.x, leftTop.y, v1.x, v1.y, lineColor, 1.3);
+    drawArrowedLine(ctx, v1.x, v1.y, rightTop.x, rightTop.y, lineColor, 1.3);
+    drawArrowedLine(ctx, leftBottom.x, leftBottom.y, v2.x, v2.y, lineColor, 1.3);
+    drawArrowedLine(ctx, v2.x, v2.y, rightBottom.x, rightBottom.y, lineColor, 1.3);
+
+    drawWavyLine(
+      ctx,
+      v1.x,
+      v1.y,
+      v2.x,
+      v2.y,
+      7 + Math.sin(phase) * 0.8,
+      10,
+      photonColor,
+      1.2
+    );
+
+    ctx.beginPath();
+    ctx.arc(v1.x, v1.y, 2.2, 0, Math.PI * 2);
+    ctx.arc(v2.x, v2.y, 2.2, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(212, 234, 255, 0.96)";
+    ctx.fill();
+
+    ctx.font = "13px Georgia, serif";
+    ctx.fillStyle = "rgba(198, 222, 255, 0.72)";
+    ctx.fillText("e⁻", leftTop.x - 6, leftTop.y - 8);
+    ctx.fillText("e⁻", leftBottom.x - 6, leftBottom.y + 18);
+    ctx.fillText("e⁻", rightTop.x - 3, rightTop.y - 8);
+    ctx.fillText("e⁻", rightBottom.x - 3, rightBottom.y + 18);
+    ctx.fillText("γ", v1.x + 10, (v1.y + v2.y) * 0.5 + 4);
+  }
+
   function drawEntanglement() {
     var pairs = [
       [0, 1],
@@ -378,6 +498,7 @@
     drawEntanglement();
     drawBodies();
     drawTorus();
+    drawFeynmanDiagram();
   }
 
   function tick(time) {
