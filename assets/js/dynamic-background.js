@@ -323,7 +323,7 @@
     var length = Math.sqrt(dx * dx + dy * dy) || 1;
     var nx = -dy / length;
     var ny = dx / length;
-    var steps = cycles * 8;
+    var steps = cycles * 18;
 
     ctx.beginPath();
     ctx.moveTo(x1, y1);
@@ -398,7 +398,7 @@
     drawArrowedLine(ctx, leftBottom.x, leftBottom.y, v2.x, v2.y, lineColor, 1.7);
     drawArrowedLine(ctx, v2.x, v2.y, rightBottom.x, rightBottom.y, lineColor, 1.7);
 
-    drawWavyLine(ctx, v1.x, v1.y, v2.x, v2.y, 8.4 + Math.sin(phase) * 0.9, 6, photonColor, 1.5);
+    drawWavyLine(ctx, v1.x, v1.y, v2.x, v2.y, 4.2 + Math.sin(phase) * 0.35, 5, photonColor, 1.35);
 
     ctx.beginPath();
     ctx.arc(v1.x, v1.y, 2.2, 0, Math.PI * 2);
