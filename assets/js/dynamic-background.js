@@ -412,7 +412,6 @@
     ctx.fillText("e-", leftBottom.x - 6, leftBottom.y + 18);
     ctx.fillText("e-", rightTop.x - 3, rightTop.y - 8);
     ctx.fillText("e-", rightBottom.x - 3, rightBottom.y + 18);
-    ctx.fillText("gamma", v1.x + 10, (v1.y + v2.y) * 0.5 + 4);
   }
 
   function drawEntanglement() {

@@ -69,7 +69,7 @@ body {
   right: clamp(1.2rem, 3vw, 2.8rem);
   bottom: 8.2rem;
   width: min(23vw, 260px);
-  height: min(19vw, 220px);
+  height: min(24vw, 280px);
   z-index: 2;
   pointer-events: none;
   opacity: 0.98;
@@ -78,7 +78,24 @@ body {
 #feynman-canvas {
   display: block;
   width: 100%;
-  height: 100%;
+  height: min(19vw, 220px);
+}
+
+.feynman-label {
+  position: absolute;
+  left: 53%;
+  top: 47%;
+  transform: translate(-50%, -50%);
+  font-size: 1.15rem;
+  color: rgba(166, 197, 255, 0.82);
+}
+
+.feynman-formula {
+  position: absolute;
+  right: 0;
+  bottom: 0.2rem;
+  font-size: 0.92rem;
+  color: rgba(195, 219, 255, 0.78);
 }
 
 .background-formula,
@@ -149,7 +166,19 @@ body {
     right: 0.9rem;
     bottom: 7.4rem;
     width: min(31vw, 210px);
+    height: min(29vw, 220px);
+  }
+
+  #feynman-canvas {
     height: min(24vw, 180px);
+  }
+
+  .feynman-label {
+    font-size: 0.96rem;
+  }
+
+  .feynman-formula {
+    font-size: 0.76rem;
   }
 }
 
