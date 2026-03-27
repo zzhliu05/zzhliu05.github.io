@@ -1,0 +1,42 @@
+% Setting up the document class and essential packages
+\documentclass[a4paper,12pt]{article}
+\usepackage{amsmath, amsthm, amssymb,color,braket}
+\usepackage{geometry}
+\geometry{margin=0.5in} % Set 1.5-inch margins on all sides
+
+\usepackage{parskip}
+\renewcommand{\familydefault}{\sfdefault}
+
+
+\newtheoremstyle{mystyle}%                % Name
+{}%                                     % Space above
+{}%                                     % Space below
+{\itshape}%                             % Body font
+{}%                                     % Indent amount
+{\bfseries}%                            % Theorem head font
+{.}%                                    % Punctuation after theorem head
+{ }%                                    % Space after theorem head, ' ', or \newline
+{}%     
+
+
+\theoremstyle{mystyle}
+% Configuring theorem-like environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{mystyle}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{definition}{\color{blue} Definition}[section]
+\newtheorem{remark}{\color{red} Remark}[section]
+\newtheorem{example}{Example}[section]
+\title{Slater Neural Quantum States}
+% Setting up section numbering
+\numberwithin{equation}{section}
+\begin{document}
+	\maketitle
+	We give a brief introduction on how statistic reconfiguration (SR) is implemented in optimization of NQS.Take any random initial state $\ket{\psi_{\tau=0}}$,if we keep projecting the state as follows
+	$$\frac{d}{d\tau}\ket{\psi}=(\Lambda-H)\ket{\psi}$$
+	Then the solution is $\ket{\psi_\tau}=e^{\Lambda-H}\ket{\psi}$.From the solution we see that the state will eventually converges to ground state.When updating the NQS we want the learning step to be "similar" to imaginary time evolution,that is
+	$$\delta_\theta \partial_\theta \ket{\psi}\sim \eta(\Lambda-H)\ket{\psi}$$
+\end{document}

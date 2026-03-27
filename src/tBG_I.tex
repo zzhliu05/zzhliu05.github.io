@@ -1,0 +1,41 @@
+% Setting up the document class and essential packages
+\documentclass[a4paper,12pt]{article}
+\usepackage{amsmath, amsthm, amssymb,color,braket}
+\usepackage{geometry}
+\geometry{margin=0.5in} % Set 1.5-inch margins on all sides
+
+\usepackage{parskip}
+\renewcommand{\familydefault}{\sfdefault}
+
+
+\newtheoremstyle{mystyle}%                % Name
+{}%                                     % Space above
+{}%                                     % Space below
+{\itshape}%                             % Body font
+{}%                                     % Indent amount
+{\bfseries}%                            % Theorem head font
+{.}%                                    % Punctuation after theorem head
+{ }%                                    % Space after theorem head, ' ', or \newline
+{}%     
+
+
+\theoremstyle{mystyle}
+% Configuring theorem-like environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{mystyle}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{definition}{\color{blue} Definition}[section]
+\newtheorem{remark}{\color{red} Remark}[section]
+\newtheorem{example}{Example}[section]
+\title{Moire Pattern of Twist Bilayer Graphene}
+% Setting up section numbering
+\numberwithin{equation}{section}
+\begin{document}
+	\maketitle
+	We start with a very simple setup.Suppose we have a 2 dimensional Bravis lattice $\mathbb{Z}\boldsymbol{a_1}+\mathbb{Z}\boldsymbol{a_2}$.Copy the lattice to another layer and rotate a certain angle,one obtains another lattice
+	$$R(\theta)(\mathbb{Z}\boldsymbol{a_1}+\mathbb{Z}\boldsymbol{a_2})$$
+	We focus on the case when $\theta$ is small.When we stack the rotated layer and the original lattice,a new larger periodicity magically emerges.
+\end{document}

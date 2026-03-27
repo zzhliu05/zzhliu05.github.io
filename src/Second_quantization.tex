@@ -40,5 +40,86 @@
 	$$\mathcal{H}_n=\mathcal{H}\otimes \mathcal{H}\otimes  \cdots \otimes \mathcal{H}$$
 	We want a system where the number of particles is not fixed.So we have to collect all Hilbert spaces with different particle number.Define the many-body Hilbert space as
 	$$\mathcal{H}_\infty=\mathcal{H}_0\oplus \mathcal{H}_1\oplus\cdots =\oplus_{n=0}^\infty \mathcal{H}_n$$
-	This is also known as the tensor algebra.There is a natural symmetrize/anti-symmetrize operator on $\mathcal{H}_\infty$.
+	This is also known as the tensor algebra.There is a natural symmetrize/anti-symmetrize operator on $\mathcal{H}_\infty$,that is to (anti-)symmetrize the state.
+	$$S=S_0\oplus S_1\oplus\cdots,S_n:\mathcal{H}_n\to \mathcal{H}_n,S_n(\ket{\psi_1}\otimes\cdots \otimes \ket{\psi_n})=\sum_{\sigma\in S_n} \ket{\psi_{\sigma(1)}}\otimes\cdots \otimes\ket{\psi_{\sigma(n)}}$$
+	In order to normalize the state,we need to compute the norm of $\sum_{\sigma\in S_n} \ket{\psi_{\sigma(1)}}\otimes\cdots \otimes\ket{\psi_{\sigma(n)}}$ (which is not necessarily $n!$).Suppose we have $k$ distinguished state among $\ket{\psi_1}\sim \ket{\psi_n}$.Each distinguished state $\ket{\psi_k}$ has $n_k$ occupation,for which we apparently have $\sum_{i=1}^k n_i=n$.Permutation within the same state occupation will contribute extra norm,so we have
+	$$||\sum_{\sigma\in S_n} \ket{\psi_{\sigma(1)}}\otimes\cdots \otimes\ket{\psi_{\sigma(n)}}||^2=\frac{n!}{\prod_{i=1}^k (n_k)!}\prod_{i=1}^k \sum_{j\in S_{n_i}(n_i)} (n_i)!=n!\sum_{i=1}^k (n_i)!$$
+	So the normalized state is (which we will then denoted as occupation state $\ket{n_\lambda}$)
+	$$\frac{1}{\sqrt{n!\sum_{i=1}^k (n_i)!}}\sum_{\sigma\in S_n} \ket{\psi_{\sigma(1)}}\otimes\cdots \otimes\ket{\psi_{\sigma(n)}}$$
+	Similarly the anti-symmetrized state is
+	$$A_n(\ket{\psi_1}\otimes\cdots \otimes \ket{\psi_n})=\sum_{\sigma\in S_n} (-1)^\sigma\ket{\psi_{\sigma(1)}}\otimes\cdots \otimes\ket{\psi_{\sigma(n)}}$$
+	But apparently now only $n_i\leq 1$ would give non-zero result.For anti-symmetric case,we would require the occupation state $\ket{n_\lambda}$ to be ordered align with the order of $\lambda$ (for example $\ket{n_1=2,n_2=1}\propto A(\ket{\psi_1}\otimes\ket{\psi_1}\otimes \ket{\psi_2})$,otherwise there will be a sign problem)
+	\\
+	We define the image of symmetrize/anti-symmetrize operator as the Fock space
+	$$\mathcal{F}=S(\mathcal{H}),\mathcal{F}=A(\mathcal{H})$$
+	of Bosons/Fermions.
+	\\
+	With symmetrize/anti-symmetrize operators we can define creation and annihilation operators on Fock space.Suppose we have a basis $\ket{\psi_\lambda}$ of $\mathcal{H}$,then the creation operator is defined on each subspace $\mathcal{H}_n$
+	$$c^\dagger_\lambda:\mathcal{F}_n\to \mathcal{F}_{n+1},\ket{\Psi}\to \frac{1}{\sqrt{n!(n+1)!}}(S/A)(\ket{\psi_\lambda}\otimes \ket{\Psi})$$
+	Its adjoint operator $c_\lambda$ is called annihilation operator.Notice that there is a interesting feature of creation/annihilation operators.Suppose $\ket{\psi_\lambda}$ has $n_\lambda$ occupation in state $\ket{\Psi}$.Then a close inspection over the normalization constant gives (if $\ket{\Psi}$ is normalized properly)
+	$$||c_\lambda^\dagger\ket{\Psi}||=\sqrt{n_\lambda+1}$$
+	and
+	$$||c_\lambda \ket{\psi}||=\sqrt{n_\lambda}$$
+	So that we can define the number operator
+	$$n_\lambda =c^\dagger_\lambda c_\lambda$$
+	Whose eigenstates are states with $n_\lambda$ occupation on state $\psi_\lambda$.
+	\\
+	The commutation relations of creation/annihilation operators are rather straight forward.Consider the occupation number basis $\mathcal{F}=\text{span}\{\ket{n_\lambda}\}$.Then for Bosons
+	$$c_\nu c_\mu\ket{n_\lambda}=\sqrt{n_\mu+1}\sqrt{n_\lambda+1}\ket{n_\lambda;n_\mu+1,n_\nu+1}$$
+	which is symmetric w.r.t. $\mu,\nu$.So $[c_\mu,c_\nu]=0$.Similarly
+	$$c^\dagger_\nu c^\dagger_\mu\ket{n_\lambda}=\sqrt{n_\mu}\sqrt{n_\lambda}\ket{n_\lambda;n_\mu-1,n_\nu-1}$$
+	So $[c^\dagger_\mu,c^\dagger_\nu]=0$ (this can also be derived from taking conjugate of the annihilation operators).For $c_\nu^\dagger c_\mu$ and $c_\nu c_\mu^\dagger$,we have
+	$$c_\nu^\dagger c_\mu\ket{n_\lambda}=\sqrt{n_\mu(n_\nu+1)}\ket{n_\lambda;n_\nu+1,n_\mu-1},(\forall \mu\neq \nu),c_\nu^\dagger c_\mu\ket{n_\lambda}=n_\nu\ket{n_\lambda},(\forall \mu=\nu)$$
+	$$c_\mu c_\nu^\dagger\ket{n_\lambda}=\sqrt{n_\mu(n_\nu+1)}\ket{n_\lambda;n_\nu+1,n_\mu-1},(\forall \mu\neq \nu),c_\mu c_\nu^\dagger\ket{n_\lambda}=(n_\nu+1)\ket{n_\lambda},(\forall \mu=\nu)$$
+	Thus we see
+	$$[c_\mu,c_\nu^\dagger]=\delta_{\mu,\nu}$$
+	For Fermions,the things are little bit different.
+	$$c_\nu c_\mu\ket{n_\lambda}\propto A(\ket{\psi_\nu}\otimes \ket{\psi_\mu}\otimes \ket{n_\lambda})$$
+	We see that if we exchange $\mu,\nu$,then there will be an extra $-1$ due to $(-1)^\sigma$ (because we have to switch $\mu,\nu$ back first).Thus
+	$$c_\nu c\mu+c_\mu c_\nu=\{c_\mu,c_\nu\}=0,\{c_\mu^\dagger,c_\nu^\dagger\}=0$$
+	and
+	$$\{c_\mu,c^\dagger_\nu\}=\delta_{\mu,\nu}$$
+	\\
+	Since $c^\dagger_\mu,c_\mu$ are linear operators on $\mathcal{F}$,we would expect some spectrum decomposition theorem even they are not Hermitian.The construction turns out to be rather obvious.For Bosons,let
+	$$\ket{\phi}=e^{\sum_\mu \phi(\mu)c^\dagger_\mu}\ket{0}$$
+	Such state are called coherent states,and we can check
+	$$c_\nu \ket{\phi}=c_\nu \sum_{n=0}^\infty\sum_\mu \frac{(\phi(\mu )c^\dagger_\mu)^n}{n!}\ket{0}$$
+	Direct observation gives
+	$$[c_\nu,(c^\dagger_\mu)^n]=n(c_\mu^\dagger)^{n-1}\delta_{\mu,\nu}$$
+	Plug in every term of exponential expansion we find
+	$$c_\nu \ket{\phi}=\phi(\nu)\ket{\phi}$$
+	The conjugate version gives
+	$$\bra{\phi}c^\dagger_\nu=\phi^*(\nu)\bra{\phi}$$
+	and
+	$$\braket{\theta|\phi}=exp(\sum_{\mu}\theta^*(\mu)\phi(\mu))$$
+	So we see the normalization constant should be $e^{-\frac{1}{2}\sum_\mu \phi^*(\mu)\phi(\mu)}\ket{\phi}$.Does $\ket{\phi}$ form a complete basis of Fock space?We all ready know that occupation number states forms a complete basis.Take any
+	$$\ket{n_\lambda}=\prod_\lambda \frac{c_\lambda^\dagger}{\sqrt{n_\lambda!}}\ket{0}$$
+	Then the projection on to the space spanned by coherent states is (we should not assume that coherent states are orthonormal)
+	$$\int \prod_\mu d\phi^*(\mu)d\phi(\mu)e^{-\sum_\mu \phi^*(\mu)\phi(\mu)}\ket{\phi}\bra{\phi}\prod_\lambda \frac{c_\lambda^\dagger}{\sqrt{n_\lambda!}}\ket{0}$$
+	which is equal to (because $\braket{\phi|0}=1$)
+	$$\int \prod_{\mu,\lambda}d\phi^*(\mu)d\phi(\mu)e^{-\sum_\mu \phi^*(\mu)\phi(\mu)}\frac{\phi^*(\lambda)}{\sqrt{n_\lambda!}}\ket{\phi}=\int \prod_{\mu,\lambda}d\phi^*(\mu)d\phi(\mu)\frac{(-1)^{n_\lambda}}{\sqrt{n_\lambda !}}\partial^{n_\lambda}_{\phi(\lambda)}(e^{-\sum_\mu \phi^*(\mu)\phi(\mu)})\ket{\phi}$$
+	integration by parts (since Gaussian vanishes at infinity) gives
+	$$\int \prod_{\mu,\lambda}d\phi^*(\mu)d\phi(\mu)\frac{1}{\sqrt{n_\lambda!}}e^{-\sum_\mu \phi^*(\mu)\phi(\mu)}\partial^{n_\lambda}_{\phi(\lambda)}\ket{\phi}$$
+	Apparently we have $\partial_{\phi(\lambda)}\ket{\phi}=c_\lambda^\dagger \ket{\phi}$,thus exchange the order of integration and operator we have
+	$$\prod_\lambda \frac{(c_\lambda^\dagger)^n}{\sqrt{n_\lambda}}\int \prod_{\mu}d\phi^*(\mu)d\phi(\mu)e^{-\sum_\mu \phi^*(\mu)\phi(\mu)}\ket{\phi}$$ 
+	We now claim that $\int \prod_{\mu}d\phi^*(\mu)d\phi(\mu)e^{-\sum_\mu \phi^*(\mu)\phi(\mu)}\ket{\phi}=\ket{0}$.This is because if you act any $c_\lambda$ onto it,then by using integration by parts
+	$$c_\lambda \int \prod_{\mu}d\phi^*(\mu)d\phi(\mu)e^{-\sum_\mu \phi^*(\mu)\phi(\mu)}\ket{\phi}=\int \prod_{\mu}d\phi^*(\mu)d\phi(\mu)e^{-\sum_\mu \phi^*(\mu)\phi(\mu)}\phi(\lambda)\ket{\phi}$$
+	$$=-\int \prod_{\mu}d\phi^*(\mu)d\phi(\mu)\partial_{\phi^*(\lambda)}(e^{-\sum_\mu \phi^*(\mu)\phi(\mu)})\ket{\phi}=\int \prod_{\mu}d\phi^*(\mu)d\phi(\mu)e^{-\sum_\mu \phi^*(\mu)\phi(\mu)}\partial_{\phi^*(\lambda)}\ket{\phi}$$
+	But apparently $\partial_{\phi^*(\lambda)}\ket{\phi}=0$.Thus $c_\lambda \int \prod_{\mu}d\phi^*(\mu)d\phi(\mu)e^{-\sum_\mu \phi^*(\mu)\phi(\mu)}\ket{\phi}=0$,$\forall c_\lambda$,which completes the proof.In conclusion,
+	$$\int \prod_\mu d\phi^*(\mu)d\phi(\mu)e^{-\sum_\mu \phi^*(\mu)\phi(\mu)}\ket{\phi}\bra{\phi}\prod_\lambda \frac{c_\lambda^\dagger}{\sqrt{n_\lambda!}}\ket{0}=\prod_\lambda \frac{c_\lambda^\dagger}{\sqrt{n_\lambda!}}\ket{0}$$
+	Since this is true of a basis of $\mathcal{F}$,we must have the projection operator to be identity
+	$$\int \prod_\mu d\phi^*(\mu)d\phi(\mu)e^{-\sum_\mu \phi^*(\mu)\phi(\mu)}\ket{\phi}\bra{\phi}=I_{\mathcal{F}}$$
+	Which implies coherent states are complete.
+	\\
+	For fermions,we can easily observe that $c_\nu$ has no eigenvector in $\mathcal{F}$.If so then by commutation relation of fermionic operators
+	$$\{c_\mu,c_\nu\}\ket{\phi}=\{\phi(\mu),\phi(\nu)\}\ket{\phi}=0\implies \phi(\mu)\phi(\nu)=-\phi(\nu)\phi(\mu)$$
+	which is not true for complex numbers (complex numbers don't anti-commute!).But we can do in this way.
+	\\
+	Consider the Clifford algebra of $\mathcal{H}$,that is ($()$ means ideal here)
+	$$Cl(\mathcal{H})=\frac{\mathcal{H}_\infty}{(\ket{\psi_1}\otimes \ket{\psi_2}+\ket{\psi_2}\otimes \ket{\psi_1}+\braket{\psi_1|\psi_2})}$$
+	Then $\ket{\psi_\mu},\ket{\psi_\nu}$ naturally anti-commute because $\braket{\psi_\mu|\psi_\nu}=0$.In the following context we will denote $\ket{\psi_\mu}$ in $Cl(\mathcal{H})$ as $\eta_\mu$ in order to distinguish it with normal states in $\mathcal{F}$.Consider the following extended Fock space
+	$$\mathcal{F}_f=Cl(\mathcal{H})\otimes \mathcal{F}$$
+	We can then construct the coherent state of Fermions
+	$$\ket{\eta}=e^{\sum_{\mu}\eta_\mu c_\mu^\dagger}\ket{0}$$
+	The rest is similar to Bosonic case.
 \end{document}
