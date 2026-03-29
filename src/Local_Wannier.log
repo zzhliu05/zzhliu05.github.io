@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.12)  26 MAR 2026 23:50
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.12)  28 MAR 2026 17:36
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -170,18 +170,19 @@ Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count270
 ))
 \c@theorem=\count271
-\c@proposition=\count272
-\c@definition=\count273
-\c@remark=\count274
-\c@example=\count275
+\c@lemma=\count272
+\c@proposition=\count273
+\c@definition=\count274
+\c@remark=\count275
+\c@example=\count276
 
 (c:/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
 File: l3backend-xetex.def 2023-10-10 L3 backend support: XeTeX
-\g__graphics_track_int=\count276
+\g__graphics_track_int=\count277
 \l__pdf_internal_box=\box53
-\g__pdf_backend_object_int=\count277
-\g__pdf_backend_annotation_int=\count278
-\g__pdf_backend_link_int=\count279
+\g__pdf_backend_object_int=\count278
+\g__pdf_backend_annotation_int=\count279
+\g__pdf_backend_link_int=\count280
 )
 (./Local_Wannier.aux)
 \openout1 = `Local_Wannier.aux'.
@@ -256,6 +257,8 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 LaTeX Warning: No \author given.
 
+LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <12> not available
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 47.
 [1
 
 ] (./Local_Wannier.aux)
@@ -265,11 +268,11 @@ L3 programming layer <2023-10-10>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 3382 strings out of 475161
- 50102 string characters out of 5770285
- 1913674 words of memory out of 5000000
- 25130 multiletter control sequences out of 15000+600000
- 560700 words of font info for 51 fonts, out of 8000000 for 9000
+ 3421 strings out of 475161
+ 50685 string characters out of 5770285
+ 1918674 words of memory out of 5000000
+ 25158 multiletter control sequences out of 15000+600000
+ 565361 words of font info for 71 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  57i,6n,65p,547b,206s stack positions out of 10000i,1000n,20000p,200000b,200000s
 

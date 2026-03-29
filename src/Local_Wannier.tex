@@ -22,7 +22,7 @@
 \theoremstyle{mystyle}
 % Configuring theorem-like environments
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{lemma}{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
 
 \theoremstyle{mystyle}
@@ -35,4 +35,19 @@
 \numberwithin{equation}{section}
 \begin{document}
 	\maketitle
+	Consider isolated $n$ bands described by Bloch functions (which are periodic in real space) in 1st Brioullin zone
+	$$\ket{u_{n,k}}=e^{-ikr}\ket{\psi_{n,k}}$$
+	The real space Wannier function (located at site $R$) is the Fourier transformation of Bloch wave
+	$$\ket{W_{{n,R}}}=\int dk e^{-ikR}\ket{\psi_{n,k}}=\int dk e^{-ik(R-r)}\ket{u_{n,k}}$$
+	Wannier functions are often understood as normalized "atomic orbitals" in the tight binding regime,so we would expect it to be localized around $R$.But notice the fact that $\ket{W_{n,R}}$ is not gauge invariant.Consider any gauge transformation that is local in momentum space
+		$$\ket{u^\prime_{m,k}}=U_{mn}(k)\ket{u_{n,k}}$$
+	Where $U_{mn}(k)$ is unitary for any $k$.Then
+	$$\ket{W^\prime_{m,R}}=\int dk U_{mn}(k)e^{-ik(R-r)}\ket{u_{n,k}}$$
+	We can check how Wannier center $\sum_n r_n=\sum_n\braket{W_{n,0}|r|W_{n,0}}$ is transformed under gauge transformation.We firstly prove the following lemma.
+	\begin{lemma}
+		$$\braket{W_{m,R}|r|W_{n,0}}=\int dk e^{ikR}\braket{u_{m,k}|\nabla_k|u_{n,k}}$$
+	\end{lemma}
+	\begin{proof}
+		By directly 
+	\end{proof}
 \end{document}
