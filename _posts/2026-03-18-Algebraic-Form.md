@@ -1,7 +1,7 @@
 ---
 title: 'Algebraic Definition of Tangent Structure on Manifolds'
 date: 2026-03-18
-permalink: /posts/2026-03
+permalink: /posts/2026-03/AF
 categories:
   - Differential Geometry
   - Sheaf Theory

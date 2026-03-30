@@ -1,6 +1,6 @@
 ---
 title: 'CV'
-permalink: /cv
+permalink: /cv/
 layout: singlepdf
 pdf_url: /files/cv.pdf
 ---
