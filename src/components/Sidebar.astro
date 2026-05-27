@@ -1,0 +1,32 @@
+---
+interface Props {
+  tags: [string, number][];
+  postCount: number;
+}
+
+const { tags, postCount } = Astro.props;
+---
+
+<aside class="sidebar" aria-label="侧栏">
+  <section>
+    <h2>作者</h2>
+    <p>zzhliu05</p>
+    <p class="muted">记录数学、编程与日常思考。</p>
+  </section>
+  <section>
+    <h2>统计</h2>
+    <p>{postCount} 篇文章</p>
+  </section>
+  <section>
+    <h2>标签</h2>
+    <div class="tag-cloud">
+      {
+        tags.map(([tag, count]) => (
+          <a href={`/tags/${encodeURIComponent(tag)}/`}>
+            {tag}<span>{count}</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</aside>
