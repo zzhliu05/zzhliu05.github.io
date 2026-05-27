@@ -319,8 +319,8 @@ function renderPage() {
     .check { display: flex; align-items: center; gap: 8px; font-weight: 400; }
     .check input { width: auto; }
     .actions { display: flex; flex-wrap: wrap; gap: 10px; }
-    button { border: 1px solid var(--text); background: var(--text); color: #fff; font: inherit; padding: 10px 16px; cursor: pointer; }
-    button.secondary { background: #fff; color: var(--text); }
+    button, .button-link { border: 1px solid var(--text); background: var(--text); color: #fff; display: inline-flex; align-items: center; font: inherit; line-height: 1.7; padding: 10px 16px; cursor: pointer; text-decoration: none; }
+    button.secondary, .button-link.secondary { background: #fff; color: var(--text); }
     button:disabled { cursor: wait; opacity: .65; }
     .status { border: 1px solid var(--line); background: var(--soft); min-height: 48px; padding: 12px; white-space: pre-wrap; }
     .hint { color: var(--muted); font-size: 14px; font-weight: 400; }
@@ -335,7 +335,7 @@ function renderPage() {
     </header>
     <div class="layout">
       <aside class="panel">
-        <button class="secondary" id="newPost" type="button">&#26032;&#24314;&#25991;&#31456;</button>
+        <a class="button-link secondary" id="newPost" href="/">&#26032;&#24314;&#25991;&#31456;</a>
         <div class="posts" id="posts"></div>
       </aside>
       <section>
@@ -353,7 +353,7 @@ function renderPage() {
           <label class="check"><input type="checkbox" name="draft"> &#20445;&#23384;&#20026;&#33609;&#31295;&#65292;&#19981;&#22312;&#27491;&#24335;&#31449;&#28857;&#23637;&#31034;</label>
           <div class="actions">
             <button type="submit" id="submit">&#25552;&#20132;&#24182;&#25512;&#36865;</button>
-            <button type="button" class="secondary" id="reset">&#28165;&#31354;&#34920;&#21333;</button>
+            <a class="button-link secondary" id="reset" href="/">&#28165;&#31354;&#34920;&#21333;</a>
           </div>
           <div class="status" id="status">&#27491;&#22312;&#21152;&#36733;&#25991;&#31456;&#21015;&#34920;&#12290;</div>
         </form>
@@ -365,8 +365,6 @@ function renderPage() {
     const statusBox = document.querySelector('#status');
     const submitButton = document.querySelector('#submit');
     const postsBox = document.querySelector('#posts');
-    const newPostButton = document.querySelector('#newPost');
-    const resetButton = document.querySelector('#reset');
     let activeSlug = '';
 
     function setStatus(message) {
@@ -385,12 +383,6 @@ function renderPage() {
       document.querySelectorAll('.post-button').forEach((button) => {
         button.classList.toggle('active', button.dataset.slug === activeSlug);
       });
-    }
-
-    function resetForm() {
-      form.reset();
-      setMode('create');
-      setStatusHtml('&#26032;&#24314;&#25991;&#31456;&#27169;&#24335;&#12290;');
     }
 
     async function loadPosts() {
@@ -451,8 +443,6 @@ function renderPage() {
       }
     });
 
-    newPostButton.addEventListener('click', resetForm);
-    resetButton.addEventListener('click', resetForm);
     loadPosts().catch((error) => setStatus('\u5931\u8d25\uff1a' + error.message));
   </script>
 </body>
