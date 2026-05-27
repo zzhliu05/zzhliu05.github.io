@@ -301,7 +301,7 @@ function renderPage() {
     :root { --text:#202124; --muted:#6b7280; --line:#d7dce1; --soft:#f6f7f8; --link:#1f5f8b; }
     * { box-sizing: border-box; }
     body { margin: 0; color: var(--text); font: 16px/1.7 "Noto Sans SC", "Microsoft YaHei", Arial, sans-serif; background: #fff; }
-    main { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 32px 0 56px; }
+    main { width: min(1280px, calc(100% - 32px)); margin: 0 auto; padding: 32px 0 56px; }
     header { border-bottom: 1px solid var(--line); margin-bottom: 24px; padding-bottom: 18px; }
     h1 { margin: 0 0 6px; font-size: 28px; }
     p { margin: 0; color: var(--muted); }
@@ -314,7 +314,22 @@ function renderPage() {
     form { display: grid; gap: 16px; }
     label { display: grid; gap: 6px; font-weight: 700; }
     input, textarea { width: 100%; border: 1px solid var(--line); color: var(--text); font: inherit; padding: 10px 12px; }
-    textarea { min-height: 380px; resize: vertical; font-family: "Cascadia Code", Consolas, monospace; line-height: 1.6; }
+    textarea { min-height: 520px; resize: vertical; font-family: "Cascadia Code", Consolas, monospace; line-height: 1.6; }
+    .editor-preview { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+    .preview-wrap { display: grid; gap: 6px; min-width: 0; }
+    .preview-title { font-weight: 700; }
+    .preview { border: 1px solid var(--line); background: #fff; min-height: 520px; overflow: auto; padding: 16px; }
+    .preview h1, .preview h2, .preview h3 { line-height: 1.35; margin: 22px 0 10px; }
+    .preview h1 { font-size: 26px; }
+    .preview h2 { border-bottom: 1px solid var(--line); font-size: 22px; padding-bottom: 5px; }
+    .preview h3 { font-size: 18px; }
+    .preview p, .preview ul, .preview ol, .preview blockquote, .preview pre { margin: 14px 0; }
+    .preview blockquote { border-left: 3px solid #9aa7b3; color: #3f454b; background: #fafafa; padding: 8px 14px; }
+    .preview code, .formula-inline { border: 1px solid #e1e5e9; background: var(--soft); border-radius: 3px; font-family: "Cascadia Code", Consolas, monospace; padding: 0.1em 0.3em; }
+    .preview pre { border: 1px solid var(--line); background: var(--soft); overflow-x: auto; padding: 14px; }
+    .preview pre code { border: 0; background: transparent; padding: 0; }
+    .formula-block { border: 1px solid #e1e5e9; background: #fbfbfb; display: block; font-family: "Cambria Math", "Times New Roman", serif; margin: 16px 0; overflow-x: auto; padding: 12px; text-align: center; white-space: pre; }
+    .formula-inline { font-family: "Cambria Math", "Times New Roman", serif; }
     .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .check { display: flex; align-items: center; gap: 8px; font-weight: 400; }
     .check input { width: auto; }
@@ -324,7 +339,7 @@ function renderPage() {
     button:disabled { cursor: wait; opacity: .65; }
     .status { border: 1px solid var(--line); background: var(--soft); min-height: 48px; padding: 12px; white-space: pre-wrap; }
     .hint { color: var(--muted); font-size: 14px; font-weight: 400; }
-    @media (max-width: 820px) { .layout, .row { grid-template-columns: 1fr; } }
+    @media (max-width: 980px) { .layout, .row, .editor-preview { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -349,7 +364,13 @@ function renderPage() {
           </div>
           <label>&#25688;&#35201;<input name="description" required placeholder="&#19968;&#20004;&#21477;&#35805;&#27010;&#25324;&#25991;&#31456;&#12290;"></label>
           <label>&#26085;&#26399;<input name="date" type="date"></label>
-          <label>&#27491;&#25991; <span class="hint">&#25903;&#25345; Markdown&#12289;$...$ &#21644; $$...$$</span><textarea name="body" required placeholder="&#36825;&#37324;&#20889;&#27491;&#25991;&#12290;"></textarea></label>
+          <div class="editor-preview">
+            <label>&#27491;&#25991; <span class="hint">&#25903;&#25345; Markdown&#12289;$...$ &#21644; $$...$$</span><textarea name="body" required placeholder="&#36825;&#37324;&#20889;&#27491;&#25991;&#12290;"></textarea></label>
+            <div class="preview-wrap">
+              <div class="preview-title">&#23454;&#26102;&#39044;&#35272;</div>
+              <article class="preview" id="preview"></article>
+            </div>
+          </div>
           <label class="check"><input type="checkbox" name="draft"> &#20445;&#23384;&#20026;&#33609;&#31295;&#65292;&#19981;&#22312;&#27491;&#24335;&#31449;&#28857;&#23637;&#31034;</label>
           <div class="actions">
             <button type="submit" id="submit">&#25552;&#20132;&#24182;&#25512;&#36865;</button>
@@ -365,7 +386,12 @@ function renderPage() {
     const statusBox = document.querySelector('#status');
     const submitButton = document.querySelector('#submit');
     const postsBox = document.querySelector('#posts');
+    const preview = document.querySelector('#preview');
     let activeSlug = '';
+
+    function field(name) {
+      return form.elements.namedItem(name);
+    }
 
     function setStatus(message) {
       statusBox.textContent = message;
@@ -376,8 +402,8 @@ function renderPage() {
     }
 
     function setMode(mode, slug = '') {
-      form.elements.mode.value = mode;
-      form.elements.originalSlug.value = slug;
+      field('mode').value = mode;
+      field('originalSlug').value = slug;
       activeSlug = slug;
       submitButton.innerHTML = mode === 'edit' ? '&#20445;&#23384;&#20462;&#25913;&#24182;&#25512;&#36865;' : '&#25552;&#20132;&#24182;&#25512;&#36865;';
       document.querySelectorAll('.post-button').forEach((button) => {
@@ -408,15 +434,143 @@ function renderPage() {
       const result = await response.json();
       if (!result.ok) throw new Error(result.message || 'Failed to load post');
       const post = result.post;
-      form.elements.title.value = post.title;
-      form.elements.slug.value = post.slug;
-      form.elements.tags.value = post.tags.join(', ');
-      form.elements.description.value = post.description;
-      form.elements.date.value = post.date;
-      form.elements.body.value = post.body;
-      form.elements.draft.checked = post.draft;
+      field('title').value = post.title;
+      field('slug').value = post.slug;
+      field('tags').value = post.tags.join(', ');
+      field('description').value = post.description;
+      field('date').value = post.date;
+      field('body').value = post.body;
+      field('draft').checked = post.draft;
       setMode('edit', post.slug);
+      updatePreview();
       setStatus('\u5df2\u52a0\u8f7d\uff1a' + post.slug);
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+
+    function renderInline(value) {
+      return escapeHtml(value)
+        .replace(/\`([^\`]+)\`/g, '<code>$1</code>')
+        .replace(/\\*\\*([^*]+)\\*\\*/g, '<strong>$1</strong>')
+        .replace(/\\*([^*]+)\\*/g, '<em>$1</em>')
+        .replace(/\\$([^$\\n]+)\\$/g, '<span class="formula-inline">$1</span>');
+    }
+
+    function renderPreview(markdown) {
+      const newline = String.fromCharCode(10);
+      const lines = String(markdown || '')
+        .replaceAll(String.fromCharCode(13, 10), newline)
+        .replaceAll(String.fromCharCode(13), newline)
+        .split(newline);
+      const html = [];
+      let paragraph = [];
+      let list = null;
+      let quote = [];
+      let code = [];
+      let inCode = false;
+      let formula = [];
+      let inFormula = false;
+
+      function flushParagraph() {
+        if (!paragraph.length) return;
+        html.push('<p>' + renderInline(paragraph.join(' ')) + '</p>');
+        paragraph = [];
+      }
+
+      function flushList() {
+        if (!list) return;
+        html.push('<' + list.type + '>' + list.items.map((item) => '<li>' + renderInline(item) + '</li>').join('') + '</' + list.type + '>');
+        list = null;
+      }
+
+      function flushQuote() {
+        if (!quote.length) return;
+        html.push('<blockquote>' + quote.map((line) => '<p>' + renderInline(line) + '</p>').join('') + '</blockquote>');
+        quote = [];
+      }
+
+      for (const line of lines) {
+        if (line.trim().startsWith(String.fromCharCode(96, 96, 96))) {
+          flushParagraph(); flushList(); flushQuote();
+          if (inCode) {
+            html.push('<pre><code>' + escapeHtml(code.join('\\n')) + '</code></pre>');
+            code = [];
+            inCode = false;
+          } else {
+            inCode = true;
+          }
+          continue;
+        }
+        if (inCode) {
+          code.push(line);
+          continue;
+        }
+
+        if (line.trim() === '$$') {
+          flushParagraph(); flushList(); flushQuote();
+          if (inFormula) {
+            html.push('<span class="formula-block">' + escapeHtml(formula.join('\\n')) + '</span>');
+            formula = [];
+            inFormula = false;
+          } else {
+            inFormula = true;
+          }
+          continue;
+        }
+        if (inFormula) {
+          formula.push(line);
+          continue;
+        }
+
+        const trimmed = line.trim();
+        if (!trimmed) {
+          flushParagraph(); flushList(); flushQuote();
+          continue;
+        }
+
+        const heading = trimmed.match(/^(#{1,3}) +(.+)$/);
+        if (heading) {
+          flushParagraph(); flushList(); flushQuote();
+          html.push('<h' + heading[1].length + '>' + renderInline(heading[2]) + '</h' + heading[1].length + '>');
+          continue;
+        }
+
+        const unordered = trimmed.match(/^[-*+] +(.+)$/);
+        const ordered = trimmed.match(/^[0-9]+\\. +(.+)$/);
+        if (unordered || ordered) {
+          flushParagraph(); flushQuote();
+          const type = unordered ? 'ul' : 'ol';
+          if (!list || list.type !== type) flushList();
+          if (!list) list = { type, items: [] };
+          list.items.push((unordered || ordered)[1]);
+          continue;
+        }
+
+        const quoted = trimmed.match(/^> ?(.+)$/);
+        if (quoted) {
+          flushParagraph(); flushList();
+          quote.push(quoted[1]);
+          continue;
+        }
+
+        paragraph.push(trimmed);
+      }
+
+      flushParagraph(); flushList(); flushQuote();
+      if (inCode) html.push('<pre><code>' + escapeHtml(code.join('\\n')) + '</code></pre>');
+      if (inFormula) html.push('<span class="formula-block">' + escapeHtml(formula.join('\\n')) + '</span>');
+      return html.join('') || '<p style="color: var(--muted);">&#39044;&#35272;&#23558;&#22312;&#36825;&#37324;&#26174;&#31034;&#12290;</p>';
+    }
+
+    function updatePreview() {
+      preview.innerHTML = renderPreview(field('body').value);
     }
 
     form.addEventListener('submit', async (event) => {
@@ -424,7 +578,7 @@ function renderPage() {
       submitButton.disabled = true;
       setStatusHtml('&#27491;&#22312;&#26500;&#24314;&#12289;&#25552;&#20132;&#24182;&#25512;&#36865;...');
       const data = Object.fromEntries(new FormData(form).entries());
-      data.draft = form.elements.draft.checked;
+      data.draft = field('draft').checked;
       try {
         const response = await fetch('/api/publish', {
           method: 'POST',
@@ -443,6 +597,10 @@ function renderPage() {
       }
     });
 
+    field('body').addEventListener('input', updatePreview);
+    field('body').addEventListener('change', updatePreview);
+    field('body').addEventListener('keyup', updatePreview);
+    updatePreview();
     loadPosts().catch((error) => setStatus('\u5931\u8d25\uff1a' + error.message));
   </script>
 </body>
