@@ -1,0 +1,82 @@
+name: Publish blog issue
+
+on:
+  issues:
+    types: [opened, edited, reopened, labeled]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Issue number to publish
+        required: true
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  publish:
+    if: ${{ github.event_name == 'workflow_dispatch' || startsWith(github.event.issue.title, '[Blog]') || contains(github.event.issue.labels.*.name, 'blog-post') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Load issue for manual run
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue_number = Number(core.getInput('issue_number'));
+            const { data: issue } = await github.rest.issues.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number
+            });
+            require('fs').writeFileSync(process.env.GITHUB_EVENT_PATH, JSON.stringify({ issue }, null, 2));
+
+      - name: Generate Markdown post
+        id: post
+        run: node scripts/publish-blog-issue.mjs
+
+      - name: Commit generated post
+        id: commit
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/content/posts
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "blog: publish ${{ steps.post.outputs.slug }}" \
+              -m "Generated from issue #${{ steps.post.outputs.issue_number }}"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Comment on issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const changed = '${{ steps.commit.outputs.changed }}' === 'true';
+            const issue_number = Number('${{ steps.post.outputs.issue_number }}');
+            const path = '${{ steps.post.outputs.path }}';
+            const slug = '${{ steps.post.outputs.slug }}';
+            const url = `https://zzhliu05.github.io/posts/${encodeURIComponent(slug)}/`;
+            const status = changed ? '已发布或更新' : '内容没有变化';
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number,
+              body: `${status}：\\`${path}\\`\\n\\n部署完成后可访问：${url}`
+            });
+            if (changed) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number,
+                state: 'closed'
+              });
+            }

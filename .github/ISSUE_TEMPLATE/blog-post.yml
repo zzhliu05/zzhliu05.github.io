@@ -1,0 +1,66 @@
+name: 创建博客文章
+description: 在线撰写一篇博客文章，提交后会自动发布到站点
+title: "[Blog] "
+labels: ["blog-post"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: 文章标题
+      description: 显示在博客首页和文章页的标题。
+      placeholder: 例如：一个关于高斯积分的笔记
+    validations:
+      required: true
+  - type: input
+    id: slug
+    attributes:
+      label: 文件名（slug）
+      description: 可选。只使用中文、英文、数字、短横线或下划线；留空会自动生成。
+      placeholder: gaussian-integral-note
+    validations:
+      required: false
+  - type: textarea
+    id: description
+    attributes:
+      label: 摘要
+      description: 显示在文章列表中的短摘要。
+      placeholder: 用一两句话概括这篇文章。
+    validations:
+      required: true
+  - type: input
+    id: tags
+    attributes:
+      label: 标签
+      description: 用逗号分隔，支持中文标签。
+      placeholder: 数学, LaTeX, 笔记
+    validations:
+      required: false
+  - type: dropdown
+    id: draft
+    attributes:
+      label: 是否草稿
+      description: 草稿会提交到仓库，但不会在正式站点展示。
+      options:
+        - "否"
+        - "是"
+      default: 0
+    validations:
+      required: true
+  - type: textarea
+    id: body
+    attributes:
+      label: 正文
+      description: 支持 Markdown 和 LaTeX。行内公式写 `$...$`，块公式写 `$$...$$`。
+      placeholder: |
+        这里写正文。
+
+        行内公式：$e^{i\pi}+1=0$
+
+        块公式：
+
+        $$
+        \int_{-\infty}^{\infty} e^{-x^2}\,dx=\sqrt{\pi}
+        $$
+      render: markdown
+    validations:
+      required: true
