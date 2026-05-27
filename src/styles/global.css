@@ -203,39 +203,6 @@ a:hover {
   padding-bottom: 56px;
 }
 
-.write-page {
-  max-width: 760px;
-  margin: 0 auto;
-  padding-bottom: 56px;
-}
-
-.write-panel {
-  border: 1px solid var(--line);
-  background: #fcfcfc;
-  padding: 18px;
-}
-
-.write-panel ol {
-  margin: 18px 0 0;
-  padding-left: 22px;
-}
-
-.primary-link {
-  display: inline-flex;
-  align-items: center;
-  border: 1px solid #202124;
-  background: #202124;
-  color: #ffffff;
-  font-family: "Noto Sans SC", "Microsoft YaHei", Arial, sans-serif;
-  line-height: 1;
-  padding: 10px 14px;
-}
-
-.primary-link:hover {
-  color: #ffffff;
-  text-decoration: none;
-}
-
 .article-page {
   max-width: 760px;
   margin: 0 auto;
