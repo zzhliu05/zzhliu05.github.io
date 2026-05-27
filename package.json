@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
+    "write": "node scripts/local-writer.mjs",
     "build": "astro check && astro build",
     "preview": "astro preview"
   },
