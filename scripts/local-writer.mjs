@@ -6,12 +6,17 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const postsDir = path.join(root, 'src', 'content', 'posts');
+const katexDir = path.join(root, 'node_modules', 'katex', 'dist');
 const host = '127.0.0.1';
 const port = Number(process.env.LOCAL_WRITER_PORT ?? 8787);
 
 const server = http.createServer(async (req, res) => {
   try {
     const url = new URL(req.url ?? '/', `http://${host}:${port}`);
+
+    if (req.method === 'GET' && url.pathname.startsWith('/katex/')) {
+      return serveKatexAsset(res, url.pathname.slice('/katex/'.length));
+    }
 
     if (req.method === 'GET' && url.pathname === '/') {
       return html(res, renderPage());
@@ -56,6 +61,33 @@ const server = http.createServer(async (req, res) => {
 server.listen(port, host, () => {
   console.log(`Local blog writer: http://${host}:${port}/`);
 });
+
+async function serveKatexAsset(res, assetPath) {
+  const safePath = path.normalize(assetPath).replace(/^(\.\.[/\\])+/, '');
+  const target = path.join(katexDir, safePath);
+  if (!target.startsWith(katexDir)) {
+    return text(res, 403, 'Forbidden');
+  }
+
+  try {
+    const content = await fs.readFile(target);
+    res.writeHead(200, { 'content-type': contentType(target) });
+    res.end(content);
+  } catch {
+    text(res, 404, 'Not found');
+  }
+}
+
+function contentType(target) {
+  const ext = path.extname(target).toLowerCase();
+  return {
+    '.css': 'text/css; charset=utf-8',
+    '.js': 'application/javascript; charset=utf-8',
+    '.woff2': 'font/woff2',
+    '.woff': 'font/woff',
+    '.ttf': 'font/ttf'
+  }[ext] ?? 'application/octet-stream';
+}
 
 async function listPosts() {
   const files = await fs.readdir(postsDir);
@@ -395,6 +427,7 @@ function renderPage() {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>&#26412;&#22320;&#21338;&#23458;&#20889;&#20316;</title>
+  <link rel="stylesheet" href="/katex/katex.min.css">
   <style>
     :root { --text:#202124; --muted:#6b7280; --line:#d7dce1; --soft:#f6f7f8; --link:#1f5f8b; }
     * { box-sizing: border-box; }
@@ -424,11 +457,10 @@ function renderPage() {
     .preview p, .preview ul, .preview ol, .preview blockquote, .preview pre { margin: 14px 0; }
     .preview blockquote { border-left: 3px solid #9aa7b3; color: #3f454b; background: #fafafa; padding: 8px 14px; }
     .preview img { border: 1px solid var(--line); display: block; height: auto; margin: 16px auto; max-width: 100%; }
-    .preview code, .formula-inline { border: 1px solid #e1e5e9; background: var(--soft); border-radius: 3px; font-family: "Cascadia Code", Consolas, monospace; padding: 0.1em 0.3em; }
+    .preview code { border: 1px solid #e1e5e9; background: var(--soft); border-radius: 3px; font-family: "Cascadia Code", Consolas, monospace; padding: 0.1em 0.3em; }
     .preview pre { border: 1px solid var(--line); background: var(--soft); overflow-x: auto; padding: 14px; }
     .preview pre code { border: 0; background: transparent; padding: 0; }
-    .formula-block { border: 1px solid #e1e5e9; background: #fbfbfb; display: block; font-family: "Cambria Math", "Times New Roman", serif; margin: 16px 0; overflow-x: auto; padding: 12px; text-align: center; white-space: pre; }
-    .formula-inline { font-family: "Cambria Math", "Times New Roman", serif; }
+    .formula-block { display: block; margin: 16px 0; overflow-x: auto; padding: 8px 0; text-align: center; }
     .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .check { display: flex; align-items: center; gap: 8px; font-weight: 400; }
     .check input { width: auto; }
@@ -517,6 +549,7 @@ function renderPage() {
       </section>
     </div>
   </main>
+  <script src="/katex/katex.min.js"></script>
   <script>
     const form = document.querySelector('#form');
     const statusBox = document.querySelector('#status');
@@ -602,7 +635,19 @@ function renderPage() {
         .replace(/\`([^\`]+)\`/g, '<code>$1</code>')
         .replace(/\\*\\*([^*]+)\\*\\*/g, '<strong>$1</strong>')
         .replace(/\\*([^*]+)\\*/g, '<em>$1</em>')
-        .replace(/\\$([^$\\n]+)\\$/g, '<span class="formula-inline">$1</span>');
+        .replace(/\\$([^$\\n]+)\\$/g, (match, tex) => renderMath(tex, false));
+    }
+
+    function renderMath(tex, displayMode) {
+      if (!window.katex) {
+        return displayMode ? '<span class="formula-block">' + escapeHtml(tex) + '</span>' : '<span>' + escapeHtml(tex) + '</span>';
+      }
+      return window.katex.renderToString(tex, {
+        displayMode,
+        throwOnError: false,
+        strict: false,
+        trust: false
+      });
     }
 
     function renderPreview(markdown) {
@@ -658,7 +703,7 @@ function renderPage() {
         if (line.trim() === '$$') {
           flushParagraph(); flushList(); flushQuote();
           if (inFormula) {
-            html.push('<span class="formula-block">' + escapeHtml(formula.join('\\n')) + '</span>');
+            html.push('<span class="formula-block">' + renderMath(formula.join('\\n'), true) + '</span>');
             formula = [];
             inFormula = false;
           } else {
@@ -707,7 +752,7 @@ function renderPage() {
 
       flushParagraph(); flushList(); flushQuote();
       if (inCode) html.push('<pre><code>' + escapeHtml(code.join('\\n')) + '</code></pre>');
-      if (inFormula) html.push('<span class="formula-block">' + escapeHtml(formula.join('\\n')) + '</span>');
+      if (inFormula) html.push('<span class="formula-block">' + renderMath(formula.join('\\n'), true) + '</span>');
       return html.join('') || '<p style="color: var(--muted);">&#39044;&#35272;&#23558;&#22312;&#36825;&#37324;&#26174;&#31034;&#12290;</p>';
     }
 
