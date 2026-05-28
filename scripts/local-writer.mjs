@@ -380,7 +380,9 @@ async function gitPush() {
 
 function command(file, args) {
   return new Promise((resolve, reject) => {
-    execFile(resolveExecutable(file), args, { cwd: root, windowsHide: true }, (error, stdout, stderr) => {
+    const commandFile = resolveExecutable(file);
+    const commandArgs = resolveArgs(file, args);
+    execFile(commandFile, commandArgs, { cwd: root, windowsHide: true }, (error, stdout, stderr) => {
       if (error) {
         reject(new Error(`${file} ${args.join(' ')}\n${stdout}${stderr}`.trim()));
         return;
@@ -392,9 +394,16 @@ function command(file, args) {
 
 function resolveExecutable(file) {
   if (process.platform === 'win32' && file === 'npm') {
-    return 'npm.cmd';
+    return process.env.ComSpec || 'cmd.exe';
   }
   return file;
+}
+
+function resolveArgs(file, args) {
+  if (process.platform === 'win32' && file === 'npm') {
+    return ['/d', '/s', '/c', 'npm.cmd', ...args];
+  }
+  return args;
 }
 
 function readBody(req) {
