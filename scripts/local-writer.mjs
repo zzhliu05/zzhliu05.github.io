@@ -38,6 +38,12 @@ const server = http.createServer(async (req, res) => {
       return json(res, 200, result);
     }
 
+    if (req.method === 'POST' && url.pathname === '/api/upload-image') {
+      const payload = JSON.parse(await readBody(req));
+      const result = await uploadImage(payload);
+      return json(res, 200, result);
+    }
+
     return text(res, 404, 'Not found');
   } catch (error) {
     return json(res, 500, {
@@ -131,7 +137,7 @@ async function publishPost(input) {
   }
 
   await command('npm', ['run', 'build']);
-  await git(['add', 'src/content/posts']);
+  await git(['add', 'src/content/posts', 'public/images/blog']);
 
   const staged = await git(['diff', '--cached', '--name-only']);
   if (!staged.trim()) {
@@ -154,6 +160,54 @@ async function publishPost(input) {
     path: `src/content/posts/${slug}.md`,
     url: `https://zzhliu05.github.io/posts/${encodeURIComponent(slug)}/`
   };
+}
+
+async function uploadImage(input) {
+  const name = required(input.name, 'Image name');
+  const dataUrl = required(input.dataUrl, 'Image data');
+  const alt = String(input.alt ?? '').trim();
+  const match = dataUrl.match(/^data:(image\/(?:png|jpeg|jpg|gif|webp|svg\+xml));base64,([A-Za-z0-9+/=]+)$/);
+  if (!match) {
+    throw new Error('Only png, jpg, gif, webp, and svg images are supported.');
+  }
+
+  const ext = extensionForMime(match[1], name);
+  const folder = new Date().toISOString().slice(0, 10);
+  const base = normalizeSlug(path.basename(name, path.extname(name))) || 'image';
+  const dir = path.join(root, 'public', 'images', 'blog', folder);
+  await fs.mkdir(dir, { recursive: true });
+
+  let filename = `${base}${ext}`;
+  let target = path.join(dir, filename);
+  let index = 2;
+  while (await exists(target)) {
+    filename = `${base}-${index}${ext}`;
+    target = path.join(dir, filename);
+    index += 1;
+  }
+
+  await fs.writeFile(target, Buffer.from(match[2], 'base64'));
+  const url = `/images/blog/${folder}/${filename}`;
+  return {
+    ok: true,
+    url,
+    markdown: `![${alt || base}](${url})`
+  };
+}
+
+function extensionForMime(mime, name) {
+  const ext = path.extname(name).toLowerCase();
+  if (['.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg'].includes(ext)) {
+    return ext === '.jpeg' ? '.jpg' : ext;
+  }
+  return {
+    'image/png': '.png',
+    'image/jpeg': '.jpg',
+    'image/jpg': '.jpg',
+    'image/gif': '.gif',
+    'image/webp': '.webp',
+    'image/svg+xml': '.svg'
+  }[mime] ?? '.png';
 }
 
 async function deletePost(input) {
@@ -369,6 +423,7 @@ function renderPage() {
     .preview h3 { font-size: 18px; }
     .preview p, .preview ul, .preview ol, .preview blockquote, .preview pre { margin: 14px 0; }
     .preview blockquote { border-left: 3px solid #9aa7b3; color: #3f454b; background: #fafafa; padding: 8px 14px; }
+    .preview img { border: 1px solid var(--line); display: block; height: auto; margin: 16px auto; max-width: 100%; }
     .preview code, .formula-inline { border: 1px solid #e1e5e9; background: var(--soft); border-radius: 3px; font-family: "Cascadia Code", Consolas, monospace; padding: 0.1em 0.3em; }
     .preview pre { border: 1px solid var(--line); background: var(--soft); overflow-x: auto; padding: 14px; }
     .preview pre code { border: 0; background: transparent; padding: 0; }
@@ -411,7 +466,13 @@ function renderPage() {
           <label>&#25688;&#35201;<input name="description" required placeholder="&#19968;&#20004;&#21477;&#35805;&#27010;&#25324;&#25991;&#31456;&#12290;"></label>
           <label>&#26085;&#26399;<input name="date" type="date"></label>
           <div class="editor-preview">
-            <label>&#27491;&#25991; <span class="hint">&#25903;&#25345; Markdown&#12289;$...$ &#21644; $$...$$</span><textarea name="body" required placeholder="&#36825;&#37324;&#20889;&#27491;&#25991;&#12290;"></textarea></label>
+            <label>&#27491;&#25991; <span class="hint">&#25903;&#25345; Markdown&#12289;$...$ &#21644; $$...$$</span>
+              <span class="actions">
+                <input id="imageFile" type="file" accept="image/png,image/jpeg,image/gif,image/webp,image/svg+xml">
+                <button type="button" class="secondary" id="insertImage">&#25554;&#20837;&#22270;&#29255;</button>
+              </span>
+              <textarea name="body" required placeholder="&#36825;&#37324;&#20889;&#27491;&#25991;&#12290;"></textarea>
+            </label>
             <div class="preview-wrap">
               <div class="preview-title">&#23454;&#26102;&#39044;&#35272;</div>
               <article class="preview" id="preview"></article>
@@ -433,6 +494,8 @@ function renderPage() {
     const statusBox = document.querySelector('#status');
     const submitButton = document.querySelector('#submit');
     const deleteButton = document.querySelector('#deletePost');
+    const imageFile = document.querySelector('#imageFile');
+    const insertImageButton = document.querySelector('#insertImage');
     const postsBox = document.querySelector('#posts');
     const preview = document.querySelector('#preview');
     let activeSlug = '';
@@ -506,6 +569,7 @@ function renderPage() {
 
     function renderInline(value) {
       return escapeHtml(value)
+        .replace(/!\\[([^\\]]*)\\]\\(([^)]+)\\)/g, '<img src="$2" alt="$1">')
         .replace(/\`([^\`]+)\`/g, '<code>$1</code>')
         .replace(/\\*\\*([^*]+)\\*\\*/g, '<strong>$1</strong>')
         .replace(/\\*([^*]+)\\*/g, '<em>$1</em>')
@@ -622,6 +686,29 @@ function renderPage() {
       preview.innerHTML = renderPreview(field('body').value);
     }
 
+    function insertAtCursor(textarea, text) {
+      const start = textarea.selectionStart ?? textarea.value.length;
+      const end = textarea.selectionEnd ?? textarea.value.length;
+      const before = textarea.value.slice(0, start);
+      const after = textarea.value.slice(end);
+      const prefix = before && !before.endsWith('\\n') ? '\\n\\n' : '';
+      const suffix = after && !after.startsWith('\\n') ? '\\n\\n' : '';
+      textarea.value = before + prefix + text + suffix + after;
+      const cursor = (before + prefix + text).length;
+      textarea.focus();
+      textarea.setSelectionRange(cursor, cursor);
+      updatePreview();
+    }
+
+    function readFileAsDataUrl(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result));
+        reader.onerror = () => reject(reader.error || new Error('Failed to read image'));
+        reader.readAsDataURL(file);
+      });
+    }
+
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       submitButton.disabled = true;
@@ -669,6 +756,33 @@ function renderPage() {
       } finally {
         submitButton.disabled = false;
         deleteButton.disabled = false;
+      }
+    });
+
+    insertImageButton.addEventListener('click', async () => {
+      const file = imageFile.files && imageFile.files[0];
+      if (!file) {
+        setStatus('\u5931\u8d25\uff1a\u8bf7\u5148\u9009\u62e9\u56fe\u7247\u6587\u4ef6\u3002');
+        return;
+      }
+      insertImageButton.disabled = true;
+      setStatus('\u6b63\u5728\u4e0a\u4f20\u56fe\u7247...');
+      try {
+        const dataUrl = await readFileAsDataUrl(file);
+        const response = await fetch('/api/upload-image', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ name: file.name, dataUrl, alt: file.name.replace(/\\.[^.]+$/, '') })
+        });
+        const result = await response.json();
+        if (!response.ok || !result.ok) throw new Error(result.message || 'Image upload failed');
+        insertAtCursor(field('body'), result.markdown);
+        imageFile.value = '';
+        setStatus('\u5df2\u63d2\u5165\u56fe\u7247\uff1a' + result.url);
+      } catch (error) {
+        setStatus('\u5931\u8d25\uff1a' + error.message);
+      } finally {
+        insertImageButton.disabled = false;
       }
     });
 

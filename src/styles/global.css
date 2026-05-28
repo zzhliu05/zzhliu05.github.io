@@ -258,6 +258,14 @@ a:hover {
   padding: 10px 16px;
 }
 
+.article-content img {
+  border: 1px solid var(--line);
+  display: block;
+  height: auto;
+  margin: 18px auto;
+  max-width: 100%;
+}
+
 .article-content code {
   border: 1px solid #e1e5e9;
   background: var(--code-bg);
