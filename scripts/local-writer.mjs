@@ -1,4 +1,4 @@
-import http from 'node:http';
+﻿import http from 'node:http';
 import { execFile } from 'node:child_process';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -433,6 +433,13 @@ function renderPage() {
     .check { display: flex; align-items: center; gap: 8px; font-weight: 400; }
     .check input { width: auto; }
     .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 6px; }
+    .toolbar button { background: #fff; border-color: var(--line); color: var(--text); font-size: 14px; padding: 6px 9px; }
+    .editor-box { position: relative; }
+    .slash-menu { background: #fff; border: 1px solid var(--line); box-shadow: 0 8px 24px rgba(0,0,0,.08); display: none; left: 10px; min-width: 220px; padding: 6px; position: absolute; top: 44px; z-index: 20; }
+    .slash-menu.open { display: grid; gap: 4px; }
+    .slash-menu button { background: #fff; border: 0; color: var(--text); justify-content: flex-start; padding: 8px 10px; text-align: left; width: 100%; }
+    .slash-menu button:hover, .slash-menu button.active { background: var(--soft); }
     button, .button-link { border: 1px solid var(--text); background: var(--text); color: #fff; display: inline-flex; align-items: center; font: inherit; line-height: 1.7; padding: 10px 16px; cursor: pointer; text-decoration: none; }
     button.secondary, .button-link.secondary { background: #fff; color: var(--text); }
     button.danger { border-color: #9f1d1d; background: #9f1d1d; color: #fff; display: none; }
@@ -467,11 +474,32 @@ function renderPage() {
           <label>&#26085;&#26399;<input name="date" type="date"></label>
           <div class="editor-preview">
             <label>&#27491;&#25991; <span class="hint">&#25903;&#25345; Markdown&#12289;$...$ &#21644; $$...$$</span>
+              <span class="toolbar" aria-label="Markdown toolbar">
+                <button type="button" data-md="h2">H2</button>
+                <button type="button" data-md="bold">B</button>
+                <button type="button" data-md="inlineCode">Code</button>
+                <button type="button" data-md="link">Link</button>
+                <button type="button" data-md="inlineMath">$x$</button>
+                <button type="button" data-md="mathBlock">$$</button>
+                <button type="button" data-md="quote">&#24341;&#29992;</button>
+                <button type="button" data-md="list">&#21015;&#34920;</button>
+                <button type="button" data-md="codeBlock">&#20195;&#30721;&#22359;</button>
+              </span>
               <span class="actions">
                 <input id="imageFile" type="file" accept="image/png,image/jpeg,image/gif,image/webp,image/svg+xml">
                 <button type="button" class="secondary" id="insertImage">&#25554;&#20837;&#22270;&#29255;</button>
               </span>
-              <textarea name="body" required placeholder="&#36825;&#37324;&#20889;&#27491;&#25991;&#12290;"></textarea>
+              <span class="editor-box">
+                <textarea name="body" required placeholder="&#36825;&#37324;&#20889;&#27491;&#25991;&#12290;"></textarea>
+                <span class="slash-menu" id="slashMenu" aria-label="Slash menu">
+                  <button type="button" data-md="h2">H2 &#26631;&#39064;</button>
+                  <button type="button" data-md="mathBlock">&#25968;&#23398;&#20844;&#24335;&#22359;</button>
+                  <button type="button" data-md="codeBlock">&#20195;&#30721;&#22359;</button>
+                  <button type="button" data-md="quote">&#24341;&#29992;</button>
+                  <button type="button" data-md="list">&#21015;&#34920;</button>
+                  <button type="button" data-md="link">&#38142;&#25509;</button>
+                </span>
+              </span>
             </label>
             <div class="preview-wrap">
               <div class="preview-title">&#23454;&#26102;&#39044;&#35272;</div>
@@ -496,6 +524,7 @@ function renderPage() {
     const deleteButton = document.querySelector('#deletePost');
     const imageFile = document.querySelector('#imageFile');
     const insertImageButton = document.querySelector('#insertImage');
+    const slashMenu = document.querySelector('#slashMenu');
     const postsBox = document.querySelector('#posts');
     const preview = document.querySelector('#preview');
     let activeSlug = '';
@@ -686,18 +715,53 @@ function renderPage() {
       preview.innerHTML = renderPreview(field('body').value);
     }
 
-    function insertAtCursor(textarea, text) {
+    function insertAtCursor(textarea, text, options = {}) {
       const start = textarea.selectionStart ?? textarea.value.length;
       const end = textarea.selectionEnd ?? textarea.value.length;
       const before = textarea.value.slice(0, start);
       const after = textarea.value.slice(end);
-      const prefix = before && !before.endsWith('\\n') ? '\\n\\n' : '';
-      const suffix = after && !after.startsWith('\\n') ? '\\n\\n' : '';
+      const prefix = options.inline || !before || before.endsWith('\\n') ? '' : '\\n\\n';
+      const suffix = options.inline || !after || after.startsWith('\\n') ? '' : '\\n\\n';
       textarea.value = before + prefix + text + suffix + after;
-      const cursor = (before + prefix + text).length;
+      const cursor = options.cursorOffset == null ? (before + prefix + text).length : (before + prefix).length + options.cursorOffset;
       textarea.focus();
       textarea.setSelectionRange(cursor, cursor);
       updatePreview();
+    }
+
+    function replaceSelection(wrapperBefore, wrapperAfter = wrapperBefore, placeholder = '') {
+      const textarea = field('body');
+      const start = textarea.selectionStart ?? textarea.value.length;
+      const end = textarea.selectionEnd ?? textarea.value.length;
+      const selected = textarea.value.slice(start, end) || placeholder;
+      textarea.value = textarea.value.slice(0, start) + wrapperBefore + selected + wrapperAfter + textarea.value.slice(end);
+      const innerStart = start + wrapperBefore.length;
+      const innerEnd = innerStart + selected.length;
+      textarea.focus();
+      textarea.setSelectionRange(innerStart, innerEnd);
+      updatePreview();
+    }
+
+    function applyMarkdown(kind) {
+      const textarea = field('body');
+      const tick = String.fromCharCode(96);
+      closeSlashMenu();
+      if (kind === 'h2') insertAtCursor(textarea, '## \u6807\u9898', { cursorOffset: 3 });
+      if (kind === 'bold') replaceSelection('**', '**', '\u52a0\u7c97\u6587\u672c');
+      if (kind === 'inlineCode') replaceSelection(tick, tick, 'code');
+      if (kind === 'link') insertAtCursor(textarea, '[\u94fe\u63a5\u6587\u5b57](https://example.com)', { inline: true, cursorOffset: 1 });
+      if (kind === 'inlineMath') replaceSelection('$', '$', 'x^2');
+      if (kind === 'mathBlock') insertAtCursor(textarea, '$$\\n\\\\int_0^1 x^2 dx\\n$$', { cursorOffset: 3 });
+      if (kind === 'quote') insertAtCursor(textarea, '> \u5f15\u7528\u5185\u5bb9', { cursorOffset: 2 });
+      if (kind === 'list') insertAtCursor(textarea, '- \u5217\u8868\u9879', { cursorOffset: 2 });
+      if (kind === 'codeBlock') insertAtCursor(textarea, tick + tick + tick + 'ts\\nconst x = 1;\\n' + tick + tick + tick, { cursorOffset: 6 });
+    }
+    function closeSlashMenu() {
+      slashMenu.classList.remove('open');
+    }
+
+    function openSlashMenu() {
+      slashMenu.classList.add('open');
     }
 
     function readFileAsDataUrl(file) {
@@ -783,6 +847,44 @@ function renderPage() {
         setStatus('\u5931\u8d25\uff1a' + error.message);
       } finally {
         insertImageButton.disabled = false;
+      }
+    });
+
+    document.querySelectorAll('[data-md]').forEach((button) => {
+      button.addEventListener('click', () => applyMarkdown(button.dataset.md));
+    });
+
+    field('body').addEventListener('keydown', (event) => {
+      const textarea = field('body');
+      if (event.key === 'Escape') {
+        closeSlashMenu();
+        return;
+      }
+      if (event.key === 'Tab') {
+        event.preventDefault();
+        const start = textarea.selectionStart;
+        const lineStart = textarea.value.lastIndexOf('\\n', start - 1) + 1;
+        textarea.value = textarea.value.slice(0, lineStart) + '  ' + textarea.value.slice(lineStart);
+        textarea.setSelectionRange(start + 2, start + 2);
+        updatePreview();
+        return;
+      }
+      const tick = String.fromCharCode(96);
+      const pairs = { '(': ')', '[': ']', '{': '}', '$': '$' };
+      pairs[tick] = tick;
+      if (pairs[event.key]) {
+        event.preventDefault();
+        replaceSelection(event.key, pairs[event.key], '');
+        return;
+      }
+      if (event.key === '/') {
+        setTimeout(openSlashMenu, 0);
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!slashMenu.contains(event.target) && event.target !== field('body')) {
+        closeSlashMenu();
       }
     });
 
