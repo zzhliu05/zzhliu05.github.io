@@ -32,6 +32,12 @@ const server = http.createServer(async (req, res) => {
       return json(res, 200, result);
     }
 
+    if (req.method === 'POST' && url.pathname === '/api/delete') {
+      const payload = JSON.parse(await readBody(req));
+      const result = await deletePost(payload);
+      return json(res, 200, result);
+    }
+
     return text(res, 404, 'Not found');
   } catch (error) {
     return json(res, 500, {
@@ -147,6 +153,44 @@ async function publishPost(input) {
     slug,
     path: `src/content/posts/${slug}.md`,
     url: `https://zzhliu05.github.io/posts/${encodeURIComponent(slug)}/`
+  };
+}
+
+async function deletePost(input) {
+  const slug = requiredSlug(input.slug);
+  const postPath = path.join(postsDir, `${slug}.md`);
+  if (!(await exists(postPath))) {
+    throw new Error(`Post does not exist: src/content/posts/${slug}.md`);
+  }
+
+  const clean = await git(['status', '--porcelain']);
+  if (clean.trim()) {
+    throw new Error('Working tree is not clean. Commit or discard existing changes first.');
+  }
+
+  await git(['pull', '--ff-only', 'origin', 'main']);
+  await fs.rm(postPath);
+  await command('npm', ['run', 'build']);
+  await git(['add', 'src/content/posts']);
+
+  const staged = await git(['diff', '--cached', '--name-only']);
+  if (!staged.trim()) {
+    throw new Error('No article deletion to commit.');
+  }
+
+  await git([
+    'commit',
+    '-m',
+    `blog: delete ${slug}`,
+    '-m',
+    'Co-authored-by: codex <codex@openai.com>'
+  ]);
+  await gitPush();
+
+  return {
+    ok: true,
+    slug,
+    path: `src/content/posts/${slug}.md`
   };
 }
 
@@ -336,6 +380,8 @@ function renderPage() {
     .actions { display: flex; flex-wrap: wrap; gap: 10px; }
     button, .button-link { border: 1px solid var(--text); background: var(--text); color: #fff; display: inline-flex; align-items: center; font: inherit; line-height: 1.7; padding: 10px 16px; cursor: pointer; text-decoration: none; }
     button.secondary, .button-link.secondary { background: #fff; color: var(--text); }
+    button.danger { border-color: #9f1d1d; background: #9f1d1d; color: #fff; display: none; }
+    body.editing button.danger { display: inline-flex; }
     button:disabled { cursor: wait; opacity: .65; }
     .status { border: 1px solid var(--line); background: var(--soft); min-height: 48px; padding: 12px; white-space: pre-wrap; }
     .hint { color: var(--muted); font-size: 14px; font-weight: 400; }
@@ -374,6 +420,7 @@ function renderPage() {
           <label class="check"><input type="checkbox" name="draft"> &#20445;&#23384;&#20026;&#33609;&#31295;&#65292;&#19981;&#22312;&#27491;&#24335;&#31449;&#28857;&#23637;&#31034;</label>
           <div class="actions">
             <button type="submit" id="submit">&#25552;&#20132;&#24182;&#25512;&#36865;</button>
+            <button type="button" class="danger" id="deletePost">&#21024;&#38500;&#25991;&#31456;</button>
             <a class="button-link secondary" id="reset" href="/">&#28165;&#31354;&#34920;&#21333;</a>
           </div>
           <div class="status" id="status">&#27491;&#22312;&#21152;&#36733;&#25991;&#31456;&#21015;&#34920;&#12290;</div>
@@ -385,6 +432,7 @@ function renderPage() {
     const form = document.querySelector('#form');
     const statusBox = document.querySelector('#status');
     const submitButton = document.querySelector('#submit');
+    const deleteButton = document.querySelector('#deletePost');
     const postsBox = document.querySelector('#posts');
     const preview = document.querySelector('#preview');
     let activeSlug = '';
@@ -405,6 +453,7 @@ function renderPage() {
       field('mode').value = mode;
       field('originalSlug').value = slug;
       activeSlug = slug;
+      document.body.classList.toggle('editing', mode === 'edit');
       submitButton.innerHTML = mode === 'edit' ? '&#20445;&#23384;&#20462;&#25913;&#24182;&#25512;&#36865;' : '&#25552;&#20132;&#24182;&#25512;&#36865;';
       document.querySelectorAll('.post-button').forEach((button) => {
         button.classList.toggle('active', button.dataset.slug === activeSlug);
@@ -594,6 +643,32 @@ function renderPage() {
         setStatus('\u5931\u8d25\uff1a' + error.message);
       } finally {
         submitButton.disabled = false;
+      }
+    });
+
+    deleteButton.addEventListener('click', async () => {
+      const slug = field('originalSlug').value;
+      if (!slug) return;
+      const ok = confirm('\u786e\u5b9a\u8981\u5220\u9664\u6587\u7ae0 ' + slug + ' \u5417\uff1f\u8fd9\u4f1a\u7acb\u5373 commit \u5e76 push\u3002');
+      if (!ok) return;
+      submitButton.disabled = true;
+      deleteButton.disabled = true;
+      setStatus('\u6b63\u5728\u5220\u9664\u3001\u6784\u5efa\u3001\u63d0\u4ea4\u5e76\u63a8\u9001...');
+      try {
+        const response = await fetch('/api/delete', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ slug })
+        });
+        const result = await response.json();
+        if (!response.ok || !result.ok) throw new Error(result.message || 'Delete failed');
+        setStatus('\u5df2\u5220\u9664\uff1a' + result.path);
+        window.location.href = '/';
+      } catch (error) {
+        setStatus('\u5931\u8d25\uff1a' + error.message);
+      } finally {
+        submitButton.disabled = false;
+        deleteButton.disabled = false;
       }
     });
 
