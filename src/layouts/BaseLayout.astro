@@ -1,6 +1,7 @@
 ---
 import 'katex/dist/katex.min.css';
 import '../styles/global.css';
+import DynamicBackground from '../components/DynamicBackground.astro';
 
 interface Props {
   title?: string;
@@ -22,6 +23,7 @@ const pageTitle = title === siteTitle ? title : `${title} - ${siteTitle}`;
     <title>{pageTitle}</title>
   </head>
   <body>
+    <DynamicBackground />
     <header class="site-header">
       <div class="container header-inner">
         <a class="site-title" href="/">zzhliu05 的博客</a>
