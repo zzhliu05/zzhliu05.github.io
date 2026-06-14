@@ -83,6 +83,12 @@ a:hover {
   background: #071429;
 }
 
+.site-banner--home {
+  height: calc(100vh - 65px);
+  height: calc(100svh - 65px);
+  min-height: 420px;
+}
+
 .site-banner img {
   display: block;
   width: 100%;
@@ -352,6 +358,12 @@ a:hover {
 @media (max-width: 820px) {
   .site-banner {
     height: 150px;
+  }
+
+  .site-banner--home {
+    height: calc(100vh - 101px);
+    height: calc(100svh - 101px);
+    min-height: 360px;
   }
 
   .site-banner img {
