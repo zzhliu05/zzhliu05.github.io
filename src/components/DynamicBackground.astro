@@ -10,117 +10,37 @@
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const sketch = (p: p5) => {
-      type Boid = {
-        position: p5.Vector;
-        velocity: p5.Vector;
-        acceleration: p5.Vector;
-        color: p5.Color;
-        size: number;
+      type Particle = {
+        x: number;
+        y: number;
+        vx: number;
+        vy: number;
+        radius: number;
       };
 
-      const palette = ['#ef476f', '#f59e0b', '#06a77d', '#118ab2', '#6d5dfc', '#d946ef'];
-      const perceptionRadius = 74;
-      const separationRadius = 30;
-      const maxSpeed = 1.35;
-      const maxForce = 0.035;
-      let boids: Boid[] = [];
+      let particles: Particle[] = [];
+      let accent = '#1f5f8b';
 
-      const createBoids = () => {
+      const createParticles = () => {
         const area = p.width * p.height;
-        const density = window.innerWidth < 720 ? 24500 : 20500;
-        const count = Math.max(24, Math.min(90, Math.floor(area / density)));
+        const density = window.innerWidth < 720 ? 34000 : 25000;
+        const count = Math.max(18, Math.min(72, Math.floor(area / density)));
 
-        boids = Array.from({ length: count }, (_, index) => {
-          const velocity = p5.Vector.random2D().setMag(p.random(0.65, maxSpeed));
-          return {
-            position: p.createVector(p.random(p.width), p.random(p.height)),
-            velocity,
-            acceleration: p.createVector(),
-            color: p.color(palette[index % palette.length]),
-            size: p.random(4.5, 7)
-          };
-        });
-      };
-
-      const steerToward = (boid: Boid, target: p5.Vector) => {
-        if (target.magSq() === 0) return target;
-        target.setMag(maxSpeed);
-        target.sub(boid.velocity);
-        target.limit(maxForce);
-        return target;
-      };
-
-      const flock = (boid: Boid) => {
-        const alignment = p.createVector();
-        const cohesion = p.createVector();
-        const separation = p.createVector();
-        let neighbors = 0;
-        let closeNeighbors = 0;
-
-        for (const other of boids) {
-          if (other === boid) continue;
-
-          const distance = p5.Vector.dist(boid.position, other.position);
-          if (distance > 0 && distance < perceptionRadius) {
-            alignment.add(other.velocity);
-            cohesion.add(other.position);
-            neighbors += 1;
-          }
-
-          if (distance > 0 && distance < separationRadius) {
-            const away = p5.Vector.sub(boid.position, other.position);
-            away.div(distance * distance);
-            separation.add(away);
-            closeNeighbors += 1;
-          }
-        }
-
-        if (neighbors > 0) {
-          alignment.div(neighbors);
-          cohesion.div(neighbors).sub(boid.position);
-          boid.acceleration.add(steerToward(boid, alignment).mult(0.95));
-          boid.acceleration.add(steerToward(boid, cohesion).mult(0.72));
-        }
-
-        if (closeNeighbors > 0) {
-          separation.div(closeNeighbors);
-          boid.acceleration.add(steerToward(boid, separation).mult(1.45));
-        }
-      };
-
-      const wrapAround = (boid: Boid) => {
-        const margin = boid.size * 2;
-        if (boid.position.x < -margin) boid.position.x = p.width + margin;
-        if (boid.position.x > p.width + margin) boid.position.x = -margin;
-        if (boid.position.y < -margin) boid.position.y = p.height + margin;
-        if (boid.position.y > p.height + margin) boid.position.y = -margin;
-      };
-
-      const drawBoid = (boid: Boid) => {
-        const heading = boid.velocity.heading() + p.HALF_PI;
-        boid.color.setAlpha(112);
-
-        p.push();
-        p.translate(boid.position.x, boid.position.y);
-        p.rotate(heading);
-        p.noStroke();
-        p.fill(boid.color);
-        p.triangle(
-          0,
-          -boid.size * 1.35,
-          -boid.size * 0.72,
-          boid.size,
-          boid.size * 0.72,
-          boid.size
-        );
-        p.pop();
+        particles = Array.from({ length: count }, () => ({
+          x: p.random(p.width),
+          y: p.random(p.height),
+          vx: p.random(-0.18, 0.18),
+          vy: p.random(-0.14, 0.14),
+          radius: p.random(1, 2.2)
+        }));
       };
 
       p.setup = () => {
         const canvas = p.createCanvas(window.innerWidth, window.innerHeight);
         canvas.attribute('aria-hidden', 'true');
         p.pixelDensity(Math.min(window.devicePixelRatio, 2));
-        createBoids();
+        accent = getComputedStyle(document.documentElement).getPropertyValue('--link').trim() || accent;
+        createParticles();
 
         if (reduceMotion) {
           p.noLoop();
@@ -129,24 +49,44 @@
 
       p.draw = () => {
         p.clear();
+        const color = p.color(accent);
 
-        for (const boid of boids) {
+        for (let i = 0; i < particles.length; i += 1) {
+          const particle = particles[i];
+
           if (!reduceMotion) {
-            flock(boid);
-            boid.velocity.add(boid.acceleration);
-            boid.velocity.limit(maxSpeed);
-            boid.position.add(boid.velocity);
-            boid.acceleration.mult(0);
+            particle.x += particle.vx;
+            particle.y += particle.vy;
           }
 
-          wrapAround(boid);
-          drawBoid(boid);
+          if (particle.x < -8) particle.x = p.width + 8;
+          if (particle.x > p.width + 8) particle.x = -8;
+          if (particle.y < -8) particle.y = p.height + 8;
+          if (particle.y > p.height + 8) particle.y = -8;
+
+          color.setAlpha(58);
+          p.noStroke();
+          p.fill(color);
+          p.circle(particle.x, particle.y, particle.radius * 2);
+
+          for (let j = i + 1; j < particles.length; j += 1) {
+            const other = particles[j];
+            const distance = p.dist(particle.x, particle.y, other.x, other.y);
+            const threshold = window.innerWidth < 720 ? 95 : 125;
+
+            if (distance < threshold) {
+              color.setAlpha(p.map(distance, 0, threshold, 26, 0));
+              p.stroke(color);
+              p.strokeWeight(0.7);
+              p.line(particle.x, particle.y, other.x, other.y);
+            }
+          }
         }
       };
 
       p.windowResized = () => {
         p.resizeCanvas(window.innerWidth, window.innerHeight);
-        createBoids();
+        createParticles();
 
         if (reduceMotion) {
           p.redraw();
