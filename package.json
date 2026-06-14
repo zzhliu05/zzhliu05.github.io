@@ -13,9 +13,9 @@
     "@astrojs/check": "^0.9.4",
     "astro": "^5.0.0",
     "katex": "^0.16.11",
-    "remark-math": "^6.0.0",
+    "p5": "^2.3.0",
     "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
     "typescript": "^5.7.2"
-  },
-  "devDependencies": {}
+  }
 }
