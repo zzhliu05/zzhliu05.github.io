@@ -12,8 +12,8 @@ export const siteConfig: SiteConfig = {
 	lang: SITE_LANG,
 
 	themeColor: {
-		hue: 240, // 主题色的默认色相，范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
-		fixed: false, // 对访问者隐藏主题色选择器
+		hue: 220, // 深蓝色
+		fixed: true,
 	},
 
 	// 特色页面开关配置（关闭未使用的页面有助于提升 SEO，关闭后请记得在 navbarConfig 中移除对应链接）
@@ -140,9 +140,9 @@ export const siteConfig: SiteConfig = {
 			title: "zzhliu05 的博客",
 			switchable: true,
 
-			subtitle: ["记录数学、编程与思考"],
+			subtitle: ["Like tears in rain"],
 			typewriter: {
-				enable: false,
+				enable: true,
 
 				speed: 100, // 打字速度（毫秒）
 				deleteSpeed: 50, // 删除速度（毫秒）
@@ -187,16 +187,16 @@ export const siteConfig: SiteConfig = {
 		asciiFont: {
 			// 英文字体 - 优先级最高
 			// 指定为英文字体则无论字体包含多大范围，都只会保留 ASCII 字符子集
-			fontFamily: "ZenMaruGothic-Medium",
+			fontFamily: "Segoe UI",
 			fontWeight: "400",
-			localFonts: ["ZenMaruGothic-Medium.ttf"],
+			localFonts: [],
 			enableCompress: false,
 		},
 		cjkFont: {
 			// 中日韩字体 - 作为回退字体
-			fontFamily: "萝莉体 第二版",
-			fontWeight: "500",
-			localFonts: ["loli.ttf"],
+			fontFamily: "Microsoft YaHei",
+			fontWeight: "400",
+			localFonts: [],
 			enableCompress: false,
 		},
 	},
