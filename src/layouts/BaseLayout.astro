@@ -25,7 +25,7 @@ const isHomePage = Astro.url.pathname === '/';
   </head>
   <body>
     <DynamicBackground />
-    <header class="site-header">
+    <header class:list={['site-header', { 'site-header--home': isHomePage }]}>
       <div class="container header-inner">
         <a class="site-title" href="/">zzhliu05 的博客</a>
         <nav class="site-nav" aria-label="主导航">
@@ -34,10 +34,22 @@ const isHomePage = Astro.url.pathname === '/';
         </nav>
       </div>
     </header>
-    <div class:list={['site-banner', { 'site-banner--home': isHomePage }]} aria-hidden="true">
+    <div
+      class:list={['site-banner', { 'site-banner--home': isHomePage }]}
+      aria-hidden={isHomePage ? undefined : 'true'}
+    >
       <img src="/banner.jpg" alt="" />
+      {isHomePage && (
+        <>
+          <div class="site-banner__content">
+            <p>记录数学、编程与思考</p>
+            <h1>zzhliu05 的博客</h1>
+          </div>
+          <a class="site-banner__scroll" href="#content" aria-label="查看文章">⌄</a>
+        </>
+      )}
     </div>
-    <main class="container">
+    <main class="container" id="content">
       <slot />
     </main>
     <footer class="site-footer">
