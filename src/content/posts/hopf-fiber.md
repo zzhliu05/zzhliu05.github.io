@@ -24,3 +24,13 @@ $$
 $$U(1)\hookrightarrow S^3\rightarrow S^2$$
 这说明$S^3$可以看作$S^2$上的$U(1)$主丛.底空间$S^2$(又称Bloch球面)可视作由$\theta,\phi$参数化的空间.现在我们开始考察这个纤维丛的一些几何性质.
 
+选取丛的一个截面
+$$
+\ket{\psi}=\left[\begin{aligned}cos\frac{\theta}{2}e^{i\phi} \\
+sin\frac{\theta}{2}e^{-i\phi}
+\end{aligned}\right]
+$$
+Berry联络由联络1-形式$\omega$经由截面的拉回给出.除去南北极,取$S^2$切空间的一组基底
+$$
+A=\braket{}
+$$

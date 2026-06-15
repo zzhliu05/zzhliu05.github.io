@@ -37,7 +37,7 @@ export const siteConfig: SiteConfig = {
 		// 顶栏标题图标路径，默认使用 public/assets/home/home.webp
 		//icon: "/ada.jpg",
 		// 网站Logo图片路径
-		logo: "/ada.jpg",
+		//logo: "/ada.jpg",
 	},
 
 	// 页面自动缩放配置
