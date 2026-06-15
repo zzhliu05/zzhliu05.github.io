@@ -140,7 +140,7 @@ export const siteConfig: SiteConfig = {
 			title: "zzhliu05 的博客",
 			switchable: true,
 
-			subtitle: ["Like tears in rain"],
+			subtitle: ["Wir müssen wissen, wir werden wissen_","Like tears in rain_"],
 			typewriter: {
 				enable: true,
 
