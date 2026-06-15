@@ -11,21 +11,6 @@ corepack pnpm install
 corepack pnpm dev
 ```
 
-## 本地写作并推送
-
-```powershell
-corepack pnpm write
-```
-
-然后访问 `http://127.0.0.1:8787/`。写作页支持新建、修改、删除、图片上传、Markdown 实时预览和 KaTeX 公式预览。
-
-如果本机 Git 没有 GitHub 写权限，可以临时设置 token：
-
-```powershell
-$env:GITHUB_TOKEN="你的 GitHub token"
-corepack pnpm write
-```
-
 ## 构建
 
 ```powershell
