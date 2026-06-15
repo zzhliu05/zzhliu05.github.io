@@ -89,6 +89,7 @@ const textData = Array.isArray(text) ? JSON.stringify(text) : text;
 			const currentText = this.getCurrentText();
 
 			if (this.isDeleting) {
+				this.element.classList.remove("is-paused");
 				// 删除字符
 				if (this.currentIndex > 0) {
 					this.currentIndex--;
@@ -111,6 +112,7 @@ const textData = Array.isArray(text) ? JSON.stringify(text) : text;
 					);
 				}
 			} else {
+				this.element.classList.remove("is-paused");
 				// 添加字符
 				if (this.currentIndex < currentText.length) {
 					this.currentIndex++;
@@ -123,6 +125,7 @@ const textData = Array.isArray(text) ? JSON.stringify(text) : text;
 						this.speed,
 					);
 				} else {
+					this.element.classList.add("is-paused");
 					// 打字完成，暂停后开始删除（如果有多条文本）
 					if (this.texts.length > 1) {
 						this.isDeleting = true;
@@ -170,6 +173,28 @@ const textData = Array.isArray(text) ? JSON.stringify(text) : text;
 		min-height: 1.5em; /* 确保即使没有文字也保持最小高度 */
 		display: inline-block;
 		vertical-align: baseline;
+	}
+
+	.typewriter::after {
+		content: "_";
+		display: inline-block;
+		opacity: 0;
+	}
+
+	.typewriter.is-paused::after {
+		animation: typewriter-cursor-blink 0.9s steps(1, end) infinite;
+	}
+
+	@keyframes typewriter-cursor-blink {
+		0%,
+		45% {
+			opacity: 1;
+		}
+
+		46%,
+		100% {
+			opacity: 0;
+		}
 	}
 
 	/* 确保打字机效果不会导致布局抖动 */

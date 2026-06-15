@@ -35,9 +35,9 @@ export const siteConfig: SiteConfig = {
 		// 顶栏标题文本
 		text: "zzhliu05",
 		// 顶栏标题图标路径，默认使用 public/assets/home/home.webp
-		icon: "/banner.jpg",
+		icon: "/ada.jpg",
 		// 网站Logo图片路径
-		logo: "/banner.jpg",
+		logo: "/ada.jpg",
 	},
 
 	// 页面自动缩放配置
@@ -140,12 +140,12 @@ export const siteConfig: SiteConfig = {
 			title: "zzhliu05 的博客",
 			switchable: true,
 
-			subtitle: ["Wir müssen wissen, wir werden wissen_","Like tears in rain_"],
+			subtitle: ["Wir müssen wissen, wir werden wissen.","Like tears in rain."],
 			typewriter: {
 				enable: true,
 
 				speed: 50, // 打字速度（毫秒）
-				deleteSpeed: 50, // 删除速度（毫秒）
+				deleteSpeed: 25, // 删除速度（毫秒）
 				pauseTime: 2000, // 完全显示后的暂停时间（毫秒）
 			},
 		},
