@@ -298,7 +298,7 @@ function parseMarkdown(file) {
   return {
     title: String(data.title ?? ''),
     description: String(data.description ?? ''),
-    date: String(data.date ?? ''),
+    date: String(data.published ?? data.date ?? ''),
     tags: Array.isArray(data.tags) ? data.tags : [],
     draft: Boolean(data.draft),
     body: match[2].trim()
@@ -341,7 +341,7 @@ function normalizeSlug(value) {
 }
 
 function renderMarkdown(post) {
-  return `---\ntitle: ${yamlString(post.title)}\ndescription: ${yamlString(post.description)}\ndate: ${post.date}\ntags: [${post.tags.map(yamlString).join(', ')}]\ndraft: ${post.draft}\n---\n\n${post.body.trim()}\n`;
+  return `---\ntitle: ${yamlString(post.title)}\ndescription: ${yamlString(post.description)}\npublished: ${post.date}\ntags: [${post.tags.map(yamlString).join(', ')}]\ncategory: \"\"\ndraft: ${post.draft}\n---\n\n${post.body.trim()}\n`;
 }
 
 function yamlString(value) {
