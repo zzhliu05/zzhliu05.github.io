@@ -16,6 +16,7 @@
 }
 
 html {
+  scroll-behavior: smooth;
   font-family: "Noto Serif SC", "Songti SC", "SimSun", Georgia, serif;
   background: var(--bg);
   color: var(--text);
@@ -76,11 +77,32 @@ a:hover {
   backdrop-filter: blur(8px);
 }
 
+.site-header--home {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 2;
+  border-bottom-color: rgba(255, 255, 255, 0.18);
+  background: linear-gradient(rgba(0, 0, 0, 0.42), transparent);
+  backdrop-filter: none;
+}
+
+.site-header--home .site-title,
+.site-header--home .site-nav a {
+  color: #fff;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.72);
+}
+
 .site-banner {
   height: clamp(160px, 24vw, 300px);
   overflow: hidden;
   border-bottom: 1px solid var(--line);
   background: #071429;
+}
+
+.site-banner--home {
+  height: 100vh;
+  height: 100svh;
+  min-height: 520px;
 }
 
 .site-banner img {
@@ -89,6 +111,61 @@ a:hover {
   height: 100%;
   object-fit: cover;
   object-position: center 46%;
+}
+
+.site-banner--home::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(3, 10, 24, 0.18),
+    rgba(3, 10, 24, 0.04) 38%,
+    rgba(3, 10, 24, 0.46)
+  );
+}
+
+.site-banner__content {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: min(90%, 760px);
+  transform: translate(-50%, -50%);
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
+}
+
+.site-banner__content h1 {
+  margin: 8px 0 0;
+  font-size: clamp(36px, 6vw, 68px);
+  line-height: 1.2;
+}
+
+.site-banner__content p {
+  margin: 0;
+  font-family: "Noto Sans SC", "Microsoft YaHei", Arial, sans-serif;
+  font-size: clamp(15px, 2vw, 20px);
+}
+
+.site-banner__scroll {
+  position: absolute;
+  z-index: 1;
+  bottom: 22px;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translateX(-50%);
+  color: #fff;
+  font: 38px/32px Georgia, serif;
+  text-align: center;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+}
+
+.site-banner__scroll:hover {
+  color: #fff;
+  text-decoration: none;
 }
 
 .header-inner {
@@ -354,8 +431,24 @@ a:hover {
     height: 150px;
   }
 
+  .site-banner--home {
+    height: 100vh;
+    height: 100svh;
+    min-height: 520px;
+  }
+
   .site-banner img {
     object-position: 54% center;
+  }
+
+  .site-header--home .header-inner {
+    align-items: center;
+    flex-direction: row;
+    padding: 14px 0;
+  }
+
+  .site-header--home .site-title {
+    font-size: 18px;
   }
 
   .container {
