@@ -12,7 +12,7 @@ export const siteConfig: SiteConfig = {
 	lang: SITE_LANG,
 
 	themeColor: {
-		hue: 220, // 深蓝色
+		hue: 245, // 深蓝色
 		fixed: true,
 	},
 
