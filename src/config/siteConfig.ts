@@ -107,15 +107,15 @@ export const siteConfig: SiteConfig = {
 	banner: {
 		// 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播
 		src: {
-			desktop: ["/banner.jpg"],
-			mobile: ["/banner.jpg"],
+			desktop: ["/banner.jpg", "/banner2.jpg"],
+			mobile: ["/banner.jpg", "/banner2.jpg"],
 		}, // 使用本地横幅图片
 
 		position: "center", // 等同于 object-position，仅支持 'top', 'center', 'bottom'。默认为 'center'
 
 		carousel: {
-			enable: false,
-			interval: 3,
+			enable: true,
+			interval: 7,
 			switchable: true,
 		},
 
