@@ -389,7 +389,7 @@ html[data-banner-title-enabled="false"] .banner-text-overlay {
   body.enable-banner.fullscreen-banner .absolute.w-full.z-30 {
     position: relative !important;
     top: 0 !important;
-    margin-top: -4rem !important;
+    margin-top: 0 !important;
   }
 
   body.enable-banner.fullscreen-banner #main-grid {
@@ -418,7 +418,7 @@ html[data-banner-title-enabled="false"] .banner-text-overlay {
   body.enable-banner.fullscreen-banner .absolute.w-full.z-30:not(.mobile-main-no-banner) {
     position: relative !important;
     top: 0 !important;
-    margin-top: -2rem !important;
+    margin-top: 0 !important;
     min-height: 0 !important;
   }
 }
