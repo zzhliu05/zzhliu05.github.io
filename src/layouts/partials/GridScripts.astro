@@ -14,6 +14,7 @@ interface Props {
 	wavesEnabled?: boolean;
 	bannerTitleEnabled?: boolean;
 	wallpaperEnabled?: boolean;
+	allowStoredWallpaperMode?: boolean;
 	postListLayoutEnabled?: boolean;
 }
 
@@ -27,6 +28,7 @@ const {
 	wavesEnabled = true,
 	bannerTitleEnabled = true,
 	wallpaperEnabled = true,
+	allowStoredWallpaperMode = true,
 	postListLayoutEnabled = true,
 } = Astro.props;
 ---
@@ -44,6 +46,7 @@ const {
 		wavesEnabled,
 		bannerTitleEnabled,
 		wallpaperEnabled,
+		allowStoredWallpaperMode,
 		postListLayoutEnabled,
 	}}
 >
@@ -171,7 +174,9 @@ const {
 	// 立即执行，在页面渲染前应用壁纸模式和布局模式，避免闪烁
 	(function () {
 		const wallpaperMode =
-			wallpaperEnabled ? (localStorage.getItem("wallpaperMode") || defaultWallpaperMode) : defaultWallpaperMode;
+			wallpaperEnabled && allowStoredWallpaperMode
+				? (localStorage.getItem("wallpaperMode") || defaultWallpaperMode)
+				: defaultWallpaperMode;
 		const body = document.body;
 		applyWallpaperVisualSettings(wallpaperMode);
 

@@ -121,6 +121,8 @@ const defaultPostListLayout = siteConfig.postListLayout?.defaultMode || "list";
 		wavesEnabled={siteConfig.banner?.waves?.enable ?? true}
 		bannerTitleEnabled={siteConfig.banner?.homeText?.enable ?? true}
 		wallpaperEnabled={fullscreenWallpaperConfig.enable ?? true}
+		allowStoredWallpaperMode={siteConfig.wallpaperMode.showModeSwitchOnMobile !==
+			"off"}
 		postListLayoutEnabled={siteConfig.postListLayout?.enable ?? true}
 	/>
 
