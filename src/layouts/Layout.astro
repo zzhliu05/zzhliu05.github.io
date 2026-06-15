@@ -341,10 +341,12 @@ if (siteConfig.font) {
 <script>
 	// Swup 页面过渡管理器 - 统一入口
 	// 所有功能已重构为模块化架构，详见 src/scripts/ 目录
+	import { initBannerParallax } from "../scripts/banner-parallax";
 	import { initSwupManager } from "../scripts/swup-manager";
 
 	// 初始化 Swup 管理器
 	initSwupManager();
+	initBannerParallax();
 </script>
 
 <!-- 代码块折叠功能 -->
