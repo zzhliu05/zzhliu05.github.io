@@ -187,14 +187,14 @@ export const siteConfig: SiteConfig = {
 		asciiFont: {
 			// 英文字体 - 优先级最高
 			// 指定为英文字体则无论字体包含多大范围，都只会保留 ASCII 字符子集
-			fontFamily: "Segoe UI",
+			fontFamily: "Roboto",
 			fontWeight: "400",
 			localFonts: [],
 			enableCompress: false,
 		},
 		cjkFont: {
 			// 中日韩字体 - 作为回退字体
-			fontFamily: "Microsoft YaHei",
+			fontFamily: "Microsoft YaHei UI",
 			fontWeight: "400",
 			localFonts: [],
 			enableCompress: false,
