@@ -144,8 +144,8 @@ export const siteConfig: SiteConfig = {
 			typewriter: {
 				enable: true,
 
-				speed: 200, // 打字速度（毫秒）
-				deleteSpeed: 200, // 删除速度（毫秒）
+				speed: 50, // 打字速度（毫秒）
+				deleteSpeed: 50, // 删除速度（毫秒）
 				pauseTime: 2000, // 完全显示后的暂停时间（毫秒）
 			},
 		},
