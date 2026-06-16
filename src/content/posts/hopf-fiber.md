@@ -67,18 +67,14 @@ $$
 以下Mathematica代码绘制了两个不同基点上的纤维在球极投影坐标系的形状.
 ```ts
 gamma[x_, \[Phi]_] := {Cos[\[Phi]] x[[1]] - Sin[\[Phi]] x[[2]], 
-    Sin[\[Phi]] x[[1]] + Cos[\[Phi]] x[[2]], 
-    Cos[\[Phi]] x[[3]]}/(1 - Sin[\[Phi]] x[[3]]);
+Sin[\[Phi]] x[[1]] + Cos[\[Phi]] x[[2]], Cos[\[Phi]] x[[3]]}/(1 - Sin[\[Phi]] x[[3]]);
+
 xA = {1/Sqrt[2], 0, 1/Sqrt[2]};
 xB = {0, Sqrt[3]/2, 1/2};
 
-curvePlot = 
-  ParametricPlot3D[
-   Evaluate[{gamma[xA, \[Phi]], gamma[xB, \[Phi]]}], {\[Phi], 0, 
-    2 Pi}, PlotStyle -> {{Red, Thick}, {Blue, Thick}}, 
+curvePlot = ParametricPlot3D[Evaluate[{gamma[xA, \[Phi]], gamma[xB, \[Phi]]}], {\[Phi], 0, 2 Pi}, PlotStyle -> {{Red, Thick}, {Blue, Thick}}, 
    PlotRange -> All, AxesLabel -> {"X", "Y", "Z"}, 
    BoxRatios -> {1, 1, 1}, PlotPoints -> 200, MaxRecursion -> 3];
-
 Show[curvePlot, ImageSize -> Large]
 ```
 效果如下
@@ -98,4 +94,4 @@ $$
 $$
 由于我们已经知道$\pi_2(S^1)=\pi_3(S^1)=0$,这说明$\pi_3(S^2)\cong \pi_3(S^3)=\mathbb{Z}$.而$\pi_3(S^2)$的生成元正是Hopf纤维丛的投影映射.
 
->这是个非凡的例子,因为它告诉我们球面的高阶同伦群是非平凡的,不同于同调群.
+>这是个非凡的例子,它告诉我们球面的高阶同伦群是非平凡的,不同于同调群.
