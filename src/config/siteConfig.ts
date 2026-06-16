@@ -35,7 +35,7 @@ export const siteConfig: SiteConfig = {
 		// 顶栏标题文本
 		text: "zzhliu05",
 		// 顶栏标题图标路径，默认使用 public/assets/home/home.webp
-		//icon: "/ada.jpg",
+		icon: "/ada.jpg",
 		// 网站Logo图片路径
 		logo: "/ada.jpg",
 	},
