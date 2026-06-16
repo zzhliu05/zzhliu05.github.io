@@ -4,8 +4,8 @@ import type { SiteConfig } from "../types/config";
 const SITE_LANG = "zh_CN"; // 语言代码，例如：'en', 'zh_CN', 'ja' 等。
 
 export const siteConfig: SiteConfig = {
-	title: "lzz的博客",
-	subtitle: "Wir müssen wissen.Wir werden wissen",
+	title: "Διονύσιος的博客",
+	subtitle: "",
 	siteURL: "https://zzhliu05.github.io/",
 	siteStartDate: "2026-05-27",
 
@@ -33,7 +33,7 @@ export const siteConfig: SiteConfig = {
 		// 显示模式："text-icon" 显示图标+文本，"logo" 仅显示Logo
 		mode: "text-icon",
 		// 顶栏标题文本
-		text: "zzhliu05",
+		text: "Διονύσιος",
 		// 顶栏标题图标路径，默认使用 public/assets/home/home.webp
 		icon: "/ada.jpg",
 		// 网站Logo图片路径
@@ -137,7 +137,7 @@ export const siteConfig: SiteConfig = {
 
 		homeText: {
 			enable: true,
-			title: "zzhliu05 的博客",
+			title: "ΔιονύσιοςのBlog",
 			switchable: true,
 
 			subtitle: ["All those moments will be lost in time","like tears in rain."],
