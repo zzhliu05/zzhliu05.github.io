@@ -57,6 +57,7 @@ $$
 $$
 因此,hopf fibration对应$eg=\frac{\hbar c}{2}$的磁单极子.
 
+## Visualization
 最后,我们可以试着取$S^3$的局部坐标系,观察纤维的具体形状.设$\psi_1=x_1+ix_2,\psi_2=x_3+ix_4$,取$x_4\neq 1$的局部覆盖,我们可以用球极投影坐标
 $$
 (x_1,x_2,x_3,x_4)\to \frac{1}{1-x_4}(x_1,x_2,x_3)
@@ -90,11 +91,11 @@ Show[curvePlot, ImageSize -> Large]
 
 注意到两支不同的纤维相互缠绕.事实上在这个例子中,任意两个不同基点的纤维都会相互缠绕,并且卷绕数恰好为$1$.
 
----
+:::note[有趣的事实]
 为什么它叫Hopf纤维化呢?因为数学家Hopf最早用这个方法证明了$\pi_3(S^2)=\mathbb{Z}$.上述纤维化$S^1\hookrightarrow S^3\rightarrow S^2$可以诱导同伦群的长正合列
 $$
 \cdots \rightarrow \pi_3(S^1)\to \pi_3(S^3)\to \pi_3(S^2)\to \pi_2(S^1)\to \cdots
 $$
 由于我们已经知道$\pi_2(S^1)=\pi_3(S^1)=0$,这说明$\pi_3(S^2)\cong \pi_3(S^3)=\mathbb{Z}$.而$\pi_3(S^2)$的生成元正是Hopf纤维丛的投影映射.
-
+:::
 >这是个非凡的例子,它告诉我们球面的高阶同伦群是非平凡的,不同于同调群.

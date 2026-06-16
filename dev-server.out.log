@@ -16,3 +16,6 @@
 [2m┃[22m Local    [36mhttp://localhost:3001/[39m
 [2m┃[22m Network  [2muse --host to expose[22m
 [2m16:08:55[22m [32mwatching for file changes...[39m
+[2m16:20:55[22m [34m[watch][39m src/config/sidebarConfig.ts
+[2m16:21:08[22m [34m[glob-loader][39m Reloaded data from [32mhopf-fiber.md[39m
+[ELIFECYCLE] Command failed with exit code 4294967295.

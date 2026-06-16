@@ -1,0 +1,13 @@
+16:24:32 [vite-plugin-svelte] no Svelte config found at E:/zzhliu05.github.io - using default configuration.
+[vite] connected.
+[2m16:24:36[22m [34m[types][39m Generated [2m5ms[22m
+[vite] connected.
+[2m16:24:38[22m [34m[content][39m Syncing content
+[2m16:24:38[22m [34m[content][39m Synced content
+[2m16:24:38[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+[42m[1m astro [22m[49m [32mv6.4.6[39m [2mready in[22m 11570 [2mms[22m
+[2m┃[22m Local    [36mhttp://127.0.0.1:4323/[39m
+[2m16:24:38[22m [32mwatching for file changes...[39m
+16:25:26 [vite-plugin-svelte] src/components/features/settings/SettingSection.svelte:60:3 Using `<slot>` to render parent content is deprecated. Use `{@render ...}` tags instead
+https://svelte.dev/e/slot_element_deprecated
+[2m16:25:32[22m [34m[200][39m /posts/first-note/ [2m7193ms[22m
