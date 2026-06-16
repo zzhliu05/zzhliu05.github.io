@@ -1,0 +1,18 @@
+已加载 .env 配置文件
+
+开始同步内容...
+
+内容目录不存在：E:\zzhliu05.github.io\content
+将使用独立仓库模式
+提示：请设置 CONTENT_REPO_URL 环境变量，或手动创建内容目录
+16:08:50 [vite-plugin-svelte] no Svelte config found at E:/zzhliu05.github.io - using default configuration.
+[vite] connected.
+[2m16:08:54[22m [34m[types][39m Generated [2m3ms[22m
+[vite] connected.
+[2m16:08:54[22m [34m[content][39m Syncing content
+[2m16:08:54[22m [34m[content][39m Synced content
+[2m16:08:55[22m [34m[vite][39m Port 3000 is in use, trying another one...
+[42m[1m astro [22m[49m [32mv6.4.6[39m [2mready in[22m 7725 [2mms[22m
+[2m┃[22m Local    [36mhttp://localhost:3001/[39m
+[2m┃[22m Network  [2muse --host to expose[22m
+[2m16:08:55[22m [32mwatching for file changes...[39m
