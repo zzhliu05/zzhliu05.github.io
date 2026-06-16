@@ -82,4 +82,4 @@ curvePlot =
 Show[curvePlot, ImageSize -> Large]
 ```
 效果如下
-![](/images/posts/hopf-fiber.jpg)
+![w-50%](/images/posts/hopf_fiber.jpg)
