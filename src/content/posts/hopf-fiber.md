@@ -88,6 +88,9 @@ Show[curvePlot, ImageSize -> Large]
      alt=""
      style="display:block; margin:0 auto; width:70%;">
 
+
+注意到两支不同的纤维相互缠绕.事实上在这个例子中,任意两个不同基点的纤维都会相互缠绕,并且卷绕数恰好为$1$.
+
 ---
 为什么它叫Hopf纤维化呢?因为数学家Hopf最早用这个方法证明了$\pi_3(S^2)=\mathbb{Z}$.上述纤维化$S^1\hookrightarrow S^3\rightarrow S^2$可以诱导同伦群的长正合列
 $$

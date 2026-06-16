@@ -140,7 +140,7 @@ export const siteConfig: SiteConfig = {
 			title: "zzhliu05 的博客",
 			switchable: true,
 
-			subtitle: ["All those moments will be lost in time,","like tears in rain."],
+			subtitle: ["All those moments will be lost in time","like tears in rain."],
 			typewriter: {
 				enable: true,
 
