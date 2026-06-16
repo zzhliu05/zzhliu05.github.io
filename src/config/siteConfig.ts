@@ -4,8 +4,8 @@ import type { SiteConfig } from "../types/config";
 const SITE_LANG = "zh_CN"; // 语言代码，例如：'en', 'zh_CN', 'ja' 等。
 
 export const siteConfig: SiteConfig = {
-	title: "zzhliu05 的博客",
-	subtitle: "记录数学、编程与思考",
+	title: "lzz的博客",
+	subtitle: "Wir müssen wissen.Wir werden wissen",
 	siteURL: "https://zzhliu05.github.io/",
 	siteStartDate: "2026-05-27",
 
