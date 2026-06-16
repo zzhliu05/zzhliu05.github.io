@@ -8,7 +8,7 @@ category: "拓扑"
 draft: false
 ---
 
-> 没有人能真正看见Hopf fibration
+> 没有人能真正看见Hopf fibration.
 
 我们考虑一个归一化的二分量波函数$\ket{\psi}=\left[ \begin{aligned}\psi_1 \\ \psi_2  \end{aligned}\right]$.其所处的态空间实际上为
 $$
@@ -82,4 +82,15 @@ curvePlot =
 Show[curvePlot, ImageSize -> Large]
 ```
 效果如下
-![w-50%](/images/posts/hopf_fiber.jpg)
+
+
+<img src="/images/posts/hopf_fiber.jpg" alt="" width="300" height="200">
+
+---
+为什么它叫Hopf纤维化呢?因为数学家Hopf最早用这个方法证明了$\pi_3(S^2)=\mathbb{Z}$.上述纤维化$S^1\hookrightarrow S^3\rightarrow S^2$可以诱导同伦群的长正合列
+$$
+\cdots \rightarrow \pi_3(S^1)\to \pi_3(S^3)\to \pi_3(S^2)\to \pi_2(S^1)\to \cdots
+$$
+由于我们已经知道$\pi_2(S^1)=\pi_3(S^1)=0$,这说明$\pi_3(S^2)\cong \pi_3(S^3)=\mathbb{Z}$.而$\pi_3(S^2)$的生成元正是Hopf纤维丛的投影映射.
+
+>这是个非凡的例子,因为它告诉我们球面的高阶同伦群是非平凡的,不同于同调群.
