@@ -19,7 +19,7 @@ export const siteConfig: SiteConfig = {
 	// 特色页面开关配置（关闭未使用的页面有助于提升 SEO，关闭后请记得在 navbarConfig 中移除对应链接）
 	featurePages: {
 		anime: false,
-		diary: false,
+		diary: true,
 		friends: false,
 		projects: false,
 		skills: false,
