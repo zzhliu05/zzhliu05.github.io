@@ -2,9 +2,9 @@
 title: "Hopf Fibration小记"
 description: "一篇介绍Hopf Fibration及其物理图景的短文."
 published: 2026-06-15
-tags: ["数学","拓扑物理"]
+tags: ["数学","拓扑物理","纤维丛"]
 image: "/images/posts/hopf-fiber.jpg"
-category: "拓扑"
+category: "拓扑物理"
 draft: false
 ---
 
