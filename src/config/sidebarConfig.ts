@@ -18,36 +18,36 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			},
 		},
 		{
-			type: "categories",
+			type: "card-toc",
 			position: "sticky",
 			class: "onload-animation",
 			animationDelay: 100,
-			responsive: {
-				collapseThreshold: 5,
-			},
 		},
 		{
-			type: "card-toc",
-			position: "sticky",
+			type: "site-stats",
+			position: "top",
 			class: "onload-animation",
 			animationDelay: 150,
 		},
 		{
-			type: "site-stats",
-			position: "sticky",
+			type: "calendar",
+			position: "top",
 			class: "onload-animation",
 			animationDelay: 200,
 		},
 		{
-			type: "calendar",
+			type: "categories",
 			position: "sticky",
 			class: "onload-animation",
 			animationDelay: 250,
+			responsive: {
+				collapseThreshold: 5,
+			},
 		},
 	],
 	components: {
-		left: ["profile", "tags"],
-		right: ["categories", "card-toc", "site-stats", "calendar"],
+		left: ["profile", "tags", "card-toc"],
+		right: ["site-stats", "calendar", "categories"],
 		drawer: ["profile", "categories", "tags", "site-stats"],
 	},
 	defaultAnimation: {
