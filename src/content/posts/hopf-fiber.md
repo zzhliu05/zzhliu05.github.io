@@ -84,7 +84,9 @@ Show[curvePlot, ImageSize -> Large]
 效果如下
 
 
-<img src="/images/posts/hopf_fiber.jpg" alt="" width="300" height="200">
+<img src="/images/posts/hopf_fiber.png"
+     alt=""
+     style="display:block; margin:0 auto; width:70%;">
 
 ---
 为什么它叫Hopf纤维化呢?因为数学家Hopf最早用这个方法证明了$\pi_3(S^2)=\mathbb{Z}$.上述纤维化$S^1\hookrightarrow S^3\rightarrow S^2$可以诱导同伦群的长正合列
