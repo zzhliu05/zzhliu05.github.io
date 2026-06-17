@@ -104,7 +104,7 @@ m_\alpha [a_\alpha+\frac{2(a_\alpha \cdot v_\alpha)v_\alpha+v_\alpha^2 a_\alpha}
 $$
 
 ## 数值模拟
-对于$q_1q_2<0$的双星系统我们可以尝试用RK4模拟一下
+由于这是一个常微分方程,我们可以尝试用RK4模拟一下.取$q_1q_2<0$的双星系统,设置双星初始速度$v_0=\frac{c}{4}$,结果如下
 ```js
 import numpy as np
 import matplotlib.pyplot as plt
@@ -204,3 +204,5 @@ for i in range(1, N):
 <img src="/images/posts/relativistic.png"
      alt=""
      style="display:block; margin:0 auto; width:70%;">
+
+可以看到当$\frac{v}{c}\sim \frac{1}{4}$时轨道与圆形有显著偏离.
