@@ -56,16 +56,50 @@ L=\sum_{\alpha}m_\alpha c^2+\frac{m_\alpha v_\alpha^2}{2}+\frac{m_\alpha v_\alph
 $$
 为了不让Lagrangian中出现加速度,我们需要一些分部积分.注意到
 $$
-\frac{a_\beta\cdot R_{\alpha \beta}}{2}=\frac{d}{dt}\frac{v_\beta\cdot R_{\alpha\beta}}{2}-\frac{v_\beta\cdot(v_\alpha-v_\beta)}{2}
+\frac{a_\beta\cdot R_{\alpha \beta}}{2 R_{\alpha\beta}}=\frac{d}{dt}\frac{v_\beta\cdot R_{\alpha\beta}}{2R_{\alpha\beta}}-\frac{v_\beta\cdot(v_\alpha-v_\beta)}{2R_{\alpha\beta}}+\frac{(v_\beta \cdot \hat{R}_{\alpha \beta})((v_\alpha-v_\beta)\cdot \hat{R}_{\alpha\beta})}{2R_{\alpha\beta}}
 $$
 而全微分对作用量变分无影响.代入$L$
 $$
-L=\sum_{\alpha}m_\alpha c^2+\frac{m_\alpha v_\alpha^2}{2}+\frac{m_\alpha v_\alpha^4}{8c^2}\\+\sum_{\alpha>\beta}\frac{q_\alpha q_\beta}{4\pi \epsilon_0 R_{\alpha\beta}}\left\{-1+\frac{v_\alpha \cdot v_\beta}{2c^2}+\frac{(v_\beta \cdot \hat{R}_{\alpha\beta})^2}{2c^2}\right \}+o(\frac{v^2}{c^2})
+L=\sum_{\alpha}m_\alpha c^2+\frac{m_\alpha v_\alpha^2}{2}+\frac{m_\alpha v_\alpha^4}{8c^2}\\+\sum_{\alpha>\beta}\frac{q_\alpha q_\beta}{4\pi \epsilon_0 R_{\alpha\beta}}\left\{-1+\frac{v_\alpha \cdot v_\beta}{2c^2}+\frac{(v_\alpha\cdot \hat{R}_{\alpha\beta})(v_\beta \cdot \hat{R}_{\alpha\beta})}{2c^2}\right \}+o(\frac{1}{c^2})
 $$
 这称为Darwin Lagrangian.
 
 ## 相对论性Hamiltonian
 考虑Legendre变换
 $$
+p_\alpha=\frac{\partial L}{\partial v_\alpha}=m_\alpha v_\alpha+\frac{m_\alpha v_\alpha^3}{2c^2}+\sum_\beta \frac{q_\alpha q_\beta}{4\pi \epsilon_0 c^2 R_{\alpha\beta}}(\frac{v_\beta}{2}+\frac{v_\beta\cdot \hat{R}_{\alpha\beta}}{2}\hat{R}_{\alpha\beta})+o(\frac{1}{c^2})
+$$
+反解$v_\alpha$
+$$
+v_\alpha=\frac{p_\alpha}{m_\alpha}-\frac{p_\alpha^3}{2m_\alpha^3c^2}-\sum_{\beta\neq \alpha} \frac{q_\alpha q_\beta}{4\pi \epsilon_0 c^2R_{\alpha\beta}}(\frac{p_\beta}{2m_\beta}+\frac{p_\beta\cdot \hat{R}_{\alpha\beta}}{2m_\beta}\hat{R}_{\alpha\beta})+o(\frac{1}{c^2})
+$$
+$$
+H=\sum_{\alpha}p_\alpha v_\alpha-L|_{p_\alpha=\frac{\partial L}{\partial v_\alpha}}=\sum_{\alpha}\frac{m_\alpha v_\alpha^2}{2}+\frac{3m_\alpha v_\alpha^4}{8 c^2}
+$$
+$$
++\sum_{\alpha>\beta}\frac{q_\alpha q_\beta}{4\pi \epsilon_0 R_{\alpha\beta}}\left\{1+\frac{v_\alpha \cdot v_\beta}{2c^2}+\frac{(v_\alpha\cdot \hat{R}_{\alpha\beta})(v_\beta \cdot \hat{R}_{\alpha\beta})}{2c^2}\right\}+o(\frac{1}{c^2})
+$$
+$$
+=\sum_{\alpha}(\frac{p_\alpha^2}{2m_\alpha}-\frac{5p_\alpha^4}{8m^3_\alpha c^2})+\sum_{\alpha>\beta}\frac{q_\alpha q_\beta}{4\pi \epsilon_0 R_{\alpha\beta}}\left\{1+\frac{p_\alpha \cdot p_\beta}{2m_{\alpha}m_\beta c^2}+\frac{(p_\alpha\cdot \hat{R}_{\alpha\beta})(p_\beta \cdot \hat{R}_{\alpha\beta})}{2m_\alpha m_\beta c^2}\right\}+o(\frac{1}{c^2})
+$$
 
+## 运动方程
+将Lagrangian代入Euler-Lagrange方程
+$$
+\frac{d}{dt}\left\{m_\alpha v_\alpha+\frac{m_\alpha v_\alpha^3}{2c^2}+\sum_\beta \frac{q_\alpha q_\beta}{4\pi \epsilon_0 c^2 R_{\alpha\beta}}(\frac{v_\beta}{2}+\frac{v_\beta\cdot \hat{R}_{\alpha\beta}}{2}\hat{R}_{\alpha\beta})\right\}=\frac{\partial L}{\partial x_\alpha}
+$$
+$$
+\implies m_\alpha a_\alpha+\frac{m_\alpha a_\alpha\cdot v_\alpha}{c^2}v_\alpha+m_\alpha\frac{v_\alpha^2}{2c^2}a_\alpha
+\\+\sum_{\beta\neq \alpha}\frac{q_\alpha q_\beta}{4\pi \epsilon_0 c^2 R_{\alpha\beta}}\{\frac{v_\alpha\cdot R_{\alpha\beta}-v_\beta \cdot R_{\alpha\beta}}{R_{\alpha\beta}^2}(\frac{v_\beta}{2}+\frac{v_\beta\cdot \hat{R}_{\alpha\beta}}{2}\hat{R}_{\alpha\beta})+\frac{a_\beta}{2}+\frac{a_\beta\cdot \hat{R}_{\alpha\beta}}{2}\hat{R}_{\alpha_\beta}
+\\
+-\frac{(v_\beta\cdot \hat{R}_{\alpha\beta})(v_{\alpha\beta}\cdot \hat{R}_{\alpha\beta})}{2R_{\alpha\beta}}\hat{R}_{\alpha\beta}+\frac{v_\beta \cdot \hat{R}_{\alpha\beta}}{2}\hat{v}_{\alpha\beta}\}
+$$
+$$
+=-\sum_{\beta\neq \alpha}\frac{q_\alpha q_\beta}{4\pi\epsilon_0 R_{\alpha\beta}}\{-\frac{\hat{R}_{\alpha\beta}}{R_{\alpha\beta}}(1-\frac{v_\alpha\cdot v_\beta}{2c^2}-\frac{(v_\alpha\cdot \hat{R}_{\alpha\beta})(v_\beta\cdot \hat{R}_{\alpha\beta})}{2c^2})-\frac{v_\beta \cdot \hat{R}_{\alpha\beta}}{2c^2R_{\alpha\beta}}v_\alpha-\\\frac{v_\alpha \cdot \hat{R}_{\alpha\beta}}{2c^2R_{\alpha\beta}}v_\beta+\frac{(v_\alpha\cdot \hat{R}_{\alpha\beta})(v_\beta \cdot \hat{R}_{\alpha\beta})}{c^2 R_{\alpha\beta}}\hat{R}_{\alpha\beta}\}
+$$
+简化得到
+$$
+m_\alpha [a_\alpha+\frac{2(a_\alpha \cdot v_\alpha)v_\alpha+v_\alpha^2 a_\alpha}{2c^2}]=\sum_{\beta\neq \alpha}\frac{q_\alpha q_\beta}{4\pi \epsilon_0 R_{\alpha\beta}}\{-\frac{a_\beta\cdot \hat{R}_{\alpha\beta}}{2c^2}\hat{R}_{\alpha\beta}
+\\
++\frac{v_\beta \cdot \hat{R}_{\alpha\beta}}{R_{\alpha\beta}c^2}v_\beta+\frac{\hat{R}_{\alpha\beta}}{R_{\alpha\beta}}-\frac{v_\alpha\cdot v_\beta}{2R_{\alpha\beta}c^2}\hat{R}_{\alpha\beta}-\frac{3(v_\alpha \cdot \hat{R}_{\alpha\beta})(v_\beta \cdot \hat{R}_{\alpha\beta})}{2R_{\alpha\beta}c^2}\hat{R}_{\alpha\beta}\}
 $$
