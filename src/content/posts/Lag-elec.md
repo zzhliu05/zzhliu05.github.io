@@ -1,6 +1,6 @@
 ---
 title: "运动电荷的相对论性修正"
-description: "对运动电荷组Lagrangian的微扰展开计算,以及对氢原子能级的相对论性修正."
+description: "对运动电荷组Lagrangian的微扰展开计算."
 published: 2026-06-16
 tags: ["电动力学"]
 category: "电动力学"
@@ -90,16 +90,18 @@ $$
 $$
 $$
 \implies m_\alpha a_\alpha+\frac{m_\alpha a_\alpha\cdot v_\alpha}{c^2}v_\alpha+m_\alpha\frac{v_\alpha^2}{2c^2}a_\alpha
-\\+\sum_{\beta\neq \alpha}\frac{q_\alpha q_\beta}{4\pi \epsilon_0 c^2 R_{\alpha\beta}}\{\frac{v_\alpha\cdot R_{\alpha\beta}-v_\beta \cdot R_{\alpha\beta}}{R_{\alpha\beta}^2}(\frac{v_\beta}{2}+\frac{v_\beta\cdot \hat{R}_{\alpha\beta}}{2}\hat{R}_{\alpha\beta})+\frac{a_\beta}{2}+\frac{a_\beta\cdot \hat{R}_{\alpha\beta}}{2}\hat{R}_{\alpha_\beta}
+\\+\sum_{\beta\neq \alpha}\frac{q_\alpha q_\beta}{4\pi \epsilon_0 c^2 R_{\alpha\beta}}\{-\frac{v_\alpha\cdot R_{\alpha\beta}-v_\beta \cdot R_{\alpha\beta}}{R_{\alpha\beta}^2}(\frac{v_\beta}{2}+\frac{v_\beta\cdot \hat{R}_{\alpha\beta}}{2}\hat{R}_{\alpha\beta})+\frac{a_\beta}{2}+\frac{a_\beta\cdot \hat{R}_{\alpha\beta}}{2}\hat{R}_{\alpha_\beta}
 \\
--\frac{(v_\beta\cdot \hat{R}_{\alpha\beta})(v_{\alpha\beta}\cdot \hat{R}_{\alpha\beta})}{2R_{\alpha\beta}}\hat{R}_{\alpha\beta}+\frac{v_\beta \cdot \hat{R}_{\alpha\beta}}{2}\hat{v}_{\alpha\beta}\}
++\frac{v_\beta\cdot v_{\alpha\beta}}{2R_{\alpha\beta}}\hat{R}_{\alpha\beta}-\frac{(v_\beta\cdot \hat{R}_{\alpha\beta})(v_{\alpha\beta}\cdot \hat{R}_{\alpha\beta})}{R_{\alpha\beta}}\hat{R}_{\alpha\beta}+\frac{v_\beta \cdot \hat{R}_{\alpha\beta}}{2}\hat{v}_{\alpha\beta}\}
 $$
 $$
 =-\sum_{\beta\neq \alpha}\frac{q_\alpha q_\beta}{4\pi\epsilon_0 R_{\alpha\beta}}\{-\frac{\hat{R}_{\alpha\beta}}{R_{\alpha\beta}}(1-\frac{v_\alpha\cdot v_\beta}{2c^2}-\frac{(v_\alpha\cdot \hat{R}_{\alpha\beta})(v_\beta\cdot \hat{R}_{\alpha\beta})}{2c^2})-\frac{v_\beta \cdot \hat{R}_{\alpha\beta}}{2c^2R_{\alpha\beta}}v_\alpha-\\\frac{v_\alpha \cdot \hat{R}_{\alpha\beta}}{2c^2R_{\alpha\beta}}v_\beta+\frac{(v_\alpha\cdot \hat{R}_{\alpha\beta})(v_\beta \cdot \hat{R}_{\alpha\beta})}{c^2 R_{\alpha\beta}}\hat{R}_{\alpha\beta}\}
 $$
 简化得到
 $$
-m_\alpha [a_\alpha+\frac{2(a_\alpha \cdot v_\alpha)v_\alpha+v_\alpha^2 a_\alpha}{2c^2}]=\sum_{\beta\neq \alpha}\frac{q_\alpha q_\beta}{4\pi \epsilon_0 R_{\alpha\beta}}\{-\frac{a_\beta\cdot \hat{R}_{\alpha\beta}}{2c^2}\hat{R}_{\alpha\beta}
-\\
-+\frac{v_\beta \cdot \hat{R}_{\alpha\beta}}{R_{\alpha\beta}c^2}v_\beta+\frac{\hat{R}_{\alpha\beta}}{R_{\alpha\beta}}-\frac{v_\alpha\cdot v_\beta}{2R_{\alpha\beta}c^2}\hat{R}_{\alpha\beta}-\frac{3(v_\alpha \cdot \hat{R}_{\alpha\beta})(v_\beta \cdot \hat{R}_{\alpha\beta})}{2R_{\alpha\beta}c^2}\hat{R}_{\alpha\beta}\}
+m_\alpha [a_\alpha+\frac{2(a_\alpha \cdot v_\alpha)v_\alpha+v_\alpha^2 a_\alpha}{2c^2}]=\sum_{\beta\neq \alpha}\frac{q_\alpha q_\beta}{4\pi \epsilon_0 R_{\alpha\beta}}\{-\frac{a_\beta+(a_\beta \cdot \hat{R}_{\alpha\beta})\hat{R}_{\alpha\beta}}{2c^2}\\
++\frac{-3(v_{\beta}\cdot \hat{R}_{\alpha\beta})(v_\beta \cdot \hat{R}_{\alpha\beta})\hat{R}_{\alpha\beta}+2(v_\alpha\cdot \hat{R}_{\alpha\beta})v_\beta+(v_\beta^2-2v_\alpha\cdot v_\beta)\hat{R}_{\alpha\beta}}{2R_{\alpha\beta}c^2}+\frac{\hat{R}_{\alpha\beta}}{R_{\alpha\beta}}\}
 $$
+
+## 数值模拟
+对于$q_1q_2<0$的双星系统
