@@ -20,6 +20,13 @@ const diaryData: DiaryItem[] = [
 		date: "2026-06-16T15:30:00Z",
 		images: [],
 	},
+	{
+		id: 2,
+		content:
+			"感觉自己什么也不会...",
+		date: "2026-06-17T23:55:00Z",
+		images: [],
+	},
 ];
 
 // 获取日记列表（按时间倒序）
