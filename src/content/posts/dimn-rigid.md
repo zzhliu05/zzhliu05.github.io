@@ -1,59 +1,180 @@
 ---
-title: "n维刚体的运动方程"
+title: "n维刚体的动力学"
 description: "对n维刚体的运动学描述."
 published: 2026-06-16
 tags: ["理论力学","刚体","李群"]
 category: "理论力学"
 draft: false
 ---
-## 刚体相空间
-考虑$n$维欧氏空间中的刚体,为了讨论简便不妨设其位于质心系内.容易证明其位形空间为$SO(n)$.考虑其李代数(左不变切向量场全体)$so(n)$,定义其一组基底为
+## 刚体位形空间
+考虑$n$维欧氏空间中的刚体,为了讨论简便不妨设其位于质心系内.容易证明其位形空间为$SO(n)$.考虑其李代数(右不变切向量场全体)$so(n)$,定义其一组基底为
 $$
-X_{ij},j>i, \ s.t. X_{ij}(I)=(-1)^{i+j}(E_{ij}-E_{ji})
+X_{ij},j>i, \ s.t. X_{ij}(I)=E_{ij}-E_{ji}
 $$
 可以看出对易关系
 $$
-[X_{ij},X_{kl}]=(-1)^{i+j+k+l}(\delta_{jk}X_{il}+\delta_{jl}X_{ik}+\delta_{ik}X_{lj}+\delta_{il}X_{jk})
+[X_{ij},X_{kl}]=\delta_{jk}X_{il}-\delta_{jl}X_{ik}+\delta_{ik}X_{lj}+\delta_{il}X_{jk}
 $$
 其中我们将$X_{ij}(j<i)$理解为$-X_{ji}$.切丛$TSO(n)$为有限生成$C^\infty(SO(n))$模,由$X_{ij}$生成.
 
-:::note[注意]
-下文中的$X_{ij}$都是指$X_{ij}(I)$.
+:::note[Notation]
+下文中的$X_{ij}$都是指$X_{ij}(I)=E_{ij}-E_{ji}$.
 :::
 
 ## Lagrangian
-Lagrangian是$TSO(n)$上的函数.考虑处于状态$(U,\sum_{j>i}\omega_{ij}X_{ij}(U))$的刚体,考虑初始时(即$U=I$)位于$x$,目前位于$Ux$的微小质量元$dm$,其速度为
+Lagrangian是$TSO(n)$上的函数.考虑处于状态$(U,\omega)$的刚体,其中$\omega$是反对称的,即
+$$\omega=\sum_{j>i} \omega_{ij}X_{ij}(U)=\sum_{i,j} \omega_{ij} E_{ij} U\in T_USO(n) 
 $$
-v=\sum_{j>i}\omega_{ij}UX_{ij}x
+考虑初始时(即$U=I$)位于$x$,目前位于$Ux$的微小质量元$dm$,其速度为
+$$
+v=\sum_{j>i}\omega_{ij}X_{ij}Ux
 $$
 因此由$U^TU=I$,
 $$
-L=\int dm \frac{v^Tv}{2}=-\int \frac{dm}{2}\sum_{j>i,l>k}\omega_{ij}\omega_{kl} x^TX_{kl}X_{ij}x
+L=\int dm \frac{v^Tv}{2}=-\int \frac{dm}{2}\sum_{j>i,l>k}\omega_{ij}\omega_{kl} x^TU^TX_{kl}X_{ij}Ux
 $$
-$$=-\int \frac{dm}{2}\sum_{j>i,l>k}\omega_{ij}\omega_{kl}(\delta_{il}x_kx_j-\delta_{ik}x_lx_j-\delta_{jl}x_kx_i+\delta_{jk}x_lx_i)$$
-定义转动惯量张量
+$$=-\int \frac{dm}{2}\sum_{j>i,l>k}\omega_{ij}\omega_{kl}(\delta_{il}x^a (U^T)_a{}^k U_j{}^b x_b-\delta_{ik}x^a (U^T)_a{}^l U_j{}^b x_b-\\ \delta_{jl}x^a (U^T)_a{}^k U_i{}^b x_b+\delta_{jk}x^a (U^T)_a{}^l U_i{}^b x_b)$$
+定义转动惯量张量(从这里开始我们开始区分协变/逆变(下/上)指标,并且开始采用爱因斯坦求和约定)
 $$
-I_{ijkl}=\int dm(\delta_{ik} x_lx_j+\delta_{jl}x_kx_i-\delta_{il}x_kx_j-\delta_{jk}x_lx_i)
+I_{ij}{}^{kl}=\int dm(\delta_i^{k} x^lx_j+\delta_j^{l}x^kx_i-\delta_i^{l}x^kx_j-\delta_j^{k}x^lx_i)
 $$
-为了方便不妨假定$\omega_{ij}=0,\forall j\leq i$,则
+容易看出它确实满足变换规则,即确实是个张量
 $$
-L=\frac{1}{2}\sum_{i,j,k,l}I_{ijkl}\omega_{ij}\omega_{kl}=\frac{1}{2}I_{ijkl}\omega^{ij}\omega^{kl}
-$$ 
+(I_U)_{ab}{}^{cd}=U_a{}^iU_b{}^jI_{ij}{}^{kl}(U^T)_k{}^c (U^T)_l{}^d
+$$
+并且$I_{ij}{}^{kl}$关于$ij,kl$分别反对称.代入拉格朗日量
+$$
+L=\frac{1}{8}\omega^{ij}(I_U)_{ij}{}^{kl}\omega_{kl}=\frac{1}{8}\omega^{ij}U_{i}{}^aU_j{}^bI_{ab}{}^{cd}(U^T)_c{}^k(U^T)_d{}^l \omega_{kl}
+$$
+
 
 ## 运动方程
+李群上的Euler-Lagrange方程应该是什么样的?考虑$SO(n)$上的一条路径$U(t)$,给出作用量
+$$
+S[U(t)]=\int_{t_0}^{t_1}L(U(t),\frac{dU}{dt}(t))dt
+$$
+考虑变分$U(t)\to U(t)+\epsilon^{ij}(t)X_{ij}(U(t))=(I+\epsilon^{ij}(t) X_{ij})U(t)$,则角速度坐标有如下变换
+$$
+(\omega^{ij}+\delta \omega^{ij})X_{ij}(I+\epsilon^{kl}(t)X_{kl})U(t)=\frac{dU}{dt}+\frac{d}{dt}(\epsilon^{ij}(t)X_{ij}U(t))
+$$
+定义结构常数$[X_{ij},X_{kl}]=C_{ijkl}^{ab}X_{ab}$
+$$
+\implies \delta \omega^{ij}=\frac{d\epsilon^{ij}}{dt}(t)+\epsilon^{ab}(t)\omega^{kl}C_{abkl}^{ij}+O(\epsilon^2)
 
-根据Euler-Lagrange方程,我们应该有
+=\frac{d\epsilon^{ij}}{dt}(t)+\epsilon^{ab}(t)\omega^{kl}C_{abkl}^{ij}+O(\epsilon^2)
 $$
-\frac{d}{dt}\frac{\partial L}{\partial \omega}(U(t),\frac{dU}{dt}(t))=0
+代入原作用量变分
 $$
-求偏导可得$\frac{\partial L}{\partial \omega^{ij}}=I_{ijkl}\omega^{kl}\implies I_{ijkl}\frac{d\omega^{kl}}{dt}=0$.
-$$
-\frac{dU}{dt}(t)=\sum_{i,j}\omega_{ij}U(t)X_{ij}
-$$
-因此
-$$
-\omega^{ij}=\braket{U^{\dagger}\frac{dU}{dt},X_{ij}}
+\delta S[U(t),\epsilon^{ij}(t)]=\int_{t_0}^{t_1}[X_{ij}(L) \epsilon^{ij}(t)+\frac{\partial L}{\partial \omega^{ij}}\delta\omega^{ij}]dt
 $$
 $$
-I_{ijkl}[\braket{U^\dagger \frac{d^2 U}{dt^2},X_{ij}}]
+=\int_{t_0}^{t_1}[X_{ij}(L) \epsilon^{ij}(t)+\frac{\partial L}{\partial \omega^{ij}}(\frac{d\epsilon^{ij}}{dt}+\epsilon^{ab}\omega^{kl}C_{abkl}^{ij})]dt=0
 $$
+标准的分部积分将$\frac{d\epsilon^{ij}}{dt}$转换为$\epsilon^{ij}$后给出
+$$
+\delta S=0\implies X_{ij}(L)=\frac{d}{dt}\frac{\partial L}{\partial \omega^{ij}}-\frac{\partial L}{\partial \omega^{ab}}\omega^{kl}C_{ijkl}^{ab}
+$$
+其中$\omega^{ij}$由$\frac{dU}{dt}=\omega^{ij}X_{ij}U$给出.由定义,$X_{ij}(L)$应该由类似以下项给出
+$$
+(X_{ij})_p{}^r=\delta_{ip}\delta_j^r-\delta_{jp}\delta_i^r
+$$
+$$
+X_{ij}(U_p{}^a)=\delta_{ip}U_j{}^a-\delta_{jp}U_i{}^a,\qquad
+X_{ij}((U^T)_c{}^s)=\delta_{is}(U^T)_c{}^j-\delta_{js}(U^T)_c{}^i
+$$
+$$
+X_{ij}(I_U)_{pq}{}^{st}
+=\delta_{ip}(I_U)_{jq}{}^{st}-\delta_{jp}(I_U)_{iq}{}^{st}
++\delta_{iq}(I_U)_{pj}{}^{st}-\delta_{jq}(I_U)_{pi}{}^{st}
+\\
++\delta_{is}(I_U)_{pq}{}^{jt}-\delta_{js}(I_U)_{pq}{}^{it}
++\delta_{it}(I_U)_{pq}{}^{sj}-\delta_{jt}(I_U)_{pq}{}^{si}
+$$
+$$
+X_{ij}(L)=\frac18\omega^{pq}\omega_{st}X_{ij}(I_U)_{pq}{}^{st}
+$$
+定义角动量$J$:
+$$
+J_{pq}:=(I_U)_{pq}{}^{st}\omega_{st},\qquad
+J^{st}:=\omega^{pq}(I_U)_{pq}{}^{st}
+$$
+我们分别计算$X_{ij}(L)$的第一行和第二行:
+$$
+X_{ij}(L)_1
+=\frac18\omega^{pq}\omega_{st}\left[
+\delta_{ip}(I_U)_{jq}{}^{st}-\delta_{jp}(I_U)_{iq}{}^{st}
++\delta_{iq}(I_U)_{pj}{}^{st}-\delta_{jq}(I_U)_{pi}{}^{st}
+\right] \\
+=\frac18\left[
+\omega^{iq}J_{jq}-\omega^{jq}J_{iq}+\omega^{pi}J_{pj}-\omega^{pj}J_{pi}
+\right] =\frac14\left[
+\omega^{iq}J_{jq}-\omega^{jq}J_{iq}
+\right]
+
+$$
+$$
+\implies X_{ij}(L)_2
+=\frac18\omega^{pq}\omega_{st}\left[
+\delta_{is}(I_U)_{pq}{}^{jt}-\delta_{js}(I_U)_{pq}{}^{it}
++\delta_{it}(I_U)_{pq}{}^{sj}-\delta_{jt}(I_U)_{pq}{}^{si}
+\right] \\
+=\frac18\left[
+\omega_{it}J^{jt}-\omega_{jt}J^{it}+\omega_{si}J^{sj}-\omega_{sj}J^{si}
+\right] 
+=\frac14\left[
+\omega^{iq}J_{jq}-\omega^{jq}J_{iq}
+\right]
+
+$$
+$$
+X_{ij}(L)=\frac12\left[
+\omega^{iq}J_{jq}-\omega^{jq}J_{iq}
+\right]
+$$
+Euler-Lagrange方程右式第二项代入对易结果$[X_{ij},X_{kl}]=\delta_{jk}X_{il}-\delta_{jl}X_{ik}+\delta_{ik}X_{lj}+\delta_{il}X_{jk}$
+
+$$
+C_{ijkl}^{ab}
+=\frac12\left[
+\delta_{jk}\delta_{il}^{ab}
+-\delta_{jl}\delta_{ik}^{ab}
++\delta_{ik}\delta_{lj}^{ab}
++\delta_{il}\delta_{jk}^{ab}
+\right],
+\qquad
+\delta_{mn}^{ab}:=\delta_m^a\delta_n^b-\delta_n^a\delta_m^b
+$$
+代入可得
+$$
+\frac{\partial L}{\partial\omega^{ab}}=\frac14J_{ab}
+,
+J_{ab}\delta_{mn}^{ab}=2J_{mn}
+\implies 
+J_{ab}C_{ijkl}^{ab}
+=\delta_{jk}J_{il}-\delta_{jl}J_{ik}
++\delta_{ik}J_{lj}+\delta_{il}J_{jk}
+$$
+$$
+
+\frac{\partial L}{\partial\omega^{ab}}\omega^{kl}C_{ijkl}^{ab}
+=\frac14J_{ab}\omega^{kl}C_{ijkl}^{ab} 
+=\frac14\omega^{kl}\left[
+\delta_{jk}J_{il}-\delta_{jl}J_{ik}
++\delta_{ik}J_{lj}+\delta_{il}J_{jk}
+\right] \\
+=\frac14\left[
+\omega^{jl}J_{il}-\omega^{kj}J_{ik}
++\omega^{il}J_{lj}+\omega^{ki}J_{jk}
+\right] =\frac12\left[
+\omega^{jq}J_{iq}-\omega^{iq}J_{jq}
+\right]
+
+$$
+$$
+\implies X_{ij}(L)=-\frac{\partial L}{\partial\omega^{ab}}\omega^{kl}C_{ijkl}^{ab}
+$$
+因此原Euler-Lagrange方程简化为
+$$
+\frac{d}{dt}\frac{\partial L}{\partial \omega^{ij}}=0\implies \frac{d}{dt}J_{ij}=0
+$$
+也即角动量守恒.
