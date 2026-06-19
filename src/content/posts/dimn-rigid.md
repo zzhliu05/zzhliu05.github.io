@@ -34,6 +34,7 @@ $$
 L=\int dm \frac{v^Tv}{2}=-\int \frac{dm}{2}\sum_{j>i,l>k}\omega_{ij}\omega_{kl} x^TU^TX_{kl}X_{ij}Ux
 $$
 $$=-\int \frac{dm}{2}\sum_{j>i,l>k}\omega_{ij}\omega_{kl}(\delta_{il}x^a (U^T)_a{}^k U_j{}^b x_b-\delta_{ik}x^a (U^T)_a{}^l U_j{}^b x_b-\\ \delta_{jl}x^a (U^T)_a{}^k U_i{}^b x_b+\delta_{jk}x^a (U^T)_a{}^l U_i{}^b x_b)$$
+
 定义转动惯量张量(从这里开始我们开始区分协变/逆变(下/上)指标,并且开始采用爱因斯坦求和约定)
 $$
 I_{ij}{}^{kl}=\int dm(\delta_i^{k} x^lx_j+\delta_j^{l}x^kx_i-\delta_i^{l}x^kx_j-\delta_j^{k}x^lx_i)
@@ -53,26 +54,24 @@ $$
 $$
 S[U(t)]=\int_{t_0}^{t_1}L(U(t),\frac{dU}{dt}(t))dt
 $$
-考虑变分$U(t)\to U(t)+\epsilon^{ij}(t)X_{ij}(U(t))=(I+\epsilon^{ij}(t) X_{ij})U(t)$,则角速度坐标有如下变换
+考虑变分$U(t)\to U(t)+\frac{1}{2}\epsilon^{ij}(t)X_{ij}(U(t))=(I+\frac12\epsilon^{ij}(t) X_{ij})U(t)$,则角速度坐标有如下变换
 $$
-(\omega^{ij}+\delta \omega^{ij})X_{ij}(I+\epsilon^{kl}(t)X_{kl})U(t)=\frac{dU}{dt}+\frac{d}{dt}(\epsilon^{ij}(t)X_{ij}U(t))
+\frac{1}{2}(\omega^{ij}+\delta \omega^{ij})X_{ij}(I+\frac{1}{2}\epsilon^{kl}(t)X_{kl})U(t)=\frac{dU}{dt}+\frac{d}{dt}(\frac{1}{2}\epsilon^{ij}(t)X_{ij}U(t))
 $$
 定义结构常数$[X_{ij},X_{kl}]=C_{ijkl}^{ab}X_{ab}$
 $$
-\implies \delta \omega^{ij}=\frac{d\epsilon^{ij}}{dt}(t)+\epsilon^{ab}(t)\omega^{kl}C_{abkl}^{ij}+O(\epsilon^2)
-
-=\frac{d\epsilon^{ij}}{dt}(t)+\epsilon^{ab}(t)\omega^{kl}C_{abkl}^{ij}+O(\epsilon^2)
+\implies \delta \omega^{ij}=\frac{d\epsilon^{ij}}{dt}(t)+\frac{1}{2}\epsilon^{ab}(t)\omega^{kl}C_{abkl}^{ij}+O(\epsilon^2)
 $$
 代入原作用量变分
 $$
 \delta S[U(t),\epsilon^{ij}(t)]=\int_{t_0}^{t_1}[X_{ij}(L) \epsilon^{ij}(t)+\frac{\partial L}{\partial \omega^{ij}}\delta\omega^{ij}]dt
 $$
 $$
-=\int_{t_0}^{t_1}[X_{ij}(L) \epsilon^{ij}(t)+\frac{\partial L}{\partial \omega^{ij}}(\frac{d\epsilon^{ij}}{dt}+\epsilon^{ab}\omega^{kl}C_{abkl}^{ij})]dt=0
+=\int_{t_0}^{t_1}\left[X_{ij}(L) \epsilon^{ij}(t)+\frac{\partial L}{\partial \omega^{ij}}\left(\frac{d\epsilon^{ij}}{dt}+\frac{1}{2}\epsilon^{ab}\omega^{kl}C_{abkl}^{ij}\right)\right]dt=0
 $$
 标准的分部积分将$\frac{d\epsilon^{ij}}{dt}$转换为$\epsilon^{ij}$后给出
 $$
-\delta S=0\implies X_{ij}(L)=\frac{d}{dt}\frac{\partial L}{\partial \omega^{ij}}-\frac{\partial L}{\partial \omega^{ab}}\omega^{kl}C_{ijkl}^{ab}
+\delta S=0\implies X_{ij}(L)=\frac{d}{dt}\frac{\partial L}{\partial \omega^{ij}}-\frac{1}{2}\frac{\partial L}{\partial \omega^{ab}}\omega^{kl}C_{ijkl}^{ab}
 $$
 其中$\omega^{ij}$由$\frac{dU}{dt}=\omega^{ij}X_{ij}U$给出.由定义,$X_{ij}(L)$应该由类似以下项给出
 $$
@@ -135,18 +134,16 @@ Euler-Lagrange方程右式第二项代入对易结果$[X_{ij},X_{kl}]=\delta_{jk
 
 $$
 C_{ijkl}^{ab}
-=\frac12\left[
-\delta_{jk}\delta_{il}^{ab}
+=\frac{1}{2}[\delta_{jk}\delta_{il}^{ab}
 -\delta_{jl}\delta_{ik}^{ab}
 +\delta_{ik}\delta_{lj}^{ab}
-+\delta_{il}\delta_{jk}^{ab}
-\right],
++\delta_{il}\delta_{jk}^{ab}],
 \qquad
 \delta_{mn}^{ab}:=\delta_m^a\delta_n^b-\delta_n^a\delta_m^b
 $$
 代入可得
 $$
-\frac{\partial L}{\partial\omega^{ab}}=\frac14J_{ab}
+\frac{\partial L}{\partial\omega^{ab}}=\frac12J_{ab}
 ,
 J_{ab}\delta_{mn}^{ab}=2J_{mn}
 \implies 
@@ -156,12 +153,13 @@ J_{ab}C_{ijkl}^{ab}
 $$
 $$
 
-\frac{\partial L}{\partial\omega^{ab}}\omega^{kl}C_{ijkl}^{ab}
+\frac{1}{2}\frac{\partial L}{\partial\omega^{ab}}\omega^{kl}C_{ijkl}^{ab}
 =\frac14J_{ab}\omega^{kl}C_{ijkl}^{ab} 
 =\frac14\omega^{kl}\left[
 \delta_{jk}J_{il}-\delta_{jl}J_{ik}
 +\delta_{ik}J_{lj}+\delta_{il}J_{jk}
-\right] \\
+\right]
+ \\
 =\frac14\left[
 \omega^{jl}J_{il}-\omega^{kj}J_{ik}
 +\omega^{il}J_{lj}+\omega^{ki}J_{jk}
@@ -171,10 +169,31 @@ $$
 
 $$
 $$
-\implies X_{ij}(L)=-\frac{\partial L}{\partial\omega^{ab}}\omega^{kl}C_{ijkl}^{ab}
+\implies X_{ij}(L)=-\frac12\frac{\partial L}{\partial\omega^{ab}}\omega^{kl}C_{ijkl}^{ab}
 $$
 因此原Euler-Lagrange方程简化为
 $$
 \frac{d}{dt}\frac{\partial L}{\partial \omega^{ij}}=0\implies \frac{d}{dt}J_{ij}=0
 $$
-也即角动量守恒.
+也即角动量守恒.具体展开上式
+$$
+\frac{d}{dt}J_{ij}=\frac{d(I_U)_{ij}{}^{kl}}{dt}\omega_{kl}+(I_U)_{ij}{}^{kl}\frac{d\omega_{kl}}{dt}
+$$
+$$
+=(I_U)_{ij}{}^{kl}\frac{d\omega_{kl}}{dt}+\frac{dU}{dt}_i{}^p(U^T)_p{}^q(I_U)_{qj}{}^{kl}\omega_{kl}+\frac{dU}{dt}_j{}^p(U^T)_p{}^q(I_U)_{iq}{}^{kl}\omega_{kl}
+$$
+$$
++(I_U)_{ij}{}^{pl}U_p{}^q\frac{dU^T}{dt}_q{}^k\omega_{kl}+(I_U)_{ij}{}^{kp}U_p{}^q\frac{dU^T}{dt}_q{}^l\omega_{kl}
+$$
+代入$\frac{dU}{dt}_i{}^j=\frac{1}{2}\omega^{kl}(X_{kl}U)_{i}{}^j=\frac{1}{2}\omega^{kl}(\delta_{ik}U_{l}{}^j-\delta_{il}U_{k}{}^j)$可得
+$$
+\frac{d}{dt}J_{ij}=(I_U)_{ij}{}^{kl}\frac{d\omega_{kl}}{dt}+[\omega_i{}^tJ_{tj}+\omega_j{}^tJ_{it}-(I_U)_{ij}{}^{kl}\omega_{k}{}^p\omega_{pl}-(I_U)_{ij}{}^{kl}\omega_{l}{}^p\omega_{kp}]
+$$
+注意$\omega_{k}{}^p\omega_{pl}$是关于$k,l$的对称张量,因此与$(I_U)_{ij}{}^{kl}$缩并为$0$.因此
+$$
+(I_U)_{ij}{}^{kl}\omega_{k}{}^p\omega_{pl}+(I_U)_{ij}{}^{kl}\omega_{l}{}^p\omega_{kp}=0
+$$
+$$
+\implies (I_U)_{ij}{}^{kl}\frac{d\omega_{kl}}{dt}+\omega_i{}^kJ_{kj}+\omega_j{}^kJ_{ik}=0
+$$
+此即刚体的Euler运动方程.
