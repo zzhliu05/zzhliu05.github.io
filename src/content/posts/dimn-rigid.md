@@ -1,5 +1,5 @@
 ---
-title: "n维刚体的动力学"
+title: "n维刚体的Euler动力学方程"
 description: "对n维刚体的运动学描述."
 published: 2026-06-17
 tags: ["理论力学","刚体","李群"]
