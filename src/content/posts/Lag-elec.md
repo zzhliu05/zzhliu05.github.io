@@ -2,7 +2,7 @@
 title: "运动电荷的相对论性修正"
 description: "对运动电荷组Lagrangian的微扰展开计算."
 published: 2026-06-16
-tags: ["电动力学"]
+tags: ["电动力学","狭义相对论"]
 category: "电动力学"
 draft: false
 ---

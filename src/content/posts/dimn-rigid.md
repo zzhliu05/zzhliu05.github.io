@@ -34,7 +34,9 @@ $$
 $$
 L=\int dm \frac{v^Tv}{2}=-\int \frac{dm}{2}\sum_{j>i,l>k}\omega_{ij}\omega_{kl} x^TU^TX_{kl}X_{ij}Ux
 $$
-$$=-\int \frac{dm}{2}\sum_{j>i,l>k}\omega_{ij}\omega_{kl}(\delta_{il}x^a (U^T)_a{}^k U_j{}^b x_b-\delta_{ik}x^a (U^T)_a{}^l U_j{}^b x_b-\\ \delta_{jl}x^a (U^T)_a{}^k U_i{}^b x_b+\delta_{jk}x^a (U^T)_a{}^l U_i{}^b x_b)$$
+
+$$=-\int \frac{dm}{2}\sum_{j>i,l>k}\omega_{ij}\omega_{kl}(\delta_{il}x^a (U^T)_a{}^k U_j{}^b x_b-\delta_{ik}x^a (U^T)_a{}^l U_j{}^b x_b-\\ \delta_{jl}x^a (U^T)_a{}^k U_i{}^b x_b+\delta_{jk}x^a (U^T)_a{}^l U_i{}^b x_b)
+$$
 
 定义转动惯量张量(从这里开始我们开始区分协变/逆变(下/上)指标,并且开始采用爱因斯坦求和约定)
 $$

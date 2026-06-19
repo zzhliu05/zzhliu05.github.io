@@ -15,10 +15,10 @@ export const LOCAL_PLAYLIST: Song[] = [
 	},
 	{
 		id: 2,
-		title: "ひとり上手",
-		artist: "Kaya",
-		cover: "assets/music/cover/hitori.webp",
-		url: "assets/music/url/hitori.mp3",
+		title: "桜流し",
+		artist: "宇多田ヒカル ",
+		cover: "assets/music/cover/109951163081242244.webp",
+		url: "assets/music/url/宇多田ヒカル - 桜流し.mp3",
 		duration: 240,
 	},
 	{
