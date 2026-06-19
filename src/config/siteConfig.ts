@@ -23,7 +23,7 @@ export const siteConfig: SiteConfig = {
 		friends: false,
 		projects: false,
 		skills: false,
-		timeline: false,
+		timeline: true,
 		albums: false,
 		devices: false,
 	},
