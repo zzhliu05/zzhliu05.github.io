@@ -7,10 +7,10 @@ export const DEFAULT_VOLUME = 0.7;
 export const LOCAL_PLAYLIST: Song[] = [
 	{
 		id: 1,
-		title: "口笛で愛は歌えない",
-		artist: "Dazbee",
-		cover: "assets/music/cover/dazbee.webp",
-		url: "assets/music/url/dazbee.mp3",
+		title: "Rachmaninoff Piano Concerto No. 2 in C minor, Op. 18 - I. Moderato",
+		artist: "Sviatoslav Richter",
+		cover: "assets/music/cover/Rachmaninov Piano Concerto No  2  Tchaikovsky Piano Concerto No  1.webp",
+		url: "assets/music/url/01 - Sergey Vassilievich Rachmaninoff Piano Concerto No. 2 in C minor, Op. 18 - I. Moderato.mp3",
 		duration: 0,
 	},
 	{
