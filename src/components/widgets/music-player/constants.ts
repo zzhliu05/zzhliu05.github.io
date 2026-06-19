@@ -18,7 +18,23 @@ export const LOCAL_PLAYLIST: Song[] = [
 		duration: 0,
 	},
 	{
+		id: 2,
+		title: "Piano Concerto No.2 In C Minor, Op.18_2. Adagio sostenuto",
+		artist: "郎朗",
+		cover: "assets/music/cover/109951165687113588.webp",
+		url: "assets/music/url/Piano Concerto No.2 In C Minor, Op.18_2. Adagio sostenuto - 郎朗.mp3",
+		duration: 0,
+	},
+	{
 		id: 3,
+		title: "Piano Concerto No.3 in D minor, Op.30_2. Intermezzo",
+		artist: "Vladimir Ashkenazy",
+		cover: "assets/music/cover/109951165228115888.webp",
+		url: "assets/music/url/Piano Concerto No.3 in D minor, Op.30_2. Intermezzo - Vladimir Ashkenazy.mp3",
+		duration: 0,
+	},
+	{
+		id: 4,
 		title: "初恋 (2022 Remastering)",
 		artist: "宇多田ヒカル",
 		cover: "assets/music/cover/109951168210315828.webp",
@@ -26,7 +42,7 @@ export const LOCAL_PLAYLIST: Song[] = [
 		duration: 0,
 	},
 	{
-		id: 4,
+		id: 5,
 		title: "桜流し",
 		artist: "宇多田ヒカル",
 		cover: UTADA_COVER,
