@@ -69,7 +69,7 @@ $$
 其中$(x_1,x_2,x_3)\in S^2$决定了纤维基点.$\varphi\in [0,2\pi)$是纤维参数.
 
 以下Mathematica代码绘制了两个不同基点上的纤维在球极投影坐标系的形状.
-```ts
+```mathematica
 gamma[x_, \[Phi]_] := {Cos[\[Phi]] x[[1]] - Sin[\[Phi]] x[[2]], 
 Sin[\[Phi]] x[[1]] + Cos[\[Phi]] x[[2]], Cos[\[Phi]] x[[3]]}/(1 - Sin[\[Phi]] x[[3]]);
 

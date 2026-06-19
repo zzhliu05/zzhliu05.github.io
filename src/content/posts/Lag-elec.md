@@ -105,7 +105,7 @@ $$
 
 ## 数值模拟
 由于这是一个常微分方程,我们可以尝试用RK4模拟一下.取$q_1q_2<0$的双星系统,设置双星初始速度$v_0=\frac{c}{4}$,结果如下
-```js
+```py
 import numpy as np
 import matplotlib.pyplot as plt
 ke = 1.0        

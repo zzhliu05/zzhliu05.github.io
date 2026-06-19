@@ -8,6 +8,11 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Diary,
 		LinkPreset.Timeline,
 		{
+			name: "音乐",
+			url: "/music/",
+			icon: "material-symbols:library-music-outline-rounded",
+		},
+		{
 			name: "GitHub",
 			url: "https://github.com/zzhliu05",
 			external: true,
