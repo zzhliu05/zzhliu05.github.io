@@ -1,6 +1,6 @@
 ---
 title: "李代数的线性表示(一)"
-description: "简单介绍李代数的定义与几类典型复李代数"
+description: "简单介绍李代数的定义与几类典型李代数."
 published: 2026-06-19
 tags: ["李代数","李群","表示论"]
 category: "李代数"
@@ -93,7 +93,7 @@ $$
 $$
 ad([a,b])(c)=[[a,b],c]=[[a,c],b]+[[c,b],a]
 \\
-=[a,[b,c]]-[b,[a,c]]=\mathrm{ad}(a)\circ \mathrm{ad}(b)(c)-\mathrm{ad}(a)\circ \mathrm{ad}(b)(c)
+=[a,[b,c]]-[b,[a,c]]\\=\mathrm{ad}(a)\circ \mathrm{ad}(b)(c)-\mathrm{ad}(a)\circ \mathrm{ad}(b)(c)
 $$
 因此$ad([a,b])=[ad(a),ad(b)]$,证毕.
 
@@ -108,7 +108,7 @@ $$
 $$
 0=\frac{d}{dt}I=\frac{d}{dt}(\mathrm{exp}(tA^T)\mathrm{exp}(tA))|_{t=0}=A^T+A
 $$
-因此$A反对称.反过来可以说明若$A$反对称,$\mathrm{exp}(tA)\in O_n(k)$.因此$O(n)$的李代数$\mathfrak{o}(n)$为反对称矩阵全体,维数为$\frac{n(n-1)}{2}$.
+因此$A$反对称.反过来可以说明若$A$反对称,$\mathrm{exp}(tA)\in O_n(k)$.因此$O(n)$的李代数$\mathfrak{o}(n)$为反对称矩阵全体,维数为$\frac{n(n-1)}{2}$.
 
 ### 辛群
 辛群$Sp(2n)$的定义为
@@ -130,7 +130,7 @@ $$
 $$
 \{U\in GL_n(\mathbb{C})|U^\dagger U=I\}
 $$
-同理可得$\mathfrak{u}(n)$为anti Hermitian矩阵全体.如果考虑$SU(n)=U(n)\cap SL_n(\mathbb{C})$,则$\mathfrak{su}(n)$为$0$迹anti Hermitian矩阵全体.分别有
+同理可得$\mathfrak{u}(n)$为anti Hermitian矩阵全体.如果考虑$SU(n)=U(n)\cap SL_n(\mathbb{C})$,则$\mathfrak{su}(n)$为$0$迹anti Hermitian矩阵$A^\dagger+A=0$全体.分别有
 $$
 \mathrm{dim}_{\mathbb{R}}\mathfrak{u}(n)=n^2,\mathrm{dim}\mathfrak{su}(n)=n^2-1
 $$
