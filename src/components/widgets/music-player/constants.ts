@@ -49,6 +49,14 @@ export const LOCAL_PLAYLIST: Song[] = [
 		url: "assets/music/url/宇多田ヒカル - 桜流し.mp3",
 		duration: 0,
 	},
+	{
+		id: 6,
+		title: "将死之时掩以水门汀",
+		artist: "缺省",
+		cover: "assets/music/cover/nebula.jpg",
+		url: "assets/music/url/将死之时掩以水门汀 - 缺省.mp3",
+		duration: 0,
+	},
 
 ];
 
