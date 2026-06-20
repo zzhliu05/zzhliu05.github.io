@@ -107,14 +107,8 @@ export const siteConfig: SiteConfig = {
 	banner: {
 		// 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播
 		src: {
-			desktop: [
-				"/assets/banner/banner-1920.webp",
-				"/assets/banner/banner2-1920.webp",
-			],
-			mobile: [
-				"/assets/banner/banner-768.webp",
-				"/assets/banner/banner2-768.webp",
-			],
+			desktop: ["/banner.jpg", "/banner2.jpg"],
+			mobile: ["/banner.jpg", "/banner2.jpg"],
 		}, // 使用本地横幅图片
 
 		position: "center", // 等同于 object-position，仅支持 'top', 'center', 'bottom'。默认为 'center'

@@ -91,25 +91,6 @@ const responsiveProps = {
 	...(sizes && { sizes }),
 	...(quality && { quality }),
 };
-
-function getPublicVariantSrc(publicSrc: string, width: number): string | null {
-	const match = publicSrc.match(/^(.*)-\d+(\.[a-zA-Z0-9]+(?:\?.*)?)$/);
-	if (!match) {
-		return null;
-	}
-	return `${match[1]}-${width}${match[2]}`;
-}
-
-const publicSrcset =
-	isPublic && widths?.length
-		? widths
-				.map((width) => {
-					const variantSrc = getPublicVariantSrc(src, width);
-					return variantSrc ? `${url(variantSrc)} ${width}w` : "";
-				})
-				.filter(Boolean)
-				.join(", ")
-		: undefined;
 ---
 
 <div id={id} class:list={[className, "overflow-hidden relative"]}>
@@ -149,8 +130,6 @@ const publicSrcset =
 		!isLocal && (
 			<img
 				src={isPublic ? url(src) : src}
-				srcset={publicSrcset}
-				sizes={publicSrcset ? sizes : undefined}
 				alt={alt || ""}
 				class={imageClass}
 				style={imageStyle}
