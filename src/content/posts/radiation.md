@@ -101,3 +101,59 @@ $$
 $$
 p_x=\int dV\delta(x-(acos(\omega_0 (t+x\cdot e_r/c),asin(\omega_0 (t+x\cdot e_r/c),0))(-qvsin(\omega_0 (t+x\cdot r/c)))
 $$
+设$e_r=(sin\theta cos\phi,sin\theta sin\phi,cos\theta)$,则
+$$
+p_x=\frac{-qvsin(\omega_0 t_r)}{1-\frac{e_r\cdot v(t_r)}{c}},p_y=\frac{qvcos(\omega_0 t_r)}{1-\frac{e_r\cdot v(t_r)}{c}}
+$$
+$$
+e_r\cdot v(t_r)=-v sin\theta cos\phi sin(\omega_0 t_r)+sin\theta sin\phi cos(\omega_0 t_r)=vsin\theta sin(\omega_0 t_r-\phi)
+$$
+记$\beta=v/c$,则
+$$
+p(x^\prime,t)=\frac{qv}{1-\beta sin\theta sin(\phi-\omega_0 t_r)}\left[\begin{matrix}-sin(\omega_0 t_r)\\cos(\omega_0 t_r)\\
+0\end{matrix}\right]
+$$
+其中$t_r$由隐函数方程决定.我们尝试计算$t_r$关于时间的导数
+$$
+t_r=t+a\frac{sin\theta cos(\omega_0 t_r-\phi)}{c}\implies \frac{dt_r}{dt}=1-\frac{a\omega_0}{c}sin\theta sin(\omega_0 t_r-\phi)\frac{dt_r}{dt}
+$$
+所以
+$$
+\frac{dt_r}{dt}=\frac{1}{1-\beta sin\theta sin(\phi-\omega_0 t_r) }=\gamma
+$$
+$$
+\frac{dp}{dt}=-\gamma^2\omega_0\beta cos(\omega_0 t_r-\phi) p+\gamma^2 q\omega_0^2 a \left[\begin{matrix}cos(\omega_0 t_r)\\sin(\omega_0 t_r)\\
+0\end{matrix}\right]
+$$
+所以
+$$
+|\dot{p}|^2=\gamma^4\omega_0^4q^2a^2[1+\beta^2cos^2(\omega_0 t_r-\phi)]
+$$
+而
+$$
+e_r\cdot \dot{p}=\gamma^2\omega_0^2qa [sin\theta cos(\omega_0 t_r-\phi)-\beta sin\theta sin(\omega_0 t_r-\phi)]=\gamma\omega_0^2qasin\theta cos(\omega_0 t_r-\phi)
+$$
+因此
+$$
+|\dot{p}|^2-|e_r\cdot \dot{p}|^2=\gamma^2\omega_0^4 q^2a^2[\gamma^2(1+\beta^2 cos^2\psi)-sin^2\theta cos^2\psi]
+$$
+代入能流密度即得
+$$
+\left<\frac{dP}{d\Omega}\right>=\frac{\mu_0 q^2a^2\omega_0^4}{16\pi^2 c}[\braket{\gamma^4}+\beta^2\braket{\gamma^4cos^2\psi}-sin^2\theta\braket{\gamma^2 cos^2\psi}]
+$$
+对于非相对论性粒子$\beta\ll 1$,$\gamma\sim 1$,$t_r\sim t$,因此$\braket{cos\psi}=\frac12$
+$$
+\left<\frac{dP}{d\Omega}\right>=\frac{\mu_0 q^2a^2\omega_0^4}{32\pi^2 c}(1+cos^2\theta)
+$$
+积分可得
+$$
+\braket{P}=\int \left<\frac{dP}{d\Omega}\right>d\Omega=\frac{\mu_0 q^2a^2\omega_0^4}{6\pi c} 
+$$
+对于氢原子$E=-\frac{e^2}{8\pi \epsilon_0 a},\omega_0=(\frac{e^2}{4\pi \epsilon_0 m_e a^3})^{1/2}$,因此
+$$
+\left<\frac{dE}{dt}\right>=\frac{e^2}{8\pi \epsilon_0 a^2}\frac{da}{dt}=-\frac{e^2 a^2}{6\pi \epsilon_0 c^3}(\frac{e^2}{4\pi \epsilon_0 m_e a^3})^2
+\\
+\implies a^2 da=-\frac{e^4}{12\pi^2\epsilon_0^2m_e^2 c^3}dt\implies a=(a_0^3-\frac{e^4 t}{4\pi^2 \epsilon_0^2m_e^2 c^3})^{1/3}
+$$
+即电子最终会在$t\sim \frac{4\pi^2 \epsilon_0^2m_e^2 c^3a_0^3}{e^4}$后掉入原子核中,这说明经典图像是无法解释电子轨道的.
+

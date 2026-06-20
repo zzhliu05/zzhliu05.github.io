@@ -4,6 +4,7 @@ description: "简单介绍李代数的定义与几类典型李代数."
 published: 2026-06-19
 tags: ["李代数","李群","表示论"]
 category: "李代数"
+image: "/images/posts/lie-algebra-1.png"
 draft: false
 ---
 ## 李代数的定义
