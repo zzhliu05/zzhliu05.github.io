@@ -98,3 +98,39 @@ $$
 因此$ad([a,b])=[ad(a),ad(b)]$,证毕.
 
 ## 常见线性李代数
+
+### 正交群
+正交群$O(n)$的定义为
+$$
+\{R\in GL_n(\mathbb{R})|R^TR=I\}
+$$
+若$\mathrm{exp}(tA)\in O(n)$,则
+$$
+0=\frac{d}{dt}I=\frac{d}{dt}(\mathrm{exp}(tA^T)\mathrm{exp}(tA))|_{t=0}=A^T+A
+$$
+因此$A反对称.反过来可以说明若$A$反对称,$\mathrm{exp}(tA)\in O_n(k)$.因此$O(n)$的李代数$\mathfrak{o}(n)$为反对称矩阵全体,维数为$\frac{n(n-1)}{2}$.
+
+### 辛群
+辛群$Sp(2n)$的定义为
+$$
+\{S\in GL_n(\mathbb{R})|S^TJ_0 S=J_0\}
+$$
+其中$J_0=\left[\begin{matrix}0 & I \\ -I & 0\end{matrix}\right]$.同理可得$\mathrm{exp}(tA)\in Sp(2n)$当且仅当
+$$
+AJ_0+J_0A^T=0
+$$
+若记$A=\left[\begin{matrix}A_{11} & A_{12} \\ A_{21} & A_{22}\end{matrix}\right]$,则须满足
+$$
+A_{12}=A_{12}^T,A_{21}=A_{21}^T,A_{11}=-A_{22}^T
+$$
+因此$\mathrm{dim}\mathfrak{sp}(2n)=n^2+n+n^2=2n^2+n$.
+
+### 幺正群
+幺正群$U(n)$的定义为
+$$
+\{U\in GL_n(\mathbb{C})|U^\dagger U=I\}
+$$
+同理可得$\mathfrak{u}(n)$为anti Hermitian矩阵全体.如果考虑$SU(n)=U(n)\cap SL_n(\mathbb{C})$,则$\mathfrak{su}(n)$为$0$迹anti Hermitian矩阵全体.分别有
+$$
+\mathrm{dim}_{\mathbb{R}}\mathfrak{u}(n)=n^2,\mathrm{dim}\mathfrak{su}(n)=n^2-1
+$$
