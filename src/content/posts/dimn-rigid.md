@@ -4,7 +4,7 @@ description: "对n维刚体的运动学描述."
 published: 2026-06-17
 tags: ["理论力学","刚体","李群"]
 category: "理论力学"
-image: "/images/posts/dimn-rigid.jpg"
+image: "/images/posts/dimn-rigid.png"
 draft: false
 ---
 ## 刚体位形空间

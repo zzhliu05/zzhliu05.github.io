@@ -1,6 +1,6 @@
 ---
 title: "李代数的线性表示(一)"
-description: "简单介绍李代数的定义与几类典型李代数."
+description: "李代数的定义与几类典型李代数."
 published: 2026-06-19
 tags: ["李代数","李群","表示论"]
 category: "李代数"

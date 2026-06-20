@@ -44,6 +44,65 @@ const keywords = siteConfig.keywords;
 // Favicons
 const favicons: Favicon[] =
 	siteConfig.favicon.length > 0 ? siteConfig.favicon : defaultFavicons;
+
+function normalizeToArray(value?: string | string[]): string[] {
+	if (!value) {
+		return [];
+	}
+	return Array.isArray(value) ? value : [value];
+}
+
+function getBannerSources() {
+	const bannerSrc = siteConfig.banner.src;
+	if (
+		typeof bannerSrc === "object" &&
+		bannerSrc !== null &&
+		!Array.isArray(bannerSrc) &&
+		("desktop" in bannerSrc || "mobile" in bannerSrc)
+	) {
+		return {
+			desktop: normalizeToArray(bannerSrc.desktop || bannerSrc.mobile),
+			mobile: normalizeToArray(bannerSrc.mobile || bannerSrc.desktop),
+		};
+	}
+	const sources = normalizeToArray(bannerSrc as string | string[]);
+	return {
+		desktop: sources,
+		mobile: sources,
+	};
+}
+
+function getPublicVariantSrc(publicSrc: string, width: number): string | null {
+	const match = publicSrc.match(/^(.*)-\d+(\.[a-zA-Z0-9]+(?:\?.*)?)$/);
+	if (!match) {
+		return null;
+	}
+	return `${match[1]}-${width}${match[2]}`;
+}
+
+function getImageSrcset(
+	publicSrc: string,
+	widths: number[],
+): string | undefined {
+	const srcset = widths
+		.map((width) => {
+			const variantSrc = getPublicVariantSrc(publicSrc, width);
+			return variantSrc ? `${url(variantSrc)} ${width}w` : "";
+		})
+		.filter(Boolean)
+		.join(", ");
+	return srcset || undefined;
+}
+
+const bannerSources = getBannerSources();
+const firstDesktopBanner = bannerSources.desktop[0];
+const firstMobileBanner = bannerSources.mobile[0];
+const desktopBannerSrcset = firstDesktopBanner
+	? getImageSrcset(firstDesktopBanner, [1280, 1920, 2560])
+	: undefined;
+const mobileBannerSrcset = firstMobileBanner
+	? getImageSrcset(firstMobileBanner, [768, 1280, 1920])
+	: undefined;
 ---
 
 <!-- SEO Meta Tags -->
@@ -98,6 +157,33 @@ const favicons: Favicon[] =
 <!-- 字体在构建时通过 scripts/compress-fonts.js 处理并复制到 dist/ -->
 
 <!-- 预连接 Iconify API 以减少图标加载延迟 -->
+{
+	firstDesktopBanner && (
+		<link
+			rel="preload"
+			as="image"
+			href={url(firstDesktopBanner)}
+			imagesrcset={desktopBannerSrcset}
+			imagesizes="100vw"
+			fetchpriority="high"
+			media="(min-width: 768px)"
+		/>
+	)
+}
+{
+	firstMobileBanner && (
+		<link
+			rel="preload"
+			as="image"
+			href={url(firstMobileBanner)}
+			imagesrcset={mobileBannerSrcset}
+			imagesizes="100vw"
+			fetchpriority="high"
+			media="(max-width: 767px)"
+		/>
+	)
+}
+
 <link rel="preconnect" href="https://api.iconify.design" crossorigin />
 
 <!-- Set the theme before the page is rendered to avoid a flash -->
