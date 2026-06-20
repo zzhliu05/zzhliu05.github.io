@@ -90,7 +90,23 @@ $$
 \int j^i dV=-i\omega \int x^i\rho dV=-i\omega d^i
 $$
 其中$d$是电偶极矩.
-
+第二项我们可以做类似的操作.注意到
+$$
+j^ix^j=\partial_k(j^k x^jx^i)-j^jx^i-x^ix^j\partial_kj^k
+$$
+即对称项可以转化为电荷密度.考虑对称/反对称分解
+$$
+j^ix^j=\frac{1}{2}[(j^ix^j+j^jx^i)+(j^ix^j-j^jx^i)]
+$$
+其中第一项通过上式和Stokes定理转化为
+$$
+\frac{1}{2}\int (j^ix^j+j^jx^i)dV=\frac{1}{2}\int x^ix^j \partial_t \rho dV
+$$
+反对称部分为
+$$
+p^i=j^ix^je_j-j^jx^ie_j=j_j\delta^{ij}\delta^{kl}x_ke_l-j_j\delta^{jl}\delta^{ik}x_ke_l=\epsilon^{jkm}\epsilon^{ilm}j_j x_ke_l=(j\times x)\times e_r
+$$
+而磁偶极矩的定义便是$m=-x\times j$.综上
 ## 圆周运动的电子
 考虑一个带电荷$q$,做半径为$a$,频率为$\omega_0$的圆周运动的粒子.则
 $$
