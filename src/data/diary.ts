@@ -27,6 +27,13 @@ const diaryData: DiaryItem[] = [
 		date: "2026-06-17T23:55:00Z",
 		images: [],
 	},
+	{
+		id: 3,
+		content:
+			"Someone used to told me time is a flat circle.",
+		date: "2026-06-30T18:39:00Z",
+		images: [],
+	},
 ];
 
 // 获取日记列表（按时间倒序）
