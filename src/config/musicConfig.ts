@@ -2,8 +2,8 @@ import type { MusicPlayerConfig } from "../types/config";
 
 // 音乐播放器配置
 export const musicPlayerConfig: MusicPlayerConfig = {
-	enable: true,
-	showFloatingPlayer: true,
+	enable: false,
+	showFloatingPlayer: false,
 	floatingEntryMode: "fab",
 	mode: "local",
 	meting_api:

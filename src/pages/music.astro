@@ -1,6 +1,11 @@
 ---
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import MusicPage from "@components/features/music/MusicPage.svelte";
+import { siteConfig } from "../config";
+
+if (!siteConfig.featurePages.music) {
+	return Astro.redirect("/404/");
+}
 
 const title = "音乐";
 const subtitle = "一些最近反复播放的声音";
