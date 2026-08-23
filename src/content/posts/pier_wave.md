@@ -8,6 +8,14 @@ draft: false
 ---
 > 本文的出现纯粹是因为笔者看到了一个桥墩.
 
+下面是三段桥墩附近水波的视频记录:
+
+<div class="video-grid">
+  <video controls preload="metadata" playsinline src="/assets/videos/pier_wave/bridge-pier-wave-1.mp4" title="桥墩附近水波视频 1"></video>
+  <video controls preload="metadata" playsinline src="/assets/videos/pier_wave/bridge-pier-wave-2.mp4" title="桥墩附近水波视频 2"></video>
+  <video controls preload="metadata" playsinline src="/assets/videos/pier_wave/bridge-pier-wave-3.mp4" title="桥墩附近水波视频 3"></video>
+</div>
+
 我们首先回顾关于二维不可压缩浅水波的一般理论.定义水面高度函数为$H(x,y,t)=h_0+h(x,y,t)$.则单个面积微元内体积为$(h_0+h(x,y,t))dxdy$.假设流体只有平行于平面速度,并且速度随高度依赖可忽略,速度场为$\vec{u}(x,y,t)$.连续性方程给出
 $$
 \frac{\partial h}{\partial t}+\nabla ((h_0+h)\vec{u})=0

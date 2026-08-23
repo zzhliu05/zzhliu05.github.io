@@ -215,3 +215,19 @@
 :root:not(.dark) .custom-md spoiler {
   --_spoiler-mask: color-mix(in oklch, var(--primary) 55%, white 45%);
 }
+
+.custom-md .video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 0.875rem;
+  margin: 1.25rem 0;
+}
+
+.custom-md .video-grid video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 0.75rem;
+  border: 1px solid var(--line-divider);
+  background: #000;
+  object-fit: cover;
+}
