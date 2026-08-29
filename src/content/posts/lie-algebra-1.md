@@ -23,7 +23,7 @@ $$
 $$
 则称$\mathfrak{N}$是$\mathfrak{L}$的李子代数.记$[\mathfrak{N}_1,\mathfrak{N}_2]$为$[a,b],a\in \mathfrak{N}_1,b\in\mathfrak{N}_2$生成的线性子空间.
 
-(2):若$f:\mathfrak{L}_1\to \mathfrak{L}_2$为线性映射并且满足 
+(2):若$f:\mathfrak{L}_1\to \mathfrak{L}_2$为线性映射并且满足
 $$
 f([a,b])=[f(a),f(b)],\forall a,b\in \mathfrak{L}_1
 $$
@@ -135,3 +135,36 @@ $$
 $$
 \mathrm{dim}_{\mathbb{R}}\mathfrak{u}(n)=n^2,\mathrm{dim}\mathfrak{su}(n)=n^2-1
 $$
+
+## 命题拾遗
+
+### 命题1.3
+设$\mathfrak{L}$是李代数,$\mathfrak{N}\subset \mathfrak{L}$是李子代数,则
+$$
+N(\mathfrak{N}):=\{a\in \mathfrak{L}|\mathrm{ad}(a)(\mathfrak{N})\subset \mathfrak{N}\}
+$$
+则$N(\mathfrak{N})$是$\mathfrak{L}$的李子代数,并且$\mathfrak{N}$是$N(\mathfrak{N})$的理想.
+
+证明:若$a,b\in N(\mathfrak{N})$,则
+$$
+\forall c\in \mathfrak{N},\mathrm{ad}([a,b])(c)=\mathrm{ad}(a)\mathrm{ad}(b)(c)-\mathrm{ad}(a)\mathrm{ad}(b)(c)\in \mathfrak{N}
+$$
+这说明$[a,b]\in N(\mathfrak{N})$.也即$N(\mathfrak{N})$确实是李子代数.
+
+$\mathfrak{N}$为$N(\mathfrak{N})$的理想这件事由定义是显然的.
+
+### 命题1.4(李代数的直积)
+对于李代数$\mathfrak{L}_1$和$\mathfrak{L}_2$,定义其直积李代数$\mathfrak{L}_1\times \mathfrak{L}_2$为向量空间直积并且附带李代数结构
+$$
+[(a_1,a_2),(b_1,b_2)]=([a_1,b_1],[a_2,b_2])
+$$
+(1):这样定义的李代数确实是一个李代数.
+
+(2):若$\mathfrak{N}_1,\mathfrak{N}_2$分别为$\mathfrak{L}_1,\mathfrak{L}_2$的李子代数,则$\mathfrak{N}_1\times \mathfrak{N}_2$为$\mathfrak{L}_1\times \mathfrak{L}_2$的李子代数.
+
+(3):若$\mathfrak{N}_1,\mathfrak{N}_2$分别为$\mathfrak{L}_1,\mathfrak{L}_2$的理想,则$\mathfrak{N}_1\times \mathfrak{N}_2$也为$\mathfrak{L}_1\times \mathfrak{L}_2$的理想,并且
+$$
+(\mathfrak{L}_1\times \mathfrak{L}_2)/(\mathfrak{N}_1\times \mathfrak{N}_2)\cong (\mathfrak{L}_1/\mathfrak{N}_1)\times (\mathfrak{L}_2/\mathfrak{N}_2)
+$$
+
+证明:好像都有点显然...

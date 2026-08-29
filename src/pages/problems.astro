@@ -1,0 +1,388 @@
+---
+import { FilterTabs } from "@components/atoms/filter-tabs";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { Icon } from "astro-icon/components";
+
+import { siteConfig } from "../config";
+import {
+	getProblemNotes,
+	getProblemTags,
+	problemStatusMeta,
+} from "../data/problems";
+
+if (!siteConfig.featurePages.problems) {
+	return Astro.redirect("/404/");
+}
+
+const notes = getProblemNotes();
+const allTags = getProblemTags();
+
+const filterTabs = [
+	{
+		value: "all",
+		label: "全部",
+		icon: "material-symbols:apps",
+		count: notes.length,
+	},
+	...allTags.map((tag) => ({
+		value: tag,
+		label: tag,
+		count: notes.filter((note) => note.tags?.includes(tag)).length,
+	})),
+];
+
+const title = "随笔";
+const subtitle = "记录暂时还没有展开成文章的小问题";
+---
+
+<MainGridLayout title={title} description={subtitle}>
+	<script is:inline src="/js/filter-tabs-handler.js"></script>
+
+	<div
+		class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32"
+	>
+		<div class="card-base z-10 relative w-full overflow-hidden">
+			<div class="px-6 sm:px-9 py-6">
+				<div class="problems-hero">
+					<div class="min-w-0">
+						<h1>{title}</h1>
+						<p>{subtitle}</p>
+					</div>
+					<div class="problems-count" aria-label="随笔数量">
+						<span>{notes.length}</span>
+						<small>条记录</small>
+					</div>
+				</div>
+			</div>
+
+			<div class="px-6 sm:px-9 pt-2 pb-8">
+				{
+					notes.length > 0 && allTags.length > 0 && (
+						<div class="mb-7">
+							<FilterTabs tabs={filterTabs} dataAttr="tags" />
+						</div>
+					)
+				}
+
+				<div class="problem-list">
+					{
+						notes.map((note) => {
+							const status = problemStatusMeta[note.status];
+							return (
+								<article
+									class="problem-card"
+									data-tags={(note.tags ?? []).join(",")}
+								>
+									<header class="problem-card-header">
+										<div class="problem-meta">
+											<span class={`problem-status is-${note.status}`}>
+												<Icon name={status.icon} />
+												{status.label}
+											</span>
+											<time datetime={note.date}>{note.date}</time>
+										</div>
+										<h2>{note.title}</h2>
+									</header>
+
+									<div class="problem-section">
+										<div class="problem-section-title">
+											<Icon name="material-symbols:help-outline-rounded" />
+											问题
+										</div>
+										<p>{note.question}</p>
+									</div>
+
+									{
+										note.thought && (
+											<div class="problem-section muted">
+												<div class="problem-section-title">
+													<Icon name="material-symbols:tips-and-updates-outline-rounded" />
+													想法
+												</div>
+												<p>{note.thought}</p>
+											</div>
+										)
+									}
+
+									{
+										note.answer && (
+											<div class="problem-section answer">
+												<div class="problem-section-title">
+													<Icon name="material-symbols:task-alt-rounded" />
+													记录
+												</div>
+												<p>{note.answer}</p>
+											</div>
+										)
+									}
+
+									{
+										note.relatedPosts && note.relatedPosts.length > 0 && (
+											<div class="problem-related">
+												<Icon name="material-symbols:article-outline-rounded" />
+												{note.relatedPosts.map((post) => (
+													<a href={post.url}>{post.title}</a>
+												))}
+											</div>
+										)
+									}
+
+									{
+										note.tags && note.tags.length > 0 && (
+											<div class="problem-tags">
+												{note.tags.map((tag) => (
+													<span>{tag}</span>
+												))}
+											</div>
+										)
+									}
+								</article>
+							);
+						})
+					}
+				</div>
+
+				<div id="no-results" class="hidden text-center py-16">
+					<Icon
+						name="material-symbols:lightbulb-outline-rounded"
+						class="text-6xl text-black/15 dark:text-white/15 mb-4"
+					/>
+					<p class="text-black/40 dark:text-white/40 text-lg">
+						没有匹配的随笔
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</MainGridLayout>
+
+<style>
+	.problems-hero {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		border-radius: 1rem;
+		border: 1px solid color-mix(in oklab, var(--primary) 18%, transparent);
+		background:
+			linear-gradient(
+				135deg,
+				color-mix(in oklab, var(--primary) 14%, transparent),
+				color-mix(in oklab, var(--primary) 4%, transparent)
+			),
+			var(--card-bg);
+		padding: 1.35rem 1.5rem;
+	}
+
+	.problems-hero h1 {
+		margin: 0 0 0.25rem;
+		color: var(--text-90);
+		font-size: 1.75rem;
+		font-weight: 700;
+		line-height: 1.2;
+	}
+
+	.problems-hero p {
+		margin: 0;
+		color: var(--text-50);
+		font-size: 0.95rem;
+		line-height: 1.7;
+	}
+
+	.problems-count {
+		display: grid;
+		place-items: center;
+		min-width: 4.75rem;
+		border-left: 1px solid var(--line-divider);
+		padding-left: 1.25rem;
+		color: var(--text-75);
+	}
+
+	.problems-count span {
+		color: var(--primary);
+		font-size: 1.75rem;
+		font-weight: 700;
+		line-height: 1;
+	}
+
+	.problems-count small {
+		margin-top: 0.35rem;
+		color: var(--text-50);
+		font-size: 0.78rem;
+	}
+
+	.problem-list {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.problem-card {
+		border: 1px solid var(--line-divider);
+		border-radius: 1rem;
+		background: color-mix(in oklab, var(--card-bg) 94%, transparent);
+		padding: 1.2rem 1.25rem;
+		transition:
+			transform 0.2s ease,
+			border-color 0.2s ease,
+			box-shadow 0.2s ease;
+	}
+
+	.problem-card:hover {
+		transform: translateY(-2px);
+		border-color: color-mix(in oklab, var(--primary) 35%, var(--line-divider));
+		box-shadow: 0 12px 30px color-mix(in oklab, var(--primary) 10%, transparent);
+	}
+
+	.problem-card-header {
+		margin-bottom: 1rem;
+	}
+
+	.problem-meta {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem;
+		margin-bottom: 0.6rem;
+		color: var(--text-50);
+		font-size: 0.8rem;
+	}
+
+	.problem-status {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		color: var(--primary);
+		font-weight: 600;
+	}
+
+	.problem-status :global(svg) {
+		width: 1rem;
+		height: 1rem;
+	}
+
+	.problem-status.is-resolved {
+		color: #1f9d62;
+	}
+
+	.problem-status.is-open {
+		color: var(--text-50);
+	}
+
+	.problem-card h2 {
+		margin: 0;
+		color: var(--text-90);
+		font-size: 1.18rem;
+		font-weight: 700;
+		line-height: 1.45;
+	}
+
+	.problem-section {
+		margin-top: 0.75rem;
+		border-left: 3px solid color-mix(in oklab, var(--primary) 55%, transparent);
+		padding-left: 0.9rem;
+	}
+
+	.problem-section.muted {
+		border-left-color: color-mix(in oklab, var(--text-50) 40%, transparent);
+	}
+
+	.problem-section.answer {
+		border-left-color: #1f9d62;
+	}
+
+	.problem-section-title {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		margin-bottom: 0.2rem;
+		color: var(--text-75);
+		font-size: 0.82rem;
+		font-weight: 700;
+	}
+
+	.problem-section-title :global(svg) {
+		width: 1rem;
+		height: 1rem;
+	}
+
+	.problem-section p {
+		margin: 0;
+		color: var(--text-75);
+		font-size: 0.95rem;
+		line-height: 1.8;
+	}
+
+	.problem-related {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.5rem;
+		margin-top: 1rem;
+		color: var(--text-50);
+		font-size: 0.86rem;
+	}
+
+	.problem-related :global(svg) {
+		width: 1rem;
+		height: 1rem;
+	}
+
+	.problem-related a {
+		color: var(--primary);
+		text-decoration: none;
+	}
+
+	.problem-related a:hover {
+		text-decoration: underline;
+	}
+
+	.problem-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.45rem;
+		margin-top: 1rem;
+	}
+
+	.problem-tags span {
+		border: 1px solid var(--line-divider);
+		border-radius: 999px;
+		background: var(--btn-regular-bg);
+		color: var(--text-50);
+		padding: 0.25rem 0.65rem;
+		font-size: 0.78rem;
+		line-height: 1.2;
+	}
+
+	@media (max-width: 640px) {
+		.problems-hero {
+			align-items: flex-start;
+			flex-direction: column;
+			padding: 1.1rem;
+		}
+
+		.problems-hero h1 {
+			font-size: 1.45rem;
+		}
+
+		.problems-count {
+			display: flex;
+			align-items: baseline;
+			gap: 0.45rem;
+			border-left: 0;
+			border-top: 1px solid var(--line-divider);
+			width: 100%;
+			padding-top: 0.8rem;
+			padding-left: 0;
+		}
+
+		.problem-card {
+			padding: 1rem;
+		}
+
+		.problem-meta {
+			align-items: flex-start;
+			flex-direction: column;
+			gap: 0.35rem;
+		}
+	}
+</style>

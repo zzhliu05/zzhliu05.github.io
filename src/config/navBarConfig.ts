@@ -6,6 +6,11 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Home,
 		LinkPreset.Archive,
 		{
+			name: "随笔",
+			url: "/problems/",
+			icon: "material-symbols:lightbulb-outline-rounded",
+		},
+		{
 			name: "GitHub",
 			url: "https://github.com/zzhliu05",
 			external: true,

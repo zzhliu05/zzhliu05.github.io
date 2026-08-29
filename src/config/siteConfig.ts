@@ -4,7 +4,7 @@ import type { SiteConfig } from "../types/config";
 const SITE_LANG = "zh_CN"; // 语言代码，例如：'en', 'zh_CN', 'ja' 等。
 
 export const siteConfig: SiteConfig = {
-	title: "Διονύσιος的博客",
+	title: "zzhliu05的博客",
 	subtitle: "",
 	siteURL: "https://zzhliu05.github.io/",
 	siteStartDate: "2026-05-27",
@@ -22,6 +22,7 @@ export const siteConfig: SiteConfig = {
 		diary: false,
 		friends: false,
 		music: false,
+		problems: true,
 		projects: false,
 		skills: false,
 		timeline: false,
@@ -34,7 +35,7 @@ export const siteConfig: SiteConfig = {
 		// 显示模式："text-icon" 显示图标+文本，"logo" 仅显示Logo
 		mode: "text-icon",
 		// 顶栏标题文本
-		text: "Διονύσιος",
+		text: "zzhliu05",
 		// 顶栏标题图标路径，默认使用 public/assets/home/home.webp
 		icon: "/ada.jpg",
 		// 网站Logo图片路径
@@ -141,17 +142,17 @@ export const siteConfig: SiteConfig = {
 			title: "ΔιονύσιοςのBlog",
 			switchable: true,
 
-			subtitle: [
-				"All those moments will be lost in time",
-				"like tears in rain.",
-			],
-			typewriter: {
-				enable: true,
+			//subtitle: [
+				//"All those moments will be lost in time",
+				//"like tears in rain.",
+			//],
+			//typewriter: {
+				//enable: true,
 
-				speed: 50, // 打字速度（毫秒）
-				deleteSpeed: 25, // 删除速度（毫秒）
-				pauseTime: 2000, // 完全显示后的暂停时间（毫秒）
-			},
+				//speed: 50, // 打字速度（毫秒）
+				//deleteSpeed: 25, // 删除速度（毫秒）
+				//pauseTime: 2000, // 完全显示后的暂停时间（毫秒）
+			//},
 		},
 
 		credit: {
