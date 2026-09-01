@@ -4,5 +4,5 @@ description: "证明洛伦兹群是全局线性的"
 published: 2026-07-18
 tags: ["微分几何","狭义相对论"]
 category: "微分几何"
-draft: false
+draft: true
 ---

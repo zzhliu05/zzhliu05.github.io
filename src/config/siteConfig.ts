@@ -139,19 +139,19 @@ export const siteConfig: SiteConfig = {
 
 		homeText: {
 			enable: true,
-			title: "ΔιονύσιοςのBlog",
+			title: "zzhliu05的Blog",
 			switchable: true,
 
 			//subtitle: [
-				//"All those moments will be lost in time",
-				//"like tears in rain.",
+			//"All those moments will be lost in time",
+			//"like tears in rain.",
 			//],
 			//typewriter: {
-				//enable: true,
+			//enable: true,
 
-				//speed: 50, // 打字速度（毫秒）
-				//deleteSpeed: 25, // 删除速度（毫秒）
-				//pauseTime: 2000, // 完全显示后的暂停时间（毫秒）
+			//speed: 50, // 打字速度（毫秒）
+			//deleteSpeed: 25, // 删除速度（毫秒）
+			//pauseTime: 2000, // 完全显示后的暂停时间（毫秒）
 			//},
 		},
 
