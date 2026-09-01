@@ -1,0 +1,200 @@
+---
+import { render } from "astro:content";
+import Markdown from "@components/misc/Markdown.astro";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { Icon } from "astro-icon/components";
+
+import {
+	getProblemNotes,
+	type ProblemEntry,
+	problemStatusMeta,
+} from "../../data/problems";
+import { formatDateToYYYYMMDD } from "../../utils/date-utils";
+
+export async function getStaticPaths() {
+	const notes = await getProblemNotes();
+
+	return notes.map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props as { entry: ProblemEntry };
+const { Content, headings } = await render(entry);
+const status = problemStatusMeta[entry.data.status];
+---
+
+<MainGridLayout
+	title={entry.data.title}
+	description={entry.data.description || entry.data.question}
+	headings={headings}
+>
+	<div
+		class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4"
+	>
+		<article class="card-base z-10 px-6 md:px-9 pt-6 pb-7 relative w-full">
+			<a href="/problems/" class="problem-back">
+				<Icon name="material-symbols:arrow-back-rounded" />
+				返回随笔
+			</a>
+
+			<header class="problem-header">
+				<div class="problem-meta">
+					<span class={`problem-status is-${entry.data.status}`}>
+						<Icon name={status.icon} />
+						{status.label}
+					</span>
+					<time datetime={formatDateToYYYYMMDD(entry.data.date)}>
+						{formatDateToYYYYMMDD(entry.data.date)}
+					</time>
+				</div>
+				<h1>{entry.data.title}</h1>
+				<p>{entry.data.question}</p>
+			</header>
+
+			{
+				entry.data.tags.length > 0 && (
+					<div class="problem-tags">
+						{entry.data.tags.map((tag) => (
+							<span>{tag}</span>
+						))}
+					</div>
+				)
+			}
+
+			<div class="border-[var(--line-divider)] border-dashed border-b-[1px] my-5" />
+
+			<Markdown class="markdown-content" data-pagefind-body>
+				<Content />
+			</Markdown>
+
+			{
+				entry.data.relatedPosts.length > 0 && (
+					<div class="problem-related">
+						<Icon name="material-symbols:article-outline-rounded" />
+						{entry.data.relatedPosts.map((post) => (
+							<a href={post.url}>{post.title}</a>
+						))}
+					</div>
+				)
+			}
+		</article>
+	</div>
+</MainGridLayout>
+
+<style>
+	.problem-back,
+	.problem-meta,
+	.problem-status,
+	.problem-related {
+		display: flex;
+		align-items: center;
+	}
+
+	.problem-back {
+		width: fit-content;
+		gap: 0.35rem;
+		margin-bottom: 1.25rem;
+		color: var(--text-50);
+		font-size: 0.88rem;
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+
+	.problem-back:hover {
+		color: var(--primary);
+	}
+
+	.problem-back :global(svg),
+	.problem-status :global(svg),
+	.problem-related :global(svg) {
+		width: 1rem;
+		height: 1rem;
+	}
+
+	.problem-header h1 {
+		margin: 0 0 0.8rem;
+		color: var(--text-90);
+		font-size: 2rem;
+		font-weight: 700;
+		line-height: 1.35;
+	}
+
+	.problem-header p {
+		margin: 0;
+		color: var(--text-75);
+		font-size: 1rem;
+		line-height: 1.85;
+	}
+
+	.problem-meta {
+		justify-content: space-between;
+		gap: 0.75rem;
+		margin-bottom: 0.8rem;
+		color: var(--text-50);
+		font-size: 0.84rem;
+	}
+
+	.problem-status {
+		gap: 0.35rem;
+		color: var(--primary);
+		font-weight: 600;
+	}
+
+	.problem-status.is-resolved {
+		color: #1f9d62;
+	}
+
+	.problem-status.is-open {
+		color: var(--text-50);
+	}
+
+	.problem-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.45rem;
+		margin-top: 1.2rem;
+	}
+
+	.problem-tags span {
+		border: 1px solid var(--line-divider);
+		border-radius: 999px;
+		background: var(--btn-regular-bg);
+		color: var(--text-50);
+		padding: 0.25rem 0.65rem;
+		font-size: 0.78rem;
+		line-height: 1.2;
+	}
+
+	.problem-related {
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-top: 1.5rem;
+		border-top: 1px dashed var(--line-divider);
+		padding-top: 1rem;
+		color: var(--text-50);
+		font-size: 0.88rem;
+	}
+
+	.problem-related a {
+		color: var(--primary);
+		text-decoration: none;
+	}
+
+	.problem-related a:hover {
+		text-decoration: underline;
+	}
+
+	@media (max-width: 640px) {
+		.problem-header h1 {
+			font-size: 1.55rem;
+		}
+
+		.problem-meta {
+			align-items: flex-start;
+			flex-direction: column;
+			gap: 0.35rem;
+		}
+	}
+</style>

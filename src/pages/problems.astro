@@ -14,8 +14,8 @@ if (!siteConfig.featurePages.problems) {
 	return Astro.redirect("/404/");
 }
 
-const notes = getProblemNotes();
-const allTags = getProblemTags();
+const notes = await getProblemNotes();
+const allTags = getProblemTags(notes);
 
 const filterTabs = [
 	{
@@ -27,7 +27,7 @@ const filterTabs = [
 	...allTags.map((tag) => ({
 		value: tag,
 		label: tag,
-		count: notes.filter((note) => note.tags?.includes(tag)).length,
+		count: notes.filter((note) => note.data.tags.includes(tag)).length,
 	})),
 ];
 
@@ -67,21 +67,25 @@ const subtitle = "记录暂时还没有展开成文章的小问题";
 				<div class="problem-list">
 					{
 						notes.map((note) => {
-							const status = problemStatusMeta[note.status];
+							const status = problemStatusMeta[note.data.status];
 							return (
 								<article
 									class="problem-card"
-									data-tags={(note.tags ?? []).join(",")}
+									data-tags={note.data.tags.join(",")}
 								>
 									<header class="problem-card-header">
 										<div class="problem-meta">
-											<span class={`problem-status is-${note.status}`}>
+											<span class={`problem-status is-${note.data.status}`}>
 												<Icon name={status.icon} />
 												{status.label}
 											</span>
-											<time datetime={note.date}>{note.date}</time>
+											<time datetime={note.data.date.toISOString()}>
+												{note.data.date.toLocaleDateString("zh-CN")}
+											</time>
 										</div>
-										<h2>{note.title}</h2>
+										<h2>
+											<a href={`/problems/${note.id}/`}>{note.data.title}</a>
+										</h2>
 									</header>
 
 									<div class="problem-section">
@@ -89,38 +93,26 @@ const subtitle = "记录暂时还没有展开成文章的小问题";
 											<Icon name="material-symbols:help-outline-rounded" />
 											问题
 										</div>
-										<p>{note.question}</p>
+										<p>{note.data.question}</p>
 									</div>
 
 									{
-										note.thought && (
+										note.data.description && (
 											<div class="problem-section muted">
 												<div class="problem-section-title">
 													<Icon name="material-symbols:tips-and-updates-outline-rounded" />
 													想法
 												</div>
-												<p>{note.thought}</p>
+												<p>{note.data.description}</p>
 											</div>
 										)
 									}
 
 									{
-										note.answer && (
-											<div class="problem-section answer">
-												<div class="problem-section-title">
-													<Icon name="material-symbols:task-alt-rounded" />
-													记录
-												</div>
-												<p>{note.answer}</p>
-											</div>
-										)
-									}
-
-									{
-										note.relatedPosts && note.relatedPosts.length > 0 && (
+										note.data.relatedPosts.length > 0 && (
 											<div class="problem-related">
 												<Icon name="material-symbols:article-outline-rounded" />
-												{note.relatedPosts.map((post) => (
+												{note.data.relatedPosts.map((post) => (
 													<a href={post.url}>{post.title}</a>
 												))}
 											</div>
@@ -128,14 +120,19 @@ const subtitle = "记录暂时还没有展开成文章的小问题";
 									}
 
 									{
-										note.tags && note.tags.length > 0 && (
+										note.data.tags.length > 0 && (
 											<div class="problem-tags">
-												{note.tags.map((tag) => (
+												{note.data.tags.map((tag) => (
 													<span>{tag}</span>
 												))}
 											</div>
 										)
 									}
+
+									<a class="problem-more" href={`/problems/${note.id}/`}>
+										阅读全文
+										<Icon name="material-symbols:arrow-forward-rounded" />
+									</a>
 								</article>
 							);
 						})
@@ -270,10 +267,19 @@ const subtitle = "记录暂时还没有展开成文章的小问题";
 
 	.problem-card h2 {
 		margin: 0;
-		color: var(--text-90);
 		font-size: 1.18rem;
 		font-weight: 700;
 		line-height: 1.45;
+	}
+
+	.problem-card h2 a {
+		color: var(--text-90);
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+
+	.problem-card h2 a:hover {
+		color: var(--primary);
 	}
 
 	.problem-section {
@@ -351,6 +357,27 @@ const subtitle = "记录暂时还没有展开成文章的小问题";
 		padding: 0.25rem 0.65rem;
 		font-size: 0.78rem;
 		line-height: 1.2;
+	}
+
+	.problem-more {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		margin-top: 1rem;
+		color: var(--primary);
+		font-size: 0.86rem;
+		font-weight: 600;
+		text-decoration: none;
+	}
+
+	.problem-more :global(svg) {
+		width: 1rem;
+		height: 1rem;
+		transition: transform 0.2s ease;
+	}
+
+	.problem-more:hover :global(svg) {
+		transform: translateX(2px);
 	}
 
 	@media (max-width: 640px) {

@@ -45,7 +45,33 @@ const specCollection = defineCollection({
 	loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/spec" }),
 	schema: z.object({}),
 });
+const problemsCollection = defineCollection({
+	loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/problems" }),
+	schema: z.object({
+		title: z.string(),
+		date: z.date(),
+		updated: z.date().optional(),
+		draft: z.boolean().optional().default(false),
+		status: z
+			.enum(["open", "thinking", "resolved"])
+			.optional()
+			.default("thinking"),
+		question: z.string(),
+		description: z.string().optional().default(""),
+		tags: z.array(z.string()).optional().default([]),
+		relatedPosts: z
+			.array(
+				z.object({
+					title: z.string(),
+					url: z.string(),
+				}),
+			)
+			.optional()
+			.default([]),
+	}),
+});
 export const collections = {
 	posts: postsCollection,
+	problems: problemsCollection,
 	spec: specCollection,
 };
