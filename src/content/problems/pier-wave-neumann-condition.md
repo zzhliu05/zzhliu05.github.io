@@ -2,7 +2,9 @@
 title: "桥墩边界为什么对应 Neumann 条件？"
 date: 2026-08-29
 status: "thinking"
-question: "浅水波遇到圆柱形桥墩时，无穿透边界条件如何转化为水面高度的法向导数条件？"
+question: |
+  浅水波遇到圆柱形桥墩时，无穿透边界条件 $u_n|_{\partial \Omega}=0$
+  如何转化为水面高度的法向导数条件 $\partial_n h|_{\partial \Omega}=0$？
 description: "线性化方程把速度场与水面高度梯度联系起来，因此无穿透条件会变成标量场的法向导数条件。"
 tags: ["流体力学", "边界条件"]
 relatedPosts:

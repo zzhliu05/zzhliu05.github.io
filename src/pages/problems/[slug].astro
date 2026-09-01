@@ -10,6 +10,7 @@ import {
 	problemStatusMeta,
 } from "../../data/problems";
 import { formatDateToYYYYMMDD } from "../../utils/date-utils";
+import { renderMathMarkdown } from "../../utils/math-markdown";
 
 export async function getStaticPaths() {
 	const notes = await getProblemNotes();
@@ -50,7 +51,10 @@ const status = problemStatusMeta[entry.data.status];
 					</time>
 				</div>
 				<h1>{entry.data.title}</h1>
-				<p>{entry.data.question}</p>
+				<div
+					class="problem-question"
+					set:html={renderMathMarkdown(entry.data.question)}
+				/>
 			</header>
 
 			{
@@ -121,11 +125,21 @@ const status = problemStatusMeta[entry.data.status];
 		line-height: 1.35;
 	}
 
-	.problem-header p {
+	.problem-question {
 		margin: 0;
 		color: var(--text-75);
 		font-size: 1rem;
 		line-height: 1.85;
+	}
+
+	.problem-question :global(p) {
+		margin: 0;
+	}
+
+	.problem-question :global(.katex-display) {
+		margin: 0.85rem 0;
+		overflow-x: auto;
+		overflow-y: hidden;
 	}
 
 	.problem-meta {

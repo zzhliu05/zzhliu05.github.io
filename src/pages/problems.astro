@@ -9,6 +9,7 @@ import {
 	getProblemTags,
 	problemStatusMeta,
 } from "../data/problems";
+import { renderMathMarkdown } from "../utils/math-markdown";
 
 if (!siteConfig.featurePages.problems) {
 	return Astro.redirect("/404/");
@@ -93,20 +94,11 @@ const subtitle = "记录暂时还没有展开成文章的小问题";
 											<Icon name="material-symbols:help-outline-rounded" />
 											问题
 										</div>
-										<p>{note.data.question}</p>
+										<div
+											class="problem-question"
+											set:html={renderMathMarkdown(note.data.question)}
+										/>
 									</div>
-
-									{
-										note.data.description && (
-											<div class="problem-section muted">
-												<div class="problem-section-title">
-													<Icon name="material-symbols:tips-and-updates-outline-rounded" />
-													想法
-												</div>
-												<p>{note.data.description}</p>
-											</div>
-										)
-									}
 
 									{
 										note.data.relatedPosts.length > 0 && (
@@ -316,6 +308,22 @@ const subtitle = "记录暂时还没有展开成文章的小问题";
 		color: var(--text-75);
 		font-size: 0.95rem;
 		line-height: 1.8;
+	}
+
+	.problem-question {
+		color: var(--text-75);
+		font-size: 0.95rem;
+		line-height: 1.8;
+	}
+
+	.problem-question :global(p) {
+		margin: 0;
+	}
+
+	.problem-question :global(.katex-display) {
+		margin: 0.75rem 0;
+		overflow-x: auto;
+		overflow-y: hidden;
 	}
 
 	.problem-related {
