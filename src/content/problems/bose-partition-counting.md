@@ -1,26 +1,17 @@
 ---
-title: "整数拆分为什么等价于 Bose 谐振子计数？"
-date: 2026-08-29
+title: "Lorentz协变测度"
+date: 2026-09-01
 status: "resolved"
-question: |
-  把总能量写成
-  $$
-  N=\sum_{n\ge 1} n k_n
-  $$
-  时，为什么得到的正好是整数拆分问题？
-description: "每个频率模式的占据数记录整数出现的次数，Bose 统计不区分粒子顺序，因此只保留拆分的重数数据。"
-tags: ["统计力学", "数论"]
-relatedPosts:
-  - title: "全同Bose谐振子与Hardy-Ramanujan公式"
-    url: "/posts/Bose-Ramanujan/"
+question: "直接解释动量空间的Lorentz协变积分测度$\frac{d^3p}{2p^0}$."
+description: ""
+tags: ["QFT"]
 ---
-
-每个频率模式的占据数记录整数 $n$ 出现的次数，Bose 统计不区分粒子顺序，因此只保留各整数出现的重数，正是整数拆分的数据。
-
-换句话说，如果总能量单位化为 $N$，那么一个占据数列
-
+It suffices to考虑一个沿$x$方向的boost,变换为
 $$
-N=\sum_{n\ge 1} n k_n
+(p^0)^\prime=\mathrm{cosh}\theta p^0+\mathrm{sinh}\theta p^1,(p^1)^\prime=\mathrm{sinh}\theta p^0+\mathrm{cosh}\theta p^1|_{p^0=\sqrt{p^2+m^2}}
 $$
-
-就对应整数 $N$ 的一种拆分，其中 $k_n$ 表示整数 $n$ 出现了多少次。
+则很显然Jacobian $J=\frac{dp^\prime}{dp}$是上三角矩阵,并且下两行的block是单位阵.因此
+$$
+det J=\frac{d^3 p^\prime}{d^3 p}=\frac{\partial (p^1)^\prime}{\partial p^1}=\mathrm{cosh}\theta+\mathrm{sinh}\theta \frac{\partial \sqrt{p^2+m^2}}{\partial p^1}=\mathrm{cosh}\theta+\mathrm{sinh}\theta\frac{p^1}{p^0}=\frac{(p^0)^\prime}{p^0}
+$$
+因此$\frac{d^3 p}{p^0}$在boost下是不变的.
