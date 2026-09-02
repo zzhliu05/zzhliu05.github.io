@@ -2,7 +2,7 @@ import type { ProfileConfig } from "../types/config";
 
 export const profileConfig: ProfileConfig = {
 	avatar: "/ada.jpg",
-	name: "Διονύσιος",
+	name: "zzhliu05",
 	bio: "Wir müssen wissen.Wir werden wissen.",
 	typewriter: {
 		enable: false,

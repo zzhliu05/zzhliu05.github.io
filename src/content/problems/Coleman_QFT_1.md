@@ -2,7 +2,7 @@
 title: "Lorentz协变测度"
 date: 2026-09-01
 status: "resolved"
-question: "直接解释动量空间的Lorentz协变积分测度$\frac{d^3p}{2p^0}$."
+question: "直接解释动量空间的Lorentz协变积分测度$\\frac{d^3p}{2p^0}$."
 description: ""
 tags: ["QFT"]
 ---
