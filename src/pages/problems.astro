@@ -42,7 +42,7 @@ const subtitle = "记录暂时还没有展开成文章的小问题";
 	<div
 		class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32"
 	>
-		<div class="card-base z-10 relative w-full overflow-hidden">
+		<div class="card-base z-10 relative w-full overflow-hidden" data-filter-scope>
 			<div class="px-6 sm:px-9 py-6">
 				<div class="problems-hero">
 					<div class="min-w-0">
@@ -220,6 +220,10 @@ const subtitle = "记录暂时还没有展开成文章的小问题";
 		transform: translateY(-2px);
 		border-color: color-mix(in oklab, var(--primary) 35%, var(--line-divider));
 		box-shadow: 0 12px 30px color-mix(in oklab, var(--primary) 10%, transparent);
+	}
+
+	.problem-card.filtered-out {
+		display: none;
 	}
 
 	.problem-card-header {

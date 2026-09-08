@@ -16,7 +16,10 @@
 			if (!filterAttr) return;
 
 			var dataSelector = "[data-" + filterAttr + "]";
-			var parent = container.closest(".card-base") || document;
+			var parent =
+				container.closest("[data-filter-scope]") ||
+				container.closest(".card-base") ||
+				document;
 			var items = parent.querySelectorAll(dataSelector);
 			var noResults = parent.querySelector("#no-results");
 
