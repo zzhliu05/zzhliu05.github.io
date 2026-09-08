@@ -7,15 +7,19 @@ import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { getSortedPostsList } from "@utils/content-utils";
 
 import { siteConfig } from "../config";
+import { getProblemNotes } from "../data/problems";
 
 const sortedPostsList = await getSortedPostsList();
+const problemNotes = await getProblemNotes();
 
 const showCategoryBar = siteConfig.postListLayout.categoryBar?.enable ?? false;
 
-// 1. 修复类型兼容性：将 category 的 null 转换为 undefined
+// 1. 修复类型兼容性：将 category 的 null 转换为 undefined，并统一文章/随笔归档条目
 const posts = sortedPostsList.map((post) => ({
 	id: post.id,
 	url: post.url,
+	type: "post",
+	typeLabel: "文章",
 	data: {
 		title: post.data.title,
 		tags: post.data.tags,
@@ -26,8 +30,26 @@ const posts = sortedPostsList.map((post) => ({
 	},
 }));
 
+const problems = problemNotes.map((note) => ({
+	id: note.id,
+	url: `/problems/${note.id}/`,
+	type: "problem",
+	typeLabel: "随笔",
+	data: {
+		title: note.data.title,
+		tags: note.data.tags,
+		category: undefined,
+		published: note.data.date,
+		description: note.data.description,
+	},
+}));
+
+const archiveItems = [...posts, ...problems].sort(
+	(a, b) => b.data.published.getTime() - a.data.published.getTime(),
+);
+
 // 2. 提取所有标签 (去重)
-const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+const tags = [...new Set(archiveItems.flatMap((item) => item.data.tags))];
 
 // 3. 提取所有分类 (去重且过滤掉 undefined)
 const categories = [
@@ -48,7 +70,7 @@ const categories = [
 
 	<!-- 修复：补全缺失的 tags 和 categories 属性 -->
 	<ArchivePanel
-		sortedPosts={posts}
+		sortedPosts={archiveItems}
 		tags={tags}
 		categories={categories}
 		client:only="svelte"

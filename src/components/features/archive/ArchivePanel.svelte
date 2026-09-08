@@ -15,6 +15,8 @@ const uncategorized = params.get("uncategorized");
 interface Post {
 	id: string;
 	url?: string; // 预计算的文章 URL
+	type?: "post" | "problem";
+	typeLabel?: string;
 	data: {
 		title: string;
 		tags: string[];
@@ -150,9 +152,16 @@ onMount(async () => {
 						<div
 							class="w-[70%] md:max-w-[65%] md:w-[65%] text-left font-bold
                      group-hover:translate-x-1 transition-all group-hover:text-[var(--primary)]
-                     text-75 pr-8 whitespace-nowrap overflow-ellipsis overflow-hidden"
+                     text-75 pr-8 whitespace-nowrap overflow-ellipsis overflow-hidden flex items-center gap-2"
 						>
-							{post.data.title}
+							<span class="whitespace-nowrap overflow-ellipsis overflow-hidden">
+								{post.data.title}
+							</span>
+							{#if post.typeLabel}
+								<span class={`archive-kind is-${post.type ?? "post"}`}>
+									{post.typeLabel}
+								</span>
+							{/if}
 						</div>
 
 						<!-- tag list -->
@@ -168,3 +177,21 @@ onMount(async () => {
 		</div>
 	{/each}
 </div>
+
+<style>
+	.archive-kind {
+		flex: 0 0 auto;
+		border: 1px solid color-mix(in oklab, var(--primary) 28%, transparent);
+		border-radius: 999px;
+		padding: 0.06rem 0.42rem;
+		color: var(--primary);
+		font-size: 0.68rem;
+		font-weight: 600;
+		line-height: 1.35;
+	}
+
+	.archive-kind.is-problem {
+		border-color: color-mix(in oklab, #1f9d62 32%, transparent);
+		color: #1f9d62;
+	}
+</style>

@@ -1,8 +1,8 @@
 ---
-title: "Wen QFT 2"
+title: "谐振子格林函数极点"
 date: 2026-09-08
-status: "thinking"
-question: ""
-description: ""
+status: "resolved"
+question: |
+
 tags: ["QFT"]
 ---

@@ -4,7 +4,6 @@ description: "通过考虑Bose谐振子得到整数拆分的Hardy-Ramanujan公�
 published: 2026-08-21
 tags: ["统计力学","解析数论"]
 category: "统计力学"
-image: ""
 draft: false
 ---
 
@@ -80,8 +79,3 @@ $$
 > 这些似乎与2D CFT中的Cardy Formula有关,但是我不懂CFT.
 
 >  在可分辨谐振子,$\omega_n=n\omega$的picture下,如果我们把重整化的真空能$E_{vac}=\frac{1}{2}\sum_{n=1}^\infty n\hbar\omega=\frac{\zeta(-1)}{2}\hbar\omega$算上,则配分函数变为$$Z=z^{-1/24}\prod_{n=1}^\infty \frac{1}{1-z^n},z:=e^{-\beta\hbar\omega} $$ 这是Dedekind eta函数的倒数$Z(\beta)=\frac{1}{\eta(i\beta\hbar\omega/2\pi)}$
-
-
-
-
-
