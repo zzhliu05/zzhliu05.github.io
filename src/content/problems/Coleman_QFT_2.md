@@ -24,5 +24,7 @@ $$
 \braket{A^2}\to a^{-3}\frac{1}{4\pi^2\mu}\int u^2e^{-u^2/2}du=\frac{a^{-3}}{4\sqrt{2}\pi^{3/2}\mu}
 $$
 在$a\to 0$极限
-$$\braket{A^2}\to \frac{a^{-2}}{4\pi^2}$$
+$$
+\braket{A^2}\to \frac{a^{-2}}{4\pi^2}
+$$
 这说明在极小尺度下(UV极限),量子涨落效应不可忽略.

@@ -4,7 +4,6 @@ description: "可解李代数的结构."
 published: 2026-07-18
 tags: ["李代数","李群","表示论"]
 category: "李代数"
-image: "/images/posts/lie-algebra-1.png"
 draft: false
 ---
 
