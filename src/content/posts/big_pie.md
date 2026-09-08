@@ -1,10 +1,10 @@
 ---
-title: "用Cuda算pi"
-description: "通过"
+title: "Big Pie:如何将$\\pi$算到$10^n$位?"
+description: ""
 published: 2026-09-06
 tags: ["解析数论"]
 category: "cuda"
-draft: false
+draft: true
 ---
 ## NTT
 $\mathbb{Z}_q$上的多项式乘法时间复杂度是多少?类似FFT的思想我们可以把他做到$O(nlogn)$.取整环$\mathbb{Z}_q$中的原根$\omega,\omega^n=1$,则
