@@ -47,4 +47,8 @@ $$
 $$
 \frac{1}{4}-\frac{i\lambda}{2}=-n\implies \omega=(2n+\frac{1}{2})\omega_0
 $$
+另一种方法是由上一个问题,
+$$
+G(x_b,x_a,\omega)=\sum_n \frac{\braket{x_b|\psi_n}\braket{\psi_n|x_a}}{\omega-\epsilon_n+i\epsilon}=\sum_n \frac{\psi_n(x_b)\psi_n^*(x_a)}{\omega-\epsilon_n+i\epsilon}
+$$
 注意到这是因为当$n$是偶数时,波函数是偶宇称,$\psi_n(0)\neq 0$,而当$n$是奇数时,$\psi_n(0)=0$.

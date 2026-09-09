@@ -26,3 +26,7 @@ $$
 $$
 L=\frac{i}{2}(\dot{a}^\dagger a-c.c.)-H
 $$
+代入$a=\frac{1}{\sqrt{2}}(x-ip),a^\dagger=\frac{1}{sqrt{2}}(x+ip)$
+$$
+L=\frac{1}{2}(p\dot{x}-x\dot{p})-H=p\dot{x}-\frac{1}{2}\frac{d}{dt}(px)-H
+$$
