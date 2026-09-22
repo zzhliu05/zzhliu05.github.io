@@ -4,7 +4,7 @@ description: "强化学习的概率统计基础."
 published: 2026-07-23
 tags: ["强化学习","概率统计"]
 category: "强化学习"
-draft: true
+draft: false
 ---
 
 Random experience->estimate value->quantify uncertainty.
@@ -72,4 +72,57 @@ Var(Y|X)=E(Y^2|X)-(E(Y|X))^2
 $$
 $$
 Var(Y)=E(Var(Y|X))+Var(E(Y|X))
+$$
+MMSE:How to approximate random var $Y$ using function $g(X)$,i.e. to minimize
+$$
+\min_g E(Y-g(X))
+$$
+Because
+$$
+E[(Y-g(X))^2]=E[(Y-E(Y|X))^2]+E[(E(Y|X)-g(X))^2]
+$$
+The answer is $g=E(Y|X)$.It is also known that
+$$
+E((Y-E(Y|X))h(X))=0,\forall h
+$$
+
+In general MMSE is a highly nonlinear function.
+
+LLSE:If we only restrict possible functional variational space to linear functions,
+$$
+\min_{g=c+dx}E(y-g(X))
+$$
+Then it is called LLSE.
+
+Adopt different approximation methods leads to different learning methods.
+
+
+Theorem:Let X,Y be Gaussian,then
+$$
+E[Y|X]=L[Y|X]=E(Y)+\frac{Cov(X,Y)}{Var(X)}(X-E(X))
+$$
+
+### Concentration Theorem
+弱大数定理:uncorrelated均值依概率收敛于期望.
+
+MC value estimation in RL:$\hat{V}^\pi(s)=\frac{1}{N(s)}\sum_{i=1}^{N(s)} G^{(i)}$.
+
+不能实时估算(off-policy),因为需要跑完整局游戏.
+
+能不能实时估算(on-policy)?
+
+随机采样中,只给一个无偏的估计值是不够的.还要关注其不确定性(方差)
+$$
+P(|\hat{\mu}_n-\mu_n|\geq \epsilon)=?
+$$
+Optimism,exploration bonuses depend on "confidence".
+
+Cauchy-Schwarz
+$$
+|E(XY)|\leq \sqrt{E(X^2)E(Y^2)}
+$$
+
+Jensen:If $f$ convex
+$$
+f(\lambda x_1+(1-\lambda)x_2)\leq \lambda_1f(x_1)+(1-\lambda)f(x_2)
 $$
