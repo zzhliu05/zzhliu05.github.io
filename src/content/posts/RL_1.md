@@ -126,3 +126,6 @@ Jensen:If $f$ convex
 $$
 f(\lambda x_1+(1-\lambda)x_2)\leq \lambda_1f(x_1)+(1-\lambda)f(x_2)
 $$
+$$
+E(f(X))\geq f(E(X))
+$$
