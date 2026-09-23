@@ -42,3 +42,5 @@ Cor:If $X$ is connected,then the $n$ is global.
 proof:Show $n:X\to \mathbb{Z}$ is continuous.
 
 Theorem:there exists topological spaces that only satisfy two of the conditions in
+
+Hausdorff,second countable but not locally Euclidean:$\mathbb{Q}$

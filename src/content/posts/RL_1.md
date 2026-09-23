@@ -129,3 +129,18 @@ $$
 $$
 E(f(X))\geq f(E(X))
 $$
+
+Entropy:$H(p)=-E[log p]$.By Jensen,the entropy is maximum when distribution is uniform.
+
+对于连续分布,最大熵分布是Gaussian.
+
+KL Divergence:
+$$
+D(p|q)=-E_p[logp-logq]
+$$
+which is non-negative.It is not symmetric,so not a metric.
+
+Markov:
+$$
+P(|X|\geq a)\leq \frac{E|X|}{a}
+$$
