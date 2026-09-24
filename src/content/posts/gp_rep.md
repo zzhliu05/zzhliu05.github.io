@@ -100,4 +100,85 @@ $$
 
 (b):特征标在群的共轭类上为常数.
 
-(c):
+(c):让$g$是$G$中阶为$k$的元素.则$\chi(g)$是$k$阶单位根$\xi$的幂次的和.
+
+(d):$\chi(g^{-1})$是$\chi(g)$的复共轭.
+
+(e):同构的表示有相同的特征标.
+
+
+## Schur引理
+
+### 引理3
+
+一个表示同构$T:V\to V^\prime$的$ker$和$im$都是不变子空间.
+
+证明:只需注意到
+$$
+v\in kerT\implies gT(v)=0 \implies T(gv)=0\implies gv\in ker T,\forall g\in G
+$$
+并且
+$$
+v^\prime\in imT\implies v^\prime=T(v)\implies gv^\prime=gT(v)=T(gv)\in imT,\forall g\in G
+$$
+因此$gimT\subset imT$.
+
+
+### Schur引理
+
+(a):如果$\rho$,$\rho^\prime$分别是在$V,V^\prime$上的不可约表示,并且$T:V\to V^\prime$是一个表示同构,则要么$T=0$,要么$T$是同构.
+
+(b):如果对于同一个不可约表示$\rho:G\to GL(V)$,$T:V\to V$是表示同构,则要么$T=0$,要么$T=cI$.
+
+证明:
+
+(a):由于$ker T$是不变子空间,并且$\rho$是不可约表示,因此$ker T=V$(对应$T=0$)或者$T$是单射.
+
+由于$im T$是不变子空间,并且$\rho^\prime$是不可约表示,因此$im T=0$(对应$T=0$)或者$T$是满射.
+
+综上$T=0$或者$T$是双射.
+
+(b):根据(a)我们不妨考虑$T\neq 0$.此时$T$是同构.注意到
+$$
+ker(T-\lambda I)
+$$
+也是不变子空间,因此由$\rho$的不可约性,要么$ker(T-\lambda I)$平凡,要么$ker(T-\lambda I)$为$V$.必然存在一个$\lambda $使得$ker(T-\lambda I)=V$.因此$T=\lambda I$.
+
+
+## 特征标的正交性关系
+
+记$\mathcal{M}$为$m\times n$复矩阵全体.
+
+### 引理4
+让$A,B$分别为$m\times m$和$n\times n$矩阵.两者构成$\mathcal{M}$上的线性算子
+$$
+F_{AB}:\mathcal{M}\to \mathcal{M},M\to AMB
+$$
+这个算子的trace为
+$$
+tr(F_{AB})=tr(A)tr(B)
+$$
+
+证明:取$M$的一组基$E_{ij},i=1,\dots,m,j=1,\dots,n$,则
+$$
+tr(F_{AB})=\sum_{i,j}\braket{E_{ij}|F|E_{ij}}=\sum_{i,j}[AE_{ij}B]_{ij}=\sum_{i,j,k,l}A_{ik}\delta_{ki}\delta_{jl}B_{lj}
+$$
+$$
+=\sum_{i,j}A_{ii}B_{jj}=tr(A)tr(B)
+$$
+
+对于两个表示$\rho,\rho^\prime$,任取$V,V^\prime$的基底(维度分别为$n,m$),定义$\mathcal{M}上的线性算符
+$$
+\Phi(M)=\frac{1}{|G|}\sum_{g} \rho(g^{-1})M\rho^\prime(g)
+$$
+
+### 引理5
+
+(a):$tr\Phi=\braket{\chi,\chi^\prime}$
+
+(b):$tr\Phi=dim(im\Phi)$
+
+(c):If $\rho$ and $\rho^\prime$ are non-isomorphic irreducible epresentations,then
+$$
+\braket{\chi,\chi}=1,\braket{\chi,\chi^\prime}=0
+$$
