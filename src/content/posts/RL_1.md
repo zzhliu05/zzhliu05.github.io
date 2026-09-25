@@ -144,3 +144,5 @@ Markov:
 $$
 P(|X|\geq a)\leq \frac{E|X|}{a}
 $$
+
+In fact such trick can be generalized to any monotone increasing functions.For example,we can
