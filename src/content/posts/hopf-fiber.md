@@ -70,14 +70,14 @@ $$
 
 以下Mathematica代码绘制了两个不同基点上的纤维在球极投影坐标系的形状.
 ```mathematica
-gamma[x_, \[Phi]_] := {Cos[\[Phi]] x[[1]] - Sin[\[Phi]] x[[2]], 
+gamma[x_, \[Phi]_] := {Cos[\[Phi]] x[[1]] - Sin[\[Phi]] x[[2]],
 Sin[\[Phi]] x[[1]] + Cos[\[Phi]] x[[2]], Cos[\[Phi]] x[[3]]}/(1 - Sin[\[Phi]] x[[3]]);
 
 xA = {1/Sqrt[2], 0, 1/Sqrt[2]};
 xB = {0, Sqrt[3]/2, 1/2};
 
-curvePlot = ParametricPlot3D[Evaluate[{gamma[xA, \[Phi]], gamma[xB, \[Phi]]}], {\[Phi], 0, 2 Pi}, PlotStyle -> {{Red, Thick}, {Blue, Thick}}, 
-   PlotRange -> All, AxesLabel -> {"X", "Y", "Z"}, 
+curvePlot = ParametricPlot3D[Evaluate[{gamma[xA, \[Phi]], gamma[xB, \[Phi]]}], {\[Phi], 0, 2 Pi}, PlotStyle -> {{Red, Thick}, {Blue, Thick}},
+   PlotRange -> All, AxesLabel -> {"X", "Y", "Z"},
    BoxRatios -> {1, 1, 1}, PlotPoints -> 200, MaxRecursion -> 3];
 Show[curvePlot, ImageSize -> Large]
 ```

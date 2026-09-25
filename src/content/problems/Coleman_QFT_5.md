@@ -32,4 +32,3 @@ $U(1)$对称性给出守恒荷
 $$
 j^\mu=\frac{\partial\mathcal{L}}{\partial(\partial_\mu \psi)}i\psi-\frac{\partial\mathcal{L}}{\partial(\partial_\mu \psi^*)}i\psi^*,Q=\int d^3x j^0=2\int d^3x \psi^* \psi
 $$
-

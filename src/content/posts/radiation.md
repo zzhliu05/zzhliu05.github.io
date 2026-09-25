@@ -163,7 +163,7 @@ $$
 $$
 积分可得
 $$
-\braket{P}=\int \left<\frac{dP}{d\Omega}\right>d\Omega=\frac{\mu_0 q^2a^2\omega_0^4}{6\pi c} 
+\braket{P}=\int \left<\frac{dP}{d\Omega}\right>d\Omega=\frac{\mu_0 q^2a^2\omega_0^4}{6\pi c}
 $$
 对于氢原子$E=-\frac{e^2}{8\pi \epsilon_0 a},\omega_0=(\frac{e^2}{4\pi \epsilon_0 m_e a^3})^{1/2}$,因此
 $$
@@ -172,4 +172,3 @@ $$
 \implies a^2 da=-\frac{e^4}{12\pi^2\epsilon_0^2m_e^2 c^3}dt\implies a=(a_0^3-\frac{e^4 t}{4\pi^2 \epsilon_0^2m_e^2 c^3})^{1/3}
 $$
 即电子最终会在$t\sim \frac{4\pi^2 \epsilon_0^2m_e^2 c^3a_0^3}{e^4}$后掉入原子核中,这说明经典图像是无法解释电子轨道的.
-

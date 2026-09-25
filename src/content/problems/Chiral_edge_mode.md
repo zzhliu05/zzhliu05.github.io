@@ -14,7 +14,7 @@ $$
 $$
 	\left [ \begin{matrix}
 		m(y)& \hbar k_x+\hbar v_F\partial_y \\
-		\hbar v_F k_x+\hbar v_F\partial_y& m(y) 
+		\hbar v_F k_x+\hbar v_F\partial_y& m(y)
 	\end{matrix} \right ]	\left [ \begin{matrix}
 		\psi_+(y)\\
 		\psi_-(y)

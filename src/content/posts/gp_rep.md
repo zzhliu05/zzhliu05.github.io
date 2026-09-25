@@ -142,7 +142,7 @@ $$
 $$
 ker(T-\lambda I)
 $$
-也是不变子空间,因此由$\rho$的不可约性,要么$ker(T-\lambda I)$平凡,要么$ker(T-\lambda I)$为$V$.必然存在一个$\lambda $使得$ker(T-\lambda I)=V$.因此$T=\lambda I$.
+也是不变子空间,因此由$\rho$的不可约性,要么$ker(T-\lambda I)$平凡,要么$ker(T-\lambda I)$为$V$.必然存在一个$\lambda $使得$ker(T-\lambda I)=V$.因此$$T=\lambda I$.
 
 
 ## 特征标的正交性关系
@@ -167,7 +167,7 @@ $$
 =\sum_{i,j}A_{ii}B_{jj}=tr(A)tr(B)
 $$
 
-对于两个表示$\rho,\rho^\prime$,任取$V,V^\prime$的基底(维度分别为$n,m$),定义$\mathcal{M}上的线性算符
+对于两个表示$\rho,\rho^\prime$,任取$V,V^\prime$的基底(维度分别为$n,m$),定义$\mathcal{M}$上的线性算符
 $$
 \Phi(M)=\frac{1}{|G|}\sum_{g} \rho(g^{-1})M\rho^\prime(g)
 $$
@@ -178,7 +178,10 @@ $$
 
 (b):$tr\Phi=dim(im\Phi)$
 
-(c):If $\rho$ and $\rho^\prime$ are non-isomorphic irreducible epresentations,then
+(c):如果 $\rho$ 和$\rho^\prime$都是不可约表示,则
 $$
 \braket{\chi,\chi}=1,\braket{\chi,\chi^\prime}=0
 $$
+
+证明:
+(a):

@@ -108,10 +108,10 @@ $$
 ```py
 import numpy as np
 import matplotlib.pyplot as plt
-ke = 1.0        
-m1 = 1.0     
-m2 = 1.0        
-q = 0.5        
+ke = 1.0
+m1 = 1.0
+m2 = 1.0
+q = 0.5
 c = 1
 q1 = +q
 q2 = -q
@@ -138,7 +138,7 @@ def derivatives(y):
     r2 = y[4:6]
     v2 = y[6:8]
     print(np.linalg.norm(v1), np.linalg.norm(v2))
-    r12 = r2 - r1 
+    r12 = r2 - r1
     dist = np.sqrt(np.dot(r12, r12) + eps**2)
     e12 = r12 / dist
     e21 = -e12
