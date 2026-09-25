@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Point_set_top_4.md",
+                "file": "Coleman_QFT_6.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Point_set_top_4"
+              "title": "Coleman_QFT_6"
             }
           }
         ]
@@ -190,6 +190,14 @@
   },
   "active": "d72d60cc3cae362b",
   "lastOpenFiles": [
+    "Wen_QFT_5.md",
+    "Wen_QFT_1.md",
+    "Wen_QFT_2.md",
+    "Wen_QFT_3.md",
+    "Wen_QFT_4.md",
+    "Drude.md",
+    "Point_set_top_4.md",
+    "Point_set_top_3.md",
     "Chiral_edge_mode.md",
     "Coherent_complete.md",
     "Coleman_QFT_2.md",

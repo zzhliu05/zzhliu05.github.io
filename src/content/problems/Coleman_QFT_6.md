@@ -1,13 +1,14 @@
 ---
-title: "量子Schrodinger场"
+title: 量子Schrodinger场
 date: 2026-09-07
-status: "resolved"
-question: |
+status: resolved
+question: |-
   量子化Schrodinger场
   $$
   \mathcal{L}=i\psi^*\partial_0\psi+b|\nabla\psi|^2
   $$
-tags: ["QFT"]
+tags:
+  - QFT
 ---
 正则动量为
 $$
