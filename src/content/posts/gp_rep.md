@@ -70,6 +70,8 @@ $$
 
 同样的可逆性论证给出$gW^\perp=W^\perp$.
 
+
+
 ### 定理1
 给定表示$\rho:G\to GL(V)$,存在V$上的内积使得$\rho$是Unitary表示.
 
@@ -106,6 +108,7 @@ $$
 
 (e):同构的表示有相同的特征标.
 
+证明:
 
 ## Schur引理
 
@@ -184,4 +187,13 @@ $$
 $$
 
 证明:
-(a):
+(a):由引理4,我们有
+$$
+tr\Phi=\frac{1}{|G|}\sum_g tr \rho(g^{-1}) tr \rho^\prime(g)=\frac{1}{|G|}\sum_g \bar{\chi}(g)\bar{\chi^\prime}(g)=\braket{\chi,\chi^\prime}
+$$
+
+(b):我们只需证明$\Phi$是一个投影算符.注意到
+$$
+\Phi^2(M)=\frac{1}{|G|}\sum_{g,h}\rho(h^{-1})\rho(g^{-1})M\rho^\prime(g)\rho^\prime(h)
+$$
+对于任意$k\in G$,恰好有

@@ -73,7 +73,7 @@ $$
 $$
 \rho(E=N\hbar \omega)\sim \frac{1}{\hbar\omega}\frac{\zeta(2)^{1/2}}{2^{3/2}N\pi}e^{2\sqrt{\zeta(2)N}}
 $$
-代入$\zeta(2)=\frac{\pi^2}{6}$,即简并度有渐近展开形式$g(E)=\rho(E)\hbar\omega\sim \frac{e^{\pi\sqrt{2N/3}}}{4\sqrt{3}}$
+代入$\zeta(2)=\frac{\pi^2}{6}$,即简并度有渐近展开形式$g(E)=\rho(E)\hbar\omega\sim \frac{e^{\pi\sqrt{2N/3}}}{4\sqrt{3}N}$
 此即Hardy和Ramanujan得到的整数拆分数的渐进公式.
 
 

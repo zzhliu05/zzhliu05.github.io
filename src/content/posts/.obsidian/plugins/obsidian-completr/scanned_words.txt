@@ -101,6 +101,7 @@ topology
 two
 theoretic
 transform
+term
 description
 draft
 dots
@@ -259,6 +260,8 @@ png
 processor
 parallel
 processors
+point
+picture
 category
 chi
 cI
@@ -361,6 +364,7 @@ code
 copy
 chunks
 concurrency
+counter
 false
 form
 frac
@@ -681,6 +685,7 @@ Hamilton
 Hamiltonian
 Hierarchy
 Handling
+Hardy
 unitary
 uncertainty
 using
@@ -911,6 +916,7 @@ block
 basis
 byte
 bandwidth
+bar
 sum
 subset
 step
@@ -1008,6 +1014,7 @@ spaces
 satisfy
 sec
 single
+saddle
 in
 im
 implies
@@ -1906,6 +1913,8 @@ RdYj
 RR
 Realistic
 Reuse
+Ramanujan
+Riemann
 and
 also
 approximate
@@ -2070,6 +2079,8 @@ Cor
 CuO
 Compilers
 Cache
+CFT
+Cardy
 experience
 estimate
 equation
@@ -2162,6 +2173,7 @@ eJe
 eQ
 eFC
 exists
+eta
 value
 variable
 var
@@ -2402,6 +2414,7 @@ Model
 More
 Memory
 Move
+Maclaurin
 of
 only
 off
@@ -2549,6 +2562,7 @@ SY
 Sd
 Show
 Sophus
+Stirling
 On
 Optimism
 One
@@ -2685,6 +2699,8 @@ Berry
 Big
 Berkley
 Basics
+Bose
+Boson
 Theorem
 The
 Then
@@ -2923,6 +2939,7 @@ Legendre
 Lagrange
 Latency
 Little
+Laplace
 we
 when
 which
@@ -3265,6 +3282,7 @@ Differential
 Dyson
 DFT
 Darwin
+Dedekind
 For
 Fock
 Field
@@ -3335,6 +3353,7 @@ FqHk
 Fibration
 FFT
 Fortran
+Formula
 Notice
 Notation
 Ne
@@ -3717,6 +3736,7 @@ zyau
 zd
 zT
 ziA
+zeta
 VSa
 Vn
 VZ

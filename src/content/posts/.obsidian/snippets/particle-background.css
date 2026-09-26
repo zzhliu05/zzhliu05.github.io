@@ -1,0 +1,42 @@
+/* Particle texture for Markdown panes in Obsidian's GitHub Theme. */
+body {
+	--particle-dot: rgba(9, 105, 218, 0.24);
+	--particle-dot-soft: rgba(130, 80, 223, 0.18);
+	--particle-glow: rgba(9, 105, 218, 0.055);
+}
+
+body.theme-dark {
+	--particle-dot: rgba(88, 166, 255, 0.3);
+	--particle-dot-soft: rgba(163, 113, 247, 0.24);
+	--particle-glow: rgba(88, 166, 255, 0.08);
+}
+
+.workspace-leaf-content[data-type="markdown"] .view-content {
+	background-color: var(--background-primary);
+	background-image:
+		radial-gradient(circle at 20% 30%, var(--particle-glow), transparent 35%),
+		radial-gradient(circle, var(--particle-dot) 1px, transparent 1.6px),
+		radial-gradient(circle, var(--particle-dot-soft) 1px, transparent 1.7px);
+	background-size: 100% 100%, 5.2rem 5.2rem, 7.3rem 7.3rem;
+	animation: particle-drift 36s linear infinite;
+}
+
+.workspace-leaf-content[data-type="markdown"] :is(
+	.markdown-source-view,
+	.markdown-reading-view,
+	.markdown-preview-view,
+	.cm-scroller
+) {
+	background-color: transparent;
+}
+
+@keyframes particle-drift {
+	from { background-position: 0 0, 0 0, 2rem 1rem; }
+	to { background-position: 0 0, 5.2rem 5.2rem, -5.3rem 8.3rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.workspace-leaf-content[data-type="markdown"] .view-content {
+		animation: none;
+	}
+}
