@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "gp_rep.md",
+                "file": "Algebraic_Bethe.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "gp_rep"
+              "title": "Algebraic_Bethe"
             }
           }
         ]
@@ -117,7 +117,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "gp_rep.md",
+                "file": "lie-algebra-2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": false
               },
@@ -173,7 +173,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -188,25 +189,26 @@
   },
   "active": "961500ce2fc0ff24",
   "lastOpenFiles": [
+    "big_pie.md",
+    "Algebraic_Bethe.md",
+    "classical-dyson.md",
+    "lie-algebra-2.md",
+    "RL_1.md",
+    "dirac_field.md",
+    "gp_rep.md",
+    "lie-algebra-1.md",
     "image.png",
     "hopf-fiber.md",
     "Lag-elec.md",
-    "lie-algebra-2.md",
-    "lie-algebra-1.md",
-    "RL_1.md",
-    "gp_rep.md",
     "Bose-Ramanujan.md",
     "pier_wave.md",
     "radiation.md",
-    "classical-dyson.md",
     "differential_topology.md",
     "未命名 1.base",
     "未命名.base",
     "cs267_1.md",
-    "big_pie.md",
     "cell-Grassmannian.md",
     "CuO_SC.md",
-    "dirac_field.md",
     "first-note.md",
     "hopf-invariant.md",
     "Isometry.md",

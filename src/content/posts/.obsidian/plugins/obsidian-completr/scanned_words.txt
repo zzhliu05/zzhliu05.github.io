@@ -1158,6 +1158,7 @@ gjN
 gtmF
 gU
 global
+gh
 hgv
 hgw
 highly
@@ -2009,6 +2010,7 @@ algebra
 anti
 assembly
 achieve
+ansatz
 Confidence
 Chain
 Concentration
@@ -2484,6 +2486,7 @@ oO
 oII
 oF
 open
+oplus
 Stat
 Schwarz
 Stokes
@@ -2701,6 +2704,7 @@ Berkley
 Basics
 Bose
 Boson
+Bethe
 Theorem
 The
 Then

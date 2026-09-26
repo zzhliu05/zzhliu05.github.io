@@ -1243,3 +1243,61 @@ body.h2-underline h2, body.h2-underline.markdown-rendered h2 {
     padding-bottom: .3em;
     border-bottom: 1px solid var(--color-base-40);
 }
+
+/* Local Markdown background: subtle particles and digital rain. */
+body {
+    --note-particle: rgba(9, 105, 218, .2);
+    --note-rain: rgba(0, 116, 86, .21);
+}
+body.theme-dark {
+    --note-particle: rgba(88, 166, 255, .25);
+    --note-rain: rgba(63, 185, 80, .3);
+}
+.workspace-leaf-content[data-type="markdown"] .view-content {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--background-primary);
+    background-image: radial-gradient(circle, var(--note-particle) 1px, transparent 1.6px);
+    background-size: 5rem 5rem;
+    animation: note-particle-drift 40s linear infinite;
+}
+.workspace-leaf-content[data-type="markdown"] .view-content::before,
+.workspace-leaf-content[data-type="markdown"] .view-content::after {
+    position: absolute;
+    top: -70rem;
+    left: 6%;
+    z-index: 0;
+    pointer-events: none;
+    content: "1010011010110010100111010011010010110100111001011010010110100101101001011010010110010101";
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    white-space: nowrap;
+    font: 10px/1.5 monospace;
+    letter-spacing: .3rem;
+    color: var(--note-rain);
+    text-shadow: 6rem 12rem var(--note-rain), 12rem 25rem var(--note-rain), 18rem 4rem var(--note-rain), 24rem 38rem var(--note-rain), 30rem 18rem var(--note-rain), 36rem 47rem var(--note-rain), 42rem 8rem var(--note-rain), 48rem 30rem var(--note-rain), 54rem 15rem var(--note-rain), 60rem 43rem var(--note-rain), 66rem 2rem var(--note-rain);
+    animation: note-digital-rain 34s linear infinite;
+}
+.workspace-leaf-content[data-type="markdown"] .view-content::after {
+    top: -95rem;
+    left: 11%;
+    opacity: .6;
+    animation-duration: 47s;
+    animation-delay: -21s;
+}
+.workspace-leaf-content[data-type="markdown"] :is(.markdown-source-view, .markdown-reading-view, .markdown-preview-view, .cm-scroller) {
+    background-color: transparent;
+}
+@keyframes note-particle-drift {
+    to { background-position: 5rem 5rem; }
+}
+@keyframes note-digital-rain {
+    to { transform: translateY(160rem); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .workspace-leaf-content[data-type="markdown"] .view-content,
+    .workspace-leaf-content[data-type="markdown"] .view-content::before,
+    .workspace-leaf-content[data-type="markdown"] .view-content::after {
+        animation: none;
+    }
+}

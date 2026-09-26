@@ -10,7 +10,7 @@ draft: false
 Random experience->estimate value->quantify uncertainty.
 强化学习是时序过程,并且不独立.(用Markov Chain建模)
 
-Mixing到目标分布.
+工程效果:如何快速Mixing到目标分布.
 
 ## Review of Prob and Stat
 

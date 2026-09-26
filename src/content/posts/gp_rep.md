@@ -109,7 +109,22 @@ $$
 (e):同构的表示有相同的特征标.
 
 证明:
-
+(a):显然.
+(b):由trace的共轭不变性,
+$$
+tr(\rho(h^{-1}gh))=tr(\rho(h)^{-1}\rho(g)\rho(h))=tr(g)
+$$
+(c):设$\lambda$是$\rho(g)$特征值,则
+$$
+\rho(g)v=\lambda v\implies \lambda^k v=\rho(g^k)v=\rho(e)v=Iv=v\implies \lambda^k=1
+$$
+因此$\rho(g)$特征值皆为$k$阶根,trace为特征值直和,因此为$k$阶根的和.
+(d):因为$\rho(g)$特征值在圆周上,因此
+$$
+\lambda_{g^{-1}}=\frac{1}{\lambda_g}=\bar{\lambda}_g
+$$
+求和即得$\chi(g^{-1})$是$\chi(g)$的共轭.
+(e):由trace共轭不变性即得.
 ## Schur引理
 
 ### 引理3
@@ -129,7 +144,7 @@ $$
 
 ### Schur引理
 
-(a):如果$\rho$,$\rho^\prime$分别是在$V,V^\prime$上的不可约表示,并且$T:V\to V^\prime$是一个表示同构,则要么$T=0$,要么$T$是同构.
+(a):如果$\rho$,$\rho^\prime$分别是在$V,V^\prime$上的不可约表示,并且$T:V\to V^\prime$是一个表示同态,则要么$T=0$,要么$T$是同构.
 
 (b):如果对于同一个不可约表示$\rho:G\to GL(V)$,$T:V\to V$是表示同构,则要么$T=0$,要么$T=cI$.
 
@@ -194,6 +209,67 @@ $$
 
 (b):我们只需证明$\Phi$是一个投影算符.注意到
 $$
-\Phi^2(M)=\frac{1}{|G|}\sum_{g,h}\rho(h^{-1})\rho(g^{-1})M\rho^\prime(g)\rho^\prime(h)
+\Phi^2(M)=\frac{1}{|G|^2}\sum_{g,h}\rho(h^{-1})\rho(g^{-1})M\rho^\prime(g)\rho^\prime(h)
 $$
-对于任意$k\in G$,恰好有
+对于任意$k\in G$,恰好有$|G|$个$gh$使得$k=gh$.因此
+$$
+\Phi^2(M)=\frac{1}{|G|}\sum_{k}\rho(k^{-1})M\rho^\prime(k)=\Phi(M)
+$$
+因此$\Phi$是投影算符.对于投影算符我们有
+$$
+\mathcal{M}=im\Phi\oplus ker\Phi
+$$
+并且$\Phi|_{im\Phi}=I$,因此显然有
+$$
+tr\Phi=dim(im\Phi)
+$$
+(c):如果$\rho,\rho^\prime$都不可约,则$\forall M\in im\Phi\implies M=\Phi(M)$,因为我们有
+$$
+\forall h\in G,\rho(h^{-1})M\rho^\prime(h)=\rho(h^{-1})\Phi(M)\rho^\prime(h)=\frac{1}{|G|}\sum_g \rho((gh)^{-1})M\rho^\prime(gh)=\Phi(M)=M
+$$
+这说明$[M]:V\to V^\prime$是一个表示同态.由Schur引理,要么$M=0$,要么$M$是同构.
+
+如果$\rho=\rho^\prime$,则由Schur引理的(b),我们有$\forall M\in im\Phi,M=cI$,因此$dim(im\Phi)=1$.由(a),(b),
+$$
+\braket{\chi,\chi}=tr(\Phi)=dim(im\Phi)=1
+$$
+如果表示$\rho,\rho^\prime$不同构,则由上述论证我们必然有$\forall M\in im\Phi,M=0$.因此由(a),(b),
+$$
+\braket{\chi,\chi^\prime}=tr(\Phi)=dim(im\Phi)=0
+$$
+
+## 不可约表示等价类
+我们接下来证明不等价的不可约表示只有共轭类的个数种.
+
+### 引理6
+(a):令$\varphi$是与所有特征标正交的类函数(在共轭类上为常数的函数),则对$G$的任意表示,
+$$
+T=\frac{1}{|G|}\sum_g \overline{\varphi(g)}\rho(g)
+$$
+是零算子.
+(b):令$\rho^{reg}$是正则表示,则$\rho^{reg}(g)$是线性无关的.
+(c):与每个特征标正交的类函数是零函数.
+
+证明:
+(a):因为任意表示是不可约表示的直和,因此可以假设$\rho$是不可约的.我们首先证明$T$是表示同构.注意到
+$$
+\rho(h^{-1})T\rho(h)=\frac{1}{|G|}\sum_g \overline{\varphi(g)}\rho(h^{-1}gh)
+$$
+我们可以将对$g$的求和分解为在每个共轭类里求和.因为$\varphi$是类函数,所以$\varphi(hgh^{-1})=\varphi(g)$.令$g^\prime=hgh^{-1}$即得
+$$
+\rho(h^{-1})T\rho(h)=\frac{1}{|G|}\sum_{g^\prime}\overline{\varphi(h^{-1}g^\prime h)}\rho(g^\prime)=T
+$$
+因此$T$是$\rho$到$\rho$的表示同态.由Schur引理,$T$是数量映射,完全由trace决定.然后我们考虑$tr(T)$.注意到由条件$\varphi$与$\chi$垂直,
+$$
+tr(T)=\frac{1}{|G|}\sum_g \overline{\varphi(g)}\chi(g)=\braket{\varphi,\chi}=0
+$$
+因此$T$是零算子.
+(b):$\{\rho^{reg}(g)e_1=e_g,g\in G\}$线性无关,因此$\rho^{reg}(g)$线性无关.
+
+(c):令$\varphi$是这样的函数,则由(a),
+$$
+\frac{1}{|G|}\sum_g \overline{\varphi(g)}\rho^{reg}(g)
+$$
+是零算子.又因为$\rho^{reg}(g)$线性无关,因此$\forall g,\varphi(g)=0$.
+
+综上所述,特征标的维数等于类函数的维数,即共轭类的个数.
