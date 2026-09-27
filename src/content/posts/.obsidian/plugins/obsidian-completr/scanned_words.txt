@@ -262,6 +262,7 @@ parallel
 processors
 point
 picture
+proton
 category
 chi
 cI
@@ -365,6 +366,7 @@ copy
 chunks
 concurrency
 counter
+closer
 false
 form
 frac
@@ -840,6 +842,7 @@ rv
 raS
 relativistic
 reads
+reg
 braket
 belief
 be
@@ -1231,6 +1234,7 @@ hopf
 holds
 hom
 higher
+hgh
 mathbb
 mathcal
 make
@@ -1825,6 +1829,7 @@ Poisson
 Pie
 Parallelism
 Pipelining
+Pauling
 RL
 Randomness
 Random
@@ -2011,6 +2016,9 @@ anti
 assembly
 achieve
 ansatz
+along
+axis
+atoms
 Confidence
 Chain
 Concentration
@@ -2176,6 +2184,7 @@ eQ
 eFC
 exists
 eta
+each
 value
 variable
 var
@@ -2247,6 +2256,7 @@ vA
 vJW
 vYbHY
 vBa
+varphi
 quantify
 qfh
 qMG
@@ -2487,6 +2497,10 @@ oII
 oF
 open
 oplus
+one
+oxygen
+other
+overline
 Stat
 Schwarz
 Stokes
@@ -2864,6 +2878,7 @@ Iqd
 IDATD
 IDATlSx
 Idealized
+Ice
 LLSE
 Let
 Lorenz
@@ -2944,6 +2959,7 @@ Lagrange
 Latency
 Little
 Laplace
+Linus
 we
 when
 which

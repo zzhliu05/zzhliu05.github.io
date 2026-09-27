@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Algebraic_Bethe.md",
+                "file": "gp_rep.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Algebraic_Bethe"
+              "title": "gp_rep"
             }
           }
         ]
@@ -189,16 +189,18 @@
   },
   "active": "961500ce2fc0ff24",
   "lastOpenFiles": [
-    "big_pie.md",
-    "Algebraic_Bethe.md",
+    "image.png",
+    "hopf-fiber.md",
+    "cs267_1.md",
     "classical-dyson.md",
+    "2026-09-27.md",
+    "Algebraic_Bethe.md",
+    "big_pie.md",
     "lie-algebra-2.md",
     "RL_1.md",
     "dirac_field.md",
     "gp_rep.md",
     "lie-algebra-1.md",
-    "image.png",
-    "hopf-fiber.md",
     "Lag-elec.md",
     "Bose-Ramanujan.md",
     "pier_wave.md",
@@ -206,7 +208,6 @@
     "differential_topology.md",
     "未命名 1.base",
     "未命名.base",
-    "cs267_1.md",
     "cell-Grassmannian.md",
     "CuO_SC.md",
     "first-note.md",
@@ -215,8 +216,6 @@
     "MPS_error.md",
     "MSE1511.md",
     "oscillator_effective.md",
-    "quantize_shallowwave.md",
-    "relativestic-fock-planck.md",
-    "Hilbert_Null.md"
+    "quantize_shallowwave.md"
   ]
 }
