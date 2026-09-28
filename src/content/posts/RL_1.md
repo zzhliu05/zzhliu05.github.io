@@ -25,7 +25,7 @@ RL perspective:状态空间$S_t$,动作空间$A_t$,奖励函数$R_{t+1}$.动作�
 
 On step of RL:$(S_t,A_t,R_{t+1},S_{t+1})$.
 
-概率论的Bayesian Perspective:Probability is belief (not frequency).
+概率论的Bayesian Perspective:概率是信念,不是频率.
 
 期望/条件期望:T=life,E[T]=70.
 

@@ -185,6 +185,7 @@ display
 defining
 dimension
 data
+dimn
 published
 prime
 perspective
@@ -843,6 +844,7 @@ raS
 relativistic
 reads
 reg
+rigid
 braket
 belief
 be
@@ -1318,6 +1320,7 @@ mJ
 margin
 manifold
 memory
+model
 xi
 xd
 xJ
@@ -2091,6 +2094,8 @@ Compilers
 Cache
 CFT
 Cardy
+Columb
+Configuration
 experience
 estimate
 equation
@@ -2257,6 +2262,7 @@ vJW
 vYbHY
 vBa
 varphi
+vertex
 quantify
 qfh
 qMG
@@ -2580,6 +2586,7 @@ Sd
 Show
 Sophus
 Stirling
+Square
 On
 Optimism
 One
@@ -2719,6 +2726,7 @@ Basics
 Bose
 Boson
 Bethe
+Boltzmann
 Theorem
 The
 Then
@@ -2960,6 +2968,7 @@ Latency
 Little
 Laplace
 Linus
+Lattice
 we
 when
 which
@@ -3036,6 +3045,7 @@ width
 ways
 writes
 within
+weight
 Jensen
 Jl
 Jw
@@ -3828,6 +3838,7 @@ VLD
 Vnjen
 VcuY
 Values
+Vertex
 Xc
 Xfv
 Xy

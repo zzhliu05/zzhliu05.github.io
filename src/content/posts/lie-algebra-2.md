@@ -98,13 +98,13 @@ $$
 ### 引理2.2
 若$\mathfrak{L}$是幂零复李代数,$V$为有限维线性空间,$\rho$为线性表示,则$V$可以分解为$\rho$的权空间的直和.
 
-证明:线性代数告诉我们对于单个线性算子$T$,线性空间$V$可以分解为特征子空间的直和
+证明:线性代数告诉我们对于单个线性算子$M$,线性空间$V$可以分解为特征子空间的直和
 $$
-V=\oplus_{\lambda} \{v|(T-\lambda I)^n v=0,\exists n\}=\oplus_{\lambda}V_{\lambda}
+V=\oplus_{\lambda} \{v|(M-\lambda I)^n v=0,\exists n\}=\oplus_{\lambda}V_{\lambda}
 $$
 我们只需说明这个不变子空间分解对于其他线性算子同样成立.
 
-引理:$V_\lambda$同时是$S$的不变子空间,当且仅当$(adT)^n(S)=0$.
+引理:$V_\lambda$同时是$S$的不变子空间,当且仅当$(adT)^n(S)=0$,其中$T=M-\lambda I$.
 
 我们首先计算$(\mathrm{ad}T)^n S$.注意到
 $$
@@ -116,11 +116,36 @@ $$
 $$
 \sum_{i=0}^n C_n^i (-1)^i T^{n-i}ST^i(v)=0
 $$
-我们的思路是逐步提升右侧$T^i$的次数,使得其刚好卡在特征子空间的临界次数上.记$n_i$为
+我们的思路是逐步提升右侧$T^i$的次数,使得其刚好卡在特征子空间的临界次数上.记$n_\lambda$为
 $$
-T^{n_i-1}V_i\neq 0,T^{n_i}V_i=0
+T^{n_\lambda-1}V_\lambda\neq 0,T^{n_\lambda}V_\lambda=0
 $$
 则通过如下方法可以提升$T^i$的次数.注意到
 $$
-
+T (adT)^nS-(adT)^{n+1}S=((adT)^nS)T=\sum_{i=0}^n C_n^i (-1)^i T^{n-i}ST^{i+1}
 $$
+由于$(adT)^n S=0$对于足够大的$n$都成立,因此不断进行上式操作
+$$
+\sum_{i=0}^n C_n^i (-1)^i T^{n-i}ST^{i+m}=0
+$$
+对于任意$m$成立.我们考虑上式在$V_\lambda$上的限制.令$m=n_\lambda-1$.此时只有$i=0$一项不为$0$.因此
+$$
+T^{n}S T^{n_\lambda-1}=0
+$$
+然后令$m=n_\lambda-2$,同理可得$T^{n}ST^{n_\lambda-2} =0$.归纳可得$T^n S=0$.这说明$S$保持$V_\lambda$,即$V_\lambda$是$S$的不变子空间.
+
+现在根据引理,先随便取一个$a_1\in \mathfrak{L}$.$\rho(a_1)$有特征子空间分解
+$$
+V=\oplus V_{\lambda,\rho(a_1)}
+$$
+现在再取$\rho(a_2)$与$\rho(a_1)$线性无关.由幂零条件,我们必然有对于足够大的$n$,
+$$
+(ad \rho(a_2))^n \rho(a_1)=0
+$$
+因此$V_{\lambda,\rho(a_1)}$同时也是$\rho(a_2)$的不变子空间,我们可以在$V_{\lambda,\rho(a_1)}$这个子空间中再对$\rho(a_2)$做特征子空间分解. 这个过程可以一直进行下去,直到取完整个李代数(由于李代数有限维,总会在有限步后终止).最终分解得到的"最小"不变子空间是所有项的不变子空间,因而是一个权空间.
+
+### 引理2.3
+一个李代数$\mathfrak{L}$是幂零的当且仅当$\forall a\in \mathfrak{L}$,$\exists n,(ad a)^n=0$.
+
+证明:$\impliedby$是显然的(由定义).
+$\implies$:
