@@ -1833,6 +1833,7 @@ Pie
 Parallelism
 Pipelining
 Pauling
+Perron
 RL
 Randomness
 Random
@@ -3384,6 +3385,7 @@ Fibration
 FFT
 Fortran
 Formula
+Frobenius
 Notice
 Notation
 Ne

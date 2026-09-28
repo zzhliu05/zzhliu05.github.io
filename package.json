@@ -46,6 +46,7 @@
     "astro-icon": "^1.1.5",
     "axios": "^1.17.0",
     "dayjs": "^1.11.21",
+    "github-slugger": "^2.0.0",
     "hastscript": "^9.0.1",
     "katex": "^0.17.0",
     "l2d-widget": "^0.1.0",
@@ -73,6 +74,7 @@
     "svelte": "^5.56.3",
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3",
+    "yaml": "^2.9.0",
     "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {

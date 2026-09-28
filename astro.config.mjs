@@ -31,6 +31,7 @@ import { remarkContent } from "./src/plugins/remark-content.mjs";
 import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
 import { remarkFixGithubAdmonitions } from "./src/plugins/remark-fix-github-admonitions.js";
 import { remarkMermaid } from "./src/plugins/remark-mermaid.js";
+import { remarkWikiLinks } from "./src/plugins/remark-wiki-links.mjs";
 
 // https://astro.build/config
 export default defineConfig({
@@ -129,6 +130,7 @@ export default defineConfig({
 		processor: unified({
 			remarkPlugins: [
 				remarkMath,
+				remarkWikiLinks,
 				remarkContent,
 				remarkFixGithubAdmonitions,
 				remarkDirective,

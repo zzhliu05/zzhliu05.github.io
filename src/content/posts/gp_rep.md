@@ -144,19 +144,19 @@ $$
 
 ### Schur引理
 
-(a):如果$\rho$,$\rho^\prime$分别是在$V,V^\prime$上的不可约表示,并且$T:V\to V^\prime$是一个表示同态,则要么$T=0$,要么$T$是同构.
+(a)如果$\rho$,$\rho^\prime$分别是在$V,V^\prime$上的不可约表示,并且$T:V\to V^\prime$是一个表示同态,则要么$T=0$,要么$T$是同构.
 
-(b):如果对于同一个不可约表示$\rho:G\to GL(V)$,$T:V\to V$是表示同构,则要么$T=0$,要么$T=cI$.
+(b)如果对于同一个不可约表示$\rho:G\to GL(V)$,$T:V\to V$是表示同构,则要么$T=0$,要么$T=cI$.
 
 证明:
 
-(a):由于$ker T$是不变子空间,并且$\rho$是不可约表示,因此$ker T=V$(对应$T=0$)或者$T$是单射.
+(a)由于$ker T$是不变子空间,并且$\rho$是不可约表示,因此$ker T=V$(对应$T=0$)或者$T$是单射.
 
 由于$im T$是不变子空间,并且$\rho^\prime$是不可约表示,因此$im T=0$(对应$T=0$)或者$T$是满射.
 
 综上$T=0$或者$T$是双射.
 
-(b):根据(a)我们不妨考虑$T\neq 0$.此时$T$是同构.注意到
+(b)根据(a)我们不妨考虑$T\neq 0$.此时$T$是同构.注意到
 $$
 ker(T-\lambda I)
 $$
@@ -202,12 +202,13 @@ $$
 $$
 
 证明:
-(a):由引理4,我们有
+
+(a)由引理4,我们有
 $$
 tr\Phi=\frac{1}{|G|}\sum_g tr \rho(g^{-1}) tr \rho^\prime(g)=\frac{1}{|G|}\sum_g \bar{\chi}(g)\bar{\chi^\prime}(g)=\braket{\chi,\chi^\prime}
 $$
 
-(b):我们只需证明$\Phi$是一个投影算符.注意到
+(b)我们只需证明$\Phi$是一个投影算符.注意到
 $$
 \Phi^2(M)=\frac{1}{|G|^2}\sum_{g,h}\rho(h^{-1})\rho(g^{-1})M\rho^\prime(g)\rho^\prime(h)
 $$
@@ -223,7 +224,7 @@ $$
 $$
 tr\Phi=dim(im\Phi)
 $$
-(c):如果$\rho,\rho^\prime$都不可约,则$\forall M\in im\Phi\implies M=\Phi(M)$,因为我们有
+(c)如果$\rho,\rho^\prime$都不可约,则$\forall M\in im\Phi\implies M=\Phi(M)$,因为我们有
 $$
 \forall h\in G,\rho(h^{-1})M\rho^\prime(h)=\rho(h^{-1})\Phi(M)\rho^\prime(h)=\frac{1}{|G|}\sum_g \rho((gh)^{-1})M\rho^\prime(gh)=\Phi(M)=M
 $$
@@ -242,16 +243,17 @@ $$
 我们接下来证明不等价的不可约表示只有共轭类的个数种.
 
 ### 引理6
-(a):令$\varphi$是与所有特征标正交的类函数(在共轭类上为常数的函数),则对$G$的任意表示,
+(a)令$\varphi$是与所有特征标正交的类函数(在共轭类上为常数的函数),则对$G$的任意表示,
 $$
 T=\frac{1}{|G|}\sum_g \overline{\varphi(g)}\rho(g)
 $$
 是零算子.
-(b):令$\rho^{reg}$是正则表示,则$\rho^{reg}(g)$是线性无关的.
-(c):与每个特征标正交的类函数是零函数.
+(b)令$\rho^{reg}$是正则表示,则$\rho^{reg}(g)$是线性无关的.
+(c)与每个特征标正交的类函数是零函数.
 
 证明:
-(a):因为任意表示是不可约表示的直和,因此可以假设$\rho$是不可约的.我们首先证明$T$是表示同构.注意到
+
+(a)因为任意表示是不可约表示的直和,因此可以假设$\rho$是不可约的.我们首先证明$T$是表示同构.注意到
 $$
 \rho(h^{-1})T\rho(h)=\frac{1}{|G|}\sum_g \overline{\varphi(g)}\rho(h^{-1}gh)
 $$
@@ -264,9 +266,10 @@ $$
 tr(T)=\frac{1}{|G|}\sum_g \overline{\varphi(g)}\chi(g)=\braket{\varphi,\chi}=0
 $$
 因此$T$是零算子.
-(b):$\{\rho^{reg}(g)e_1=e_g,g\in G\}$线性无关,因此$\rho^{reg}(g)$线性无关.
 
-(c):令$\varphi$是这样的函数,则由(a),
+(b)$\{\rho^{reg}(g)e_1=e_g,g\in G\}$线性无关,因此$\rho^{reg}(g)$线性无关.
+
+(c)令$\varphi$是这样的函数,则由(a),
 $$
 \frac{1}{|G|}\sum_g \overline{\varphi(g)}\rho^{reg}(g)
 $$
