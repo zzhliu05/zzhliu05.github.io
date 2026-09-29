@@ -147,5 +147,8 @@ $$
 ### 引理2.3
 一个李代数$\mathfrak{L}$是幂零的当且仅当$\forall a\in \mathfrak{L}$,$\exists n,(ad a)^n=0$.
 
-证明:$\impliedby$是显然的(由定义).
+证明:
+
+$\impliedby$是显然的(由定义).
+
 $\implies$:

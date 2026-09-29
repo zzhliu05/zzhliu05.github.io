@@ -264,6 +264,7 @@ processors
 point
 picture
 proton
+parameter
 category
 chi
 cI
@@ -1020,6 +1021,10 @@ satisfy
 sec
 single
 saddle
+simplex
+spin
+symmetry
+spectral
 in
 im
 implies
@@ -1096,6 +1101,7 @@ invariant
 image
 images
 img
+inversion
 gv
 gw
 gT
@@ -1321,6 +1327,7 @@ margin
 manifold
 memory
 model
+matrix
 xi
 xd
 xJ
@@ -1834,6 +1841,7 @@ Parallelism
 Pipelining
 Pauling
 Perron
+Pauli
 RL
 Randomness
 Random
@@ -2434,6 +2442,7 @@ More
 Memory
 Move
 Maclaurin
+Monodromy
 of
 only
 off
@@ -2588,6 +2597,7 @@ Show
 Sophus
 Stirling
 Square
+Simplex
 On
 Optimism
 One
@@ -3184,6 +3194,7 @@ EOD
 Ep
 EdFo
 Euclidean
+Eight
 KL
 KD
 KW

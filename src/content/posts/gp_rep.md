@@ -62,7 +62,7 @@ $$
 ### 引理2
 令$W\subset V$是Unitary表示$\rho$的不变子空间.则其正交补也是不变子空间.
 
-证明:
+**证明:**
 $$
 \forall g,\forall v\in W^\perp,\forall w\in W,\braket{gv,w}=\braket{g^{-1}gv,g^{-1}w}=\braket{v,g^{-1}w}=0
 $$
@@ -75,7 +75,8 @@ $$
 ### 定理1
 给定表示$\rho:G\to GL(V)$,存在V$上的内积使得$\rho$是Unitary表示.
 
-证明:任取$V$上内积$\braket{}$,定义平均内积为
+**证明:**
+任取$V$上内积$\braket{}$,定义平均内积为
 $$
 \braket{v,w}_G=\frac{1}{|G|}\sum_{g\in G}\braket{gv,gw}
 $$
@@ -108,7 +109,7 @@ $$
 
 (e):同构的表示有相同的特征标.
 
-证明:
+**证明:**
 (a):显然.
 (b):由trace的共轭不变性,
 $$
@@ -148,7 +149,7 @@ $$
 
 (b)如果对于同一个不可约表示$\rho:G\to GL(V)$,$T:V\to V$是表示同构,则要么$T=0$,要么$T=cI$.
 
-证明:
+**证明:**
 
 (a)由于$ker T$是不变子空间,并且$\rho$是不可约表示,因此$ker T=V$(对应$T=0$)或者$T$是单射.
 
@@ -177,7 +178,8 @@ $$
 tr(F_{AB})=tr(A)tr(B)
 $$
 
-证明:取$M$的一组基$E_{ij},i=1,\dots,m,j=1,\dots,n$,则
+**证明:**
+取$M$的一组基$E_{ij},i=1,\dots,m,j=1,\dots,n$,则
 $$
 tr(F_{AB})=\sum_{i,j}\braket{E_{ij}|F|E_{ij}}=\sum_{i,j}[AE_{ij}B]_{ij}=\sum_{i,j,k,l}A_{ik}\delta_{ki}\delta_{jl}B_{lj}
 $$
@@ -201,7 +203,7 @@ $$
 \braket{\chi,\chi}=1,\braket{\chi,\chi^\prime}=0
 $$
 
-证明:
+**证明:**
 
 (a)由引理4,我们有
 $$
@@ -251,7 +253,7 @@ $$
 (b)令$\rho^{reg}$是正则表示,则$\rho^{reg}(g)$是线性无关的.
 (c)与每个特征标正交的类函数是零函数.
 
-证明:
+**证明:**
 
 (a)因为任意表示是不可约表示的直和,因此可以假设$\rho$是不可约的.我们首先证明$T$是表示同构.注意到
 $$
