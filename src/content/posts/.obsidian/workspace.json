@@ -13,12 +13,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "RL_1.md",
+                "file": "Algebraic_Bethe.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "RL_1"
+              "title": "Algebraic_Bethe"
+            }
+          },
+          {
+            "id": "28356eabbf98e65d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Integral_ring_extension.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Integral_ring_extension"
             }
           }
         ]
@@ -189,16 +203,17 @@
   },
   "active": "2fce8100a0f9d00c",
   "lastOpenFiles": [
+    "Integral_ring_extension.md",
     "Algebraic_Bethe.md",
+    "big_pie.md",
+    "RL_1.md",
     "Perron_Frobenius.md",
     "gp_rep.md",
     "lie-algebra-2.md",
     "classical-dyson.md",
-    "big_pie.md",
     "Bose-Ramanujan.md",
     "differential_topology.md",
     "dimn-rigid.md",
-    "RL_1.md",
     "radiation.md",
     "pier_wave.md",
     "cs267_1.md",
@@ -220,7 +235,6 @@
     "cell-Grassmannian.md",
     "CuO_SC.md",
     "first-note.md",
-    "hopf-invariant.md",
-    "Isometry.md"
+    "hopf-invariant.md"
   ]
 }
