@@ -27,15 +27,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Integral_ring_extension.md",
+                "file": "dryden-spectrum.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Integral_ring_extension"
+              "title": "dryden-spectrum"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -201,9 +202,11 @@
       "bases:新建数据库": false
     }
   },
-  "active": "2fce8100a0f9d00c",
+  "active": "28356eabbf98e65d",
   "lastOpenFiles": [
     "Integral_ring_extension.md",
+    "未命名.md",
+    "dryden-spectrum.md",
     "Algebraic_Bethe.md",
     "big_pie.md",
     "RL_1.md",
@@ -233,8 +236,6 @@
     "未命名 1.base",
     "未命名.base",
     "cell-Grassmannian.md",
-    "CuO_SC.md",
-    "first-note.md",
-    "hopf-invariant.md"
+    "CuO_SC.md"
   ]
 }
