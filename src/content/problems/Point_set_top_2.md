@@ -3,7 +3,7 @@ title: "点拓复健:连续性"
 date: 2026-09-08
 status: "resolved"
 question: |
-  证明$\mathbb{Q}$上由度量$|x-y|$诱导的拓扑$\mathbb{Q}_e$和离散拓扑$\mathbb{Q}_d$不同胚. 
+  证明$\mathbb{Q}$上由度量$|x-y|$诱导的拓扑$\mathbb{Q}_e$和离散拓扑$\mathbb{Q}_d$不同胚.
 tags: ["点集拓扑"]
 ---
 假设存在同胚
