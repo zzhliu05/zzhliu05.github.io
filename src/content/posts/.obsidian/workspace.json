@@ -34,9 +34,37 @@
               "icon": "lucide-file",
               "title": "RL_1"
             }
+          },
+          {
+            "id": "0ac6a148e24c323b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "XGboost.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "XGboost"
+            }
+          },
+          {
+            "id": "86fb939b80e7a9df",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "RL_1.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "RL_1"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -202,15 +230,16 @@
       "bases:新建数据库": false
     }
   },
-  "active": "28356eabbf98e65d",
+  "active": "86fb939b80e7a9df",
   "lastOpenFiles": [
+    "Algebraic_Bethe.md",
+    "RL_1.md",
+    "XGboost.md",
+    "Quant.md",
     "susceptibility.md",
     "dryden-spectrum.md",
     "Integral_ring_extension.md",
-    "未命名.md",
-    "Algebraic_Bethe.md",
     "big_pie.md",
-    "RL_1.md",
     "Perron_Frobenius.md",
     "gp_rep.md",
     "lie-algebra-2.md",
@@ -235,7 +264,6 @@
     "Lag-elec.md",
     "未命名 1.base",
     "未命名.base",
-    "cell-Grassmannian.md",
-    "CuO_SC.md"
+    "cell-Grassmannian.md"
   ]
 }

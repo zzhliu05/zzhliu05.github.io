@@ -271,6 +271,7 @@ picture
 proton
 parameter
 polynomial
+probability
 category
 chi
 cI
@@ -705,6 +706,7 @@ Hamiltonian
 Hierarchy
 Handling
 Hardy
+Hoeffding
 unitary
 uncertainty
 using
@@ -776,6 +778,7 @@ uqs
 unique
 use
 unital
+upper
 rho
 random
 restrict
@@ -941,6 +944,7 @@ basis
 byte
 bandwidth
 bar
+bound
 sum
 subset
 step
@@ -1643,6 +1647,7 @@ line
 length
 larger
 latency
+lemma
 AB
 AMB
 Adopt
@@ -1967,6 +1972,7 @@ Realistic
 Reuse
 Ramanujan
 Riemann
+Remark
 and
 also
 approximate
@@ -2143,6 +2149,9 @@ Columb
 Configuration
 Cayley
 Compute
+Carlo
+Chebyshev
+Chernoff
 experience
 estimate
 equation
@@ -2485,6 +2494,7 @@ Memory
 Move
 Maclaurin
 Monodromy
+Monte
 of
 only
 off
@@ -2783,6 +2793,7 @@ Boson
 Bethe
 Boltzmann
 But
+Basic
 Theorem
 The
 Then
@@ -3978,6 +3989,7 @@ XdY
 XMb
 XLD
 XGAc
+XGboost
 Qt
 QM
 Qa

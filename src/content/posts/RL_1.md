@@ -1,9 +1,11 @@
 ---
-title: "RL(1):Randomness and Confidence"
-description: "强化学习的概率统计基础."
-published: 2026-07-23
-tags: ["强化学习","概率统计"]
-category: "强化学习"
+title: RL(1):Randomness and Confidence
+description: 强化学习的概率统计基础.
+published: 2026-10-03
+tags:
+  - 强化学习
+  - 概率统计
+category: 强化学习
 draft: false
 ---
 
@@ -186,3 +188,70 @@ $$
 $$
 \mu\in [\hat{\mu}_n-\sqrt{\frac{ln(2/\delta)}{2n}},\hat{\mu}_n+\sqrt{\frac{ln(2/\delta)}{2n}}]
 $$
+在Monte Carlo树搜索等强化学习算法中一种常见的最优行动选择是置信区间上界选择(upper confidence bound)
+$$
+A_t=\mathrm{argmax}_a[\hat{\mu}_a+\sqrt{\frac{2ln(t)}{N_t(a)}}]
+$$
+其中$N_t(a)$是策略$a$被采样的次数.直观理解,如果一个行动被采样的次数很少,那么我们应该认为其估值是不准确的.从冒险的角度,我们应该鼓励探索采样次数少的行动,因此用置信区间上界(即这个行动大概率能得到的最优回报)作为选择的依据.
+
+
+### Markov Chain
+一个随机过程是一族随机变量
+$$
+\{X_t|t\in I\}
+$$
+Markov性:给定当前状态的信息,未来状态的烟花概率独立于过去的演化.
+
+Markov链:对于随机变量序列$X_i$取值于$\{1,\dots,M\}$,我们称其为Markov链,如果
+$$
+P(X_{n+1}=j|X_n=i,X_{n-1}=i-1,\dots,X_0=i_0)=P(X_{n+1}=j|X_n=i)
+$$
+我们可以定义转移矩阵
+$$
+T_{ij}=P(X_{n+1}=i|X_n=j)
+$$
+$T_{ij}$是一个非负矩阵,并且由全概率公式,每一行的和为$1$.
+
+假如第$n$步我们有概率分布
+$$
+\mu_n(i)=P(X_n=i)
+$$
+则第$n+1$步的概率分布为
+$$
+\mu_{n+1}=T\mu_n
+$$
+
+Markov链的第$i$个节点称为可回归的,如果存在$n\in \mathbb{N}_{>0}$,such that
+$$
+(T^n)_{ii}>0
+$$
+Markov链称为不可约的,如果对于任意两个节点$i,j$,$\exists n\in \mathbb{N}_{>0}$,使得
+$$
+(T^n)_{ij}>0
+$$
+即对应的有向图是强连通的.
+
+Theorem:不可约的Markov链的所有节点都是可回归的.
+
+对于Markov链的第$i$个节点,定义其周期
+$$
+d(i)=\mathrm{gcd}\{n>0|(T^n)_{ii}>0\}
+$$
+
+一个态空间上的概率分布$\mu$称为平稳分布,如果
+$$
+\mu=T\mu
+$$
+即$\mu$是$T$特征值为$1$的特征向量.
+
+一个分布是细致平衡,如果
+$$
+T_{ij}\mu_j=T_{ji}\mu_i
+$$
+即每条边的净流量都为$0$.
+
+对于Markov状态空间上的分布$p,q$,我们可以定义全变差范数
+$$
+||p-q||_{TV}=\frac{1}{2}\sum_i |p(i)-q(i)|
+$$
+### Statistical Inference
