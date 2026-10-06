@@ -354,6 +354,10 @@ html[data-banner-title-enabled="false"] .banner-text-overlay {
 	display: none !important;
 }
 
+body:not(.enable-banner.fullscreen-banner) #banner-scroll-cue {
+  display: none;
+}
+
 /* ==========================================================================
    全屏 Banner 模式 - 复用 Banner 设计，仅改变高度
    ========================================================================== */

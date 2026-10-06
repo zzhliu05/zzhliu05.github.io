@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "RL_1.md",
+                "file": "XGboost.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "RL_1"
+              "title": "XGboost"
             }
           }
         ],
@@ -232,8 +232,8 @@
   },
   "active": "86fb939b80e7a9df",
   "lastOpenFiles": [
-    "Algebraic_Bethe.md",
     "RL_1.md",
+    "Algebraic_Bethe.md",
     "XGboost.md",
     "Quant.md",
     "susceptibility.md",

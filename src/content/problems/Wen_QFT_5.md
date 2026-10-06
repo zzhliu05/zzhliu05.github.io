@@ -6,7 +6,7 @@ question: 给出均匀势场$V(x)=-\lambda x$下的传播子.
 tags:
   - QFT
 ---
-Schrodinger方程法:我们可以直接写出
+**Schrodinger方程法**:我们可以直接写出
 $$
 i\partial_t G(x,t)=HG(x,t)=(-\frac{\partial_x^2}{2m}-\lambda x)G(x,t)
 $$
@@ -18,4 +18,10 @@ $$
 $$
 i\partial_t f=-\lambda x f-\frac{\partial_x^2 f}{2m}-\frac{ix}{t}\partial_x f
 $$
-特
+假设$f=e^g$,那么
+$$
+i\partial_t g=-\lambda x-\frac{(\partial_x g)^2+\partial_x^2 g}{2m}-\frac{x}{t}\partial_x g
+$$
+
+
+**路径积分法**:

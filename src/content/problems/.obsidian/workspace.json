@@ -13,15 +13,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Wen_QFT_5.md",
+                "file": "Chiral_edge_mode.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Wen_QFT_5"
+              "title": "Chiral_edge_mode"
+            }
+          },
+          {
+            "id": "0e0920b1a81fad4b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Wen_QFT_6.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Wen_QFT_6"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -188,20 +203,24 @@
       "bases:新建数据库": false
     }
   },
-  "active": "d72d60cc3cae362b",
+  "active": "0e0920b1a81fad4b",
   "lastOpenFiles": [
-    "Wen_QFT_4.md",
+    "Coleman_QFT_6.md",
+    "Wen_QFT_6.md",
     "Wen_QFT_1.md",
+    "Wen_QFT_2.md",
+    "Wen_QFT_4.md",
+    "Wen_QFT_3.md",
+    "Wen_QFT_5.md",
+    "template/Template.md",
+    "未命名.base",
+    "Chiral_edge_mode.md",
+    "template",
+    "Coherent_complete.md",
     "Point_set_top_4.md",
     "Point_set_top_3.md",
     "Point_set_top_2.md",
     "Drude.md",
-    "Coleman_QFT_6.md",
-    "Wen_QFT_5.md",
-    "Wen_QFT_2.md",
-    "Wen_QFT_3.md",
-    "Chiral_edge_mode.md",
-    "Coherent_complete.md",
     "Coleman_QFT_2.md",
     "Coleman_QFT_3.md",
     "Coleman_QFT_5.md"

@@ -945,6 +945,7 @@ byte
 bandwidth
 bar
 bound
+boosting
 sum
 subset
 step
@@ -1050,6 +1051,7 @@ spectral
 set
 subring
 say
+square
 in
 im
 implies
@@ -1131,6 +1133,7 @@ interal
 injective
 integral
 integrally
+idea
 gv
 gw
 gT
@@ -1648,6 +1651,7 @@ length
 larger
 latency
 lemma
+loss
 AB
 AMB
 Adopt
@@ -2495,6 +2499,7 @@ Move
 Maclaurin
 Monodromy
 Monte
+Mean
 of
 only
 off
@@ -2652,6 +2657,7 @@ Square
 Simplex
 Since
 Spectrum
+Statistical
 On
 Optimism
 One
@@ -2794,6 +2800,7 @@ Bethe
 Boltzmann
 But
 Basic
+Boosting
 Theorem
 The
 Then
@@ -2871,6 +2878,7 @@ Topology
 Two
 Tuesday
 Take
+Tree
 If
 It
 In
@@ -2955,6 +2963,7 @@ IDATlSx
 Idealized
 Ice
 Integral
+Inference
 LLSE
 Let
 Lorenz

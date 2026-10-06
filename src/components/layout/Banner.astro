@@ -24,6 +24,7 @@ interface Props {
 
 	// 文字覆盖层
 	showTextOverlay?: boolean;
+	showScrollCue?: boolean;
 	overlayTitle?: string;
 	overlaySubtitle?: string | string[];
 	typewriter?: boolean;
@@ -36,6 +37,7 @@ const {
 	bannerImages,
 	mobileNonHomeBannerClass = "",
 	showTextOverlay = false,
+	showScrollCue = false,
 	overlayTitle = siteConfig.banner.homeText?.title,
 	overlaySubtitle = siteConfig.banner.homeText?.subtitle,
 	typewriter = siteConfig.banner.homeText?.typewriter?.enable ?? false,
@@ -643,6 +645,17 @@ const bannerFormats = getImageFormats();
 	)}
 
 	<!-- 非首页页面标题覆盖层（持久化容器，JS 动态填充文本） -->
+	{showScrollCue && (
+		<a
+			id="banner-scroll-cue"
+			href="#main-grid"
+			aria-label="向下浏览文章"
+			title="向下浏览文章"
+		>
+			<Icon name="material-symbols:keyboard-double-arrow-down-rounded" />
+		</a>
+	)}
+
 	<div id="banner-page-overlay" class="banner-page-overlay hidden lg:flex absolute inset-0 z-20 pointer-events-none">
 		<div class="flex flex-col items-center justify-center w-full text-center px-4">
 			<h2 id="page-overlay-title" class="page-overlay-title text-3xl lg:text-5xl text-white font-bold drop-shadow-lg px-4"></h2>
@@ -751,6 +764,44 @@ const bannerFormats = getImageFormats();
 </div>
 
 <style>
+	#banner-scroll-cue {
+		position: absolute;
+		bottom: max(1.5rem, calc(env(safe-area-inset-bottom) + 1rem));
+		left: 50%;
+		z-index: 30;
+		display: grid;
+		width: 3rem;
+		height: 3rem;
+		place-items: center;
+		color: white;
+		filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.65));
+		transform: translateX(-50%);
+		animation: scroll-cue-float 1.8s ease-in-out infinite;
+	}
+
+	#banner-scroll-cue :global(svg) {
+		width: 2.5rem;
+		height: 2.5rem;
+	}
+
+	#banner-scroll-cue:hover {
+		color: white;
+		filter: drop-shadow(0 3px 7px rgba(0, 0, 0, 0.85));
+	}
+
+	#banner-scroll-cue:focus-visible {
+		outline: 2px solid white;
+		outline-offset: 2px;
+	}
+
+	@keyframes scroll-cue-float {
+		50% { transform: translate(-50%, 0.5rem); }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		#banner-scroll-cue { animation: none; }
+	}
+
 	/* Banner 文本样式 */
 	.banner-title {
 		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
