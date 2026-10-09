@@ -470,6 +470,7 @@ fast
 faithful
 finitely
 finite
+from
 note
 neq
 not
@@ -2658,6 +2659,7 @@ Simplex
 Since
 Spectrum
 Statistical
+Samples
 On
 Optimism
 One
@@ -3046,6 +3048,7 @@ Little
 Laplace
 Linus
 Lattice
+Learning
 we
 when
 which
