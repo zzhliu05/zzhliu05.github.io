@@ -22,63 +22,21 @@
             }
           },
           {
-            "id": "28356eabbf98e65d",
+            "id": "39ed56458154df71",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "RL_1.md",
+                "file": "Fokker-Plank.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "RL_1"
-            }
-          },
-          {
-            "id": "0ac6a148e24c323b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "XGboost.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "XGboost"
-            }
-          },
-          {
-            "id": "86fb939b80e7a9df",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "XGboost.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "XGboost"
-            }
-          },
-          {
-            "id": "fd7d6b2e664b57aa",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "RL_2.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "RL_2"
+              "title": "Fokker-Plank"
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -140,7 +98,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "16f0890aedc91f04",
@@ -244,12 +203,15 @@
       "bases:新建数据库": false
     }
   },
-  "active": "fd7d6b2e664b57aa",
+  "active": "39ed56458154df71",
   "lastOpenFiles": [
-    "RL_1.md",
-    "RL_2.md",
-    "XGboost.md",
     "Algebraic_Bethe.md",
+    "Fokker-Plank.md",
+    "RL_2.md",
+    "RL_1.md",
+    "未命名 1",
+    "未命名",
+    "XGboost.md",
     "Quant.md",
     "susceptibility.md",
     "dryden-spectrum.md",
@@ -276,7 +238,6 @@
     "hopf-fiber.md",
     "2026-09-27.md",
     "dirac_field.md",
-    "Lag-elec.md",
     "未命名 1.base",
     "未命名.base"
   ]

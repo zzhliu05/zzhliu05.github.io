@@ -29,7 +29,7 @@ $$
 $$
 化简得
 $$
-\braket{\Delta x^2}=\frac{m^2v_0^2}{\xi^2}(1-e^{-\xi t/m})^2+\int_0^t dt_1\int_0^t dt_2 \int_0^{max(t_1,t_2)}d\tau e^{2\xi \tau/m}\frac{2A}{m^2}=\cdots+\frac{2Ae^{-2\xi t/m}}{m^2}
+\braket{\Delta x^2}=\frac{m^2v_0^2}{\xi^2}(1-e^{-\xi t/m})^2+\int_0^t dt_1\int_0^t dt_2 \int_0^{min(t_1,t_2)}d\tau e^{2\xi \tau/m}\frac{2A}{m^2}
 $$
 
 对于正则系综,代入FDT:$A=\xi k_B T$,我们有
