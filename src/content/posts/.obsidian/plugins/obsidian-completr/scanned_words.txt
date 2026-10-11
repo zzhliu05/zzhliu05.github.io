@@ -708,6 +708,7 @@ Hierarchy
 Handling
 Hardy
 Hoeffding
+Heisenberg
 unitary
 uncertainty
 using
@@ -3469,6 +3470,7 @@ Fortran
 Formula
 Frobenius
 Fourier
+Fokker
 Notice
 Notation
 Ne

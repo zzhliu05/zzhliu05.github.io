@@ -27,16 +27,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Fokker-Plank.md",
+                "file": "classical-dyson.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Fokker-Plank"
+              "title": "classical-dyson"
+            }
+          },
+          {
+            "id": "dfb7d0585ee070c5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Yoneda_lemma.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Yoneda_lemma"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -98,8 +112,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "16f0890aedc91f04",
@@ -133,7 +146,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "lie-algebra-2.md",
+                "file": "Yoneda_lemma.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": false
               },
@@ -203,10 +216,17 @@
       "bases:新建数据库": false
     }
   },
-  "active": "39ed56458154df71",
+  "active": "dfb7d0585ee070c5",
   "lastOpenFiles": [
-    "Algebraic_Bethe.md",
+    "classical-dyson.md",
+    "Yoneda_lemma.md",
+    "Bose-Ramanujan.md",
+    "differential_topology.md",
     "Fokker-Plank.md",
+    "hopf-fiber.md",
+    "big_pie.md",
+    "Algebraic_Bethe.md",
+    "gp_rep.md",
     "RL_2.md",
     "RL_1.md",
     "未命名 1",
@@ -216,13 +236,8 @@
     "susceptibility.md",
     "dryden-spectrum.md",
     "Integral_ring_extension.md",
-    "big_pie.md",
     "Perron_Frobenius.md",
-    "gp_rep.md",
     "lie-algebra-2.md",
-    "classical-dyson.md",
-    "Bose-Ramanujan.md",
-    "differential_topology.md",
     "dimn-rigid.md",
     "radiation.md",
     "pier_wave.md",
@@ -235,9 +250,7 @@
     "新建文件夹",
     "image.png",
     "lie-algebra-1.md",
-    "hopf-fiber.md",
     "2026-09-27.md",
-    "dirac_field.md",
     "未命名 1.base",
     "未命名.base"
   ]
