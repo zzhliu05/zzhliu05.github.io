@@ -20,25 +20,22 @@ $$\frac{dX}{dt}(q^i(t),p_i(t),t)=\frac{\partial X}{\partial t}+\{X,H\}$$
 我们考虑$\partial_t X=0$的情形.则记非微扰传播子为
 $$U_0(t)=e^{-tX_{H_0}}$$
 并且假设
-$$X(q^i(t),p_i(t))=(U_0(t)f)(q^i(0),p_i(0),t)$$
+$$X(q^i(t),p_i(t))=U(t)[X](q^i(0),p_i(0))=(U_0(t)f)(q^i(0),p_i(0),t)$$
 代入运动方程
-$$\frac{dX}{dt}=-X_{H_0}(X)+U_0(t)\partial_t f=-X_{H_0}(X)-X_{V(t)}(U_0(t)f)$$
-
+$$\frac{dX}{dt}=-X_{H_0}(X)+U_0(t)\partial_t f=-X_{H_0}(X)-X_{V(t)}U_0(t)[f]$$
 因此
-
 $$U_0(t)\partial_t f=-X_{V(t)}U_0(t)[f]$$
-
 即
 
 $$\partial_t f=-U_0^{-1}(t)X_{V(t)}U_0(t)[f]$$
-
 显然我们应该有$f(q^i,p_i,0)=X(q^i,p_i)$,因此
 
 $$f(q^i,p_i,t)=X(q^i,p_i)-\int_0^t d\tau, U_0^{-1}(\tau)X_{V(\tau)}U_0(\tau)[f]$$
 
 类似Dyson级数展开,我们得到
 
-$$f(q^i,p_i,t)=\sum_{n=0}^\infty (-1)^n \prod_{k=n}^{1} \left(\int_0^{t_{k+1}}dt_k, U_0^{-1}(t_k)X_{V(t_k)}U_0(t_k)\right)[X]=\mathcal{T}\left{e^{-\int_0^t d\tau, \tilde{X}_{V(\tau)}}\right}[X]$$
+$$f(q^i,p_i,t)=\sum_{n=0}^\infty (-1)^n \prod_{k=n}^{1} \left(\int_0^{t_{k+1}}dt_k, U_0^{-1}(t_k)X_{V(t_k)}U_0(t_k)\right)[X]=\mathcal{T}\left{e^{-\int_0^t d\tau, \tilde{X}_{V(\tau)}}\right}[X]
+$$
 
 其中$t_{n+1}:=t$,乘积中$k=n$在最左边(即时间较晚的算符在左),$\mathcal{T}$为时间编序,$\tilde{X}_{V(\tau)}:=U_0^{-1}(\tau)X_{V(\tau)}U_0(\tau)$是相互作用绘景下的可观测量.由于$U_0$是正则变换,保持Poisson括号,故
 
