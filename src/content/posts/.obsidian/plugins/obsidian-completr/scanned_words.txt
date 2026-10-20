@@ -1564,6 +1564,7 @@ Ga
 General
 Grassmannian
 Grassman
+Green
 lambda
 lj
 life
@@ -3398,6 +3399,7 @@ Darwin
 Dedekind
 Define
 Dryden
+Duffing
 For
 Fock
 Field
