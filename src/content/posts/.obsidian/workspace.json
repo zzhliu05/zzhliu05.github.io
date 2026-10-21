@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "classical-dyson.md",
+                "file": "gp_rep.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "classical-dyson"
+              "title": "gp_rep"
             }
           }
         ],
@@ -218,11 +218,11 @@
   },
   "active": "dfb7d0585ee070c5",
   "lastOpenFiles": [
+    "classical-dyson.md",
     "Fokker-Plank.md",
     "Integral_ring_extension.md",
     "Perron_Frobenius.md",
     "Yoneda_lemma.md",
-    "classical-dyson.md",
     "Bose-Ramanujan.md",
     "differential_topology.md",
     "hopf-fiber.md",
