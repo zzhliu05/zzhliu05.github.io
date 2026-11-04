@@ -56,7 +56,7 @@
               "type": "markdown",
               "state": {
                 "file": "RL_3.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
@@ -232,9 +232,9 @@
   },
   "active": "879e169979aacfb3",
   "lastOpenFiles": [
-    "template/template.md",
-    "RL_3.md",
     "RL_2.md",
+    "RL_3.md",
+    "template/template.md",
     "RL_1.md",
     "gp_rep.md",
     "classical-dyson.md",
