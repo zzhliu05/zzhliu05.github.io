@@ -2,5 +2,5 @@
   "cssTheme": "OnePage",
   "enabledCssSnippets": [],
   "theme": "moonstone",
-  "showRibbon": false
+  "showRibbon": true
 }

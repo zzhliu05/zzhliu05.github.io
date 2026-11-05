@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "RL_3.md",
-                "mode": "preview",
+                "file": "RL_4.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "RL_3"
+              "title": "RL_4"
             }
           }
         ],
@@ -142,6 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "RL_4.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -160,7 +161,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "RL_3.md",
+                "file": "RL_4.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": false
               },
@@ -203,6 +204,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "RL_4.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -210,43 +212,58 @@
               "icon": "lucide-list",
               "title": "大纲"
             }
+          },
+          {
+            "id": "9c3f7da7d0e12ceb",
+            "type": "leaf",
+            "state": {
+              "type": "deepseek-ai-assistant-itemview",
+              "state": {},
+              "icon": "bot",
+              "title": "Deepseek AI assistant"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
-    "width": 300,
+    "width": 602.9283447265625,
     "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
+      "deepseek-ai-assistant:Open deepseek AI assistant": false,
       "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
       "canvas:新建白板": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
       "command-palette:打开命令面板": false,
-      "bases:新建数据库": false
+      "bases:新建数据库": false,
+      "workspaces:管理工作区布局": false
     }
   },
   "active": "879e169979aacfb3",
   "lastOpenFiles": [
     "RL_2.md",
-    "RL_3.md",
+    "RL_4.md",
+    "Yoneda_lemma.md",
+    "lie-algebra-1.md",
+    "Algebraic_Bethe.md",
     "template/template.md",
+    "radiation.md",
+    "Bose-Ramanujan.md",
+    "differential_topology.md",
+    "cs267_1.md",
     "RL_1.md",
     "gp_rep.md",
     "classical-dyson.md",
     "Fokker-Plank.md",
     "Integral_ring_extension.md",
     "Perron_Frobenius.md",
-    "Yoneda_lemma.md",
-    "Bose-Ramanujan.md",
-    "differential_topology.md",
     "hopf-fiber.md",
     "big_pie.md",
-    "Algebraic_Bethe.md",
     "未命名 1",
     "未命名",
     "XGboost.md",
@@ -255,16 +272,13 @@
     "dryden-spectrum.md",
     "lie-algebra-2.md",
     "dimn-rigid.md",
-    "radiation.md",
     "pier_wave.md",
-    "cs267_1.md",
     "2026-09-28.md",
     "未命名.canvas",
     "template/新建 WolframScript.wls",
     "template",
     "新建文件夹",
     "image.png",
-    "lie-algebra-1.md",
     "未命名 1.base",
     "未命名.base"
   ]

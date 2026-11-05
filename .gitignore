@@ -27,6 +27,7 @@ yarn.lock
 # generated data
 src/data/bangumi-data.json
 src/data/bilibili-data.json
+src/content/posts/.obsidian/plugins/deepseek-ai-assistant/data.json
 
 # editor and system files
 .DS_Store
