@@ -191,6 +191,9 @@ data
 dimn
 determinant
 domain
+define
+defines
+distance
 published
 prime
 perspective
@@ -272,6 +275,7 @@ proton
 parameter
 polynomial
 probability
+projection
 category
 chi
 cI
@@ -381,6 +385,9 @@ characteristic
 contradicts
 contradiction
 closure
+conditioned
+compact
+complement
 false
 form
 frac
@@ -471,6 +478,7 @@ faithful
 finitely
 finite
 from
+frames
 note
 neq
 not
@@ -550,6 +558,7 @@ nnuZm
 na
 nj
 nStI
+natural
 Unitary
 Ux
 UX
@@ -1054,6 +1063,7 @@ set
 subring
 say
 square
+subspace
 in
 im
 implies
@@ -1136,6 +1146,7 @@ injective
 integral
 integrally
 idea
+induced
 gv
 gw
 gT
@@ -1280,6 +1291,7 @@ holds
 hom
 higher
 hgh
+homeo
 mathbb
 mathcal
 make
@@ -2159,6 +2171,7 @@ Compute
 Carlo
 Chebyshev
 Chernoff
+Compactness
 experience
 estimate
 equation
@@ -2504,6 +2517,7 @@ Maclaurin
 Monodromy
 Monte
 Mean
+Matching
 of
 only
 off
@@ -2578,6 +2592,7 @@ one
 oxygen
 other
 overline
+orthonormal
 Stat
 Schwarz
 Stokes
@@ -2663,6 +2678,7 @@ Since
 Spectrum
 Statistical
 Samples
+Stiefel
 On
 Optimism
 One
@@ -2724,6 +2740,7 @@ OfY
 OOO
 Oe
 OTF
+Orthonomal
 Bayesian
 Bellman
 Because
@@ -3052,6 +3069,7 @@ Laplace
 Linus
 Lattice
 Learning
+Lemma
 we
 when
 which
@@ -3400,6 +3418,9 @@ Dedekind
 Define
 Dryden
 Duffing
+Diffusion
+DDPM
+Definition
 For
 Fock
 Field
@@ -3474,6 +3495,8 @@ Formula
 Frobenius
 Fourier
 Fokker
+Flow
+Fix
 Notice
 Notation
 Ne

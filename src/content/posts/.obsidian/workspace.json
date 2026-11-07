@@ -62,9 +62,37 @@
               "icon": "lucide-file",
               "title": "RL_4"
             }
+          },
+          {
+            "id": "1e6b66bc107015f7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "pier_wave.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "pier_wave"
+            }
+          },
+          {
+            "id": "0dfaf2d419e9c083",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "费米液体.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "费米液体"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -244,18 +272,21 @@
       "workspaces:管理工作区布局": false
     }
   },
-  "active": "879e169979aacfb3",
+  "active": "0dfaf2d419e9c083",
   "lastOpenFiles": [
-    "RL_2.md",
+    "pier_wave.md",
+    "费米液体.md",
+    "cs267_1.md",
+    "Characteristic Classes.md",
+    "Bose-Ramanujan.md",
     "RL_4.md",
+    "RL_2.md",
     "Yoneda_lemma.md",
     "lie-algebra-1.md",
     "Algebraic_Bethe.md",
     "template/template.md",
     "radiation.md",
-    "Bose-Ramanujan.md",
     "differential_topology.md",
-    "cs267_1.md",
     "RL_1.md",
     "gp_rep.md",
     "classical-dyson.md",
@@ -271,9 +302,6 @@
     "susceptibility.md",
     "dryden-spectrum.md",
     "lie-algebra-2.md",
-    "dimn-rigid.md",
-    "pier_wave.md",
-    "2026-09-28.md",
     "未命名.canvas",
     "template/新建 WolframScript.wls",
     "template",
