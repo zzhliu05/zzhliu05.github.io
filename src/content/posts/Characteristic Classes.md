@@ -25,4 +25,4 @@ Lemma:The space $Gr_n(\mathbb{R}^{n+k})$ is a compact topological manifold and t
 Hausdorff:Take the distance map $\rho_w(X)=||w||^2-\sum_{i} \braket{w,x_i}^2$,then $\rho_w(X)=0,\rho_w(Y)>0$,
 Compactness:$V^o_n(\mathbb{R}^N)$ is compact,so $Gr_n(\mathbb{R}^N)$ is compact.
 
-$d(\tilde{x},\tilde{y})=d(x,y)-$
+$d(\tilde{x},\tilde{y})=\inf_{x\in \bar{x},y\in \bar{y}}d(x,y)$
