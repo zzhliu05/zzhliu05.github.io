@@ -1152,6 +1152,7 @@ integral
 integrally
 idea
 induced
+ising
 gv
 gw
 gT
@@ -2527,6 +2528,7 @@ Monodromy
 Monte
 Mean
 Matching
+Magnetization
 of
 only
 off
@@ -2688,6 +2690,7 @@ Spectrum
 Statistical
 Samples
 Stiefel
+Spontaneous
 On
 Optimism
 One
@@ -2995,6 +2998,7 @@ Idealized
 Ice
 Integral
 Inference
+Ising
 LLSE
 Let
 Lorenz
@@ -3079,6 +3083,7 @@ Linus
 Lattice
 Learning
 Lemma
+Luttinger
 we
 when
 which
@@ -3349,6 +3354,7 @@ Kr
 KX
 Kn
 Ke
+Kohn
 Divergence
 Def
 DMRG
@@ -3506,6 +3512,7 @@ Fourier
 Fokker
 Flow
 Fix
+FKG
 Notice
 Notation
 Ne
